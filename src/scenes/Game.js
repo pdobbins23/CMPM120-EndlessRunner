@@ -6,22 +6,49 @@ class Game extends Phaser.Scene {
   create() {
     console.log("create: game");
 
-    const TILE_SIZE = 32;
+    this.player = this.physics.add.sprite(game.config.width / 2, game.config.height / 2, "player", 1);
+    this.player.body.setSize(32, 32).setOffset(0, 16);
+    this.playerVel = new Phaser.Math.Vector2(100, 1);
+    this.playerSpeed = 350;
+    this.player.setDepth(1);
 
-    const NEEDED_ROWS = Math.floor(game.config.height / TILE_SIZE) + 1;
-    const NEEDED_COLS = Math.floor(game.config.width / TILE_SIZE) + 1;
+    const level = [
+      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ],
+    ];
 
-    let visibleMap = [];
+    this.maps = [];
+    this.tiles = [];
+    this.layers = [];
+    this.solids = [];
 
-    for (let y = 0; y < NEEDED_ROWS; y++) {
-      let row = [];
-      
-      for (let x = 0; x < NEEDED_COLS; x++) {
-        const frame = Math.floor(Math.random() * 4);
-        row.push(this.add.sprite(x * TILE_SIZE, y * TILE_SIZE, "tileset", frame));
-      }
+    for (let i = 0; i < 10; i++) {
+      let map = this.make.tilemap({ data: level, tileWidth: 32, tileHeight: 32 });
+      let tiles = map.addTilesetImage("tileset");
+      let layer = map.createLayer(0, tiles, i * 321, 0);
 
-      visibleMap.push(row);
+      this.solids.push(map.filterTiles(tile => tile.index > 0));
+
+      this.maps.push(map);
+      this.tiles.push(tiles);
+      this.layers.push(layer);
+
+      map.setCollisionBetween(1, 4, true);
+
+      this.physics.add.collider(this.player, layer);
     }
 
     this.CAMERA_SPEED = 10;
@@ -36,22 +63,31 @@ class Game extends Phaser.Scene {
 
   update() {
     if (this.keyUP.isDown) {
-      this.cameras.main.scrollY -= this.CAMERA_SPEED;
+      // this.cameras.main.scrollY -= this.CAMERA_SPEED;
+      if (this.player.body.blocked.down) {
+        this.playerVel.y = -300;
+      }
     }
     if (this.keyDOWN.isDown) {
-      this.cameras.main.scrollY += this.CAMERA_SPEED;
-    }
-    if (this.keyLEFT.isDown) {
-      this.cameras.main.scrollX -= this.CAMERA_SPEED;
-    }
-    if (this.keyRIGHT.isDown) {
-      this.cameras.main.scrollX += this.CAMERA_SPEED;
+      // this.cameras.main.scrollY += this.CAMERA_SPEED;
     }
     if (this.keyF.isDown) {
-      this.cameras.main.rotation += 0.01;
+      this.player.rotation += 0.01;
     }
     if (Phaser.Input.Keyboard.JustDown(this.keyR)) {
-      this.cameras.main.rotation = 0;
+      this.player.rotation = 0;
     }
+
+    // TODO: Fix velocity
+
+    this.smoothMoveCameraTowards(this.player);
+    this.cameras.main.rotation = this.player.rotation;
+  }
+
+  smoothMoveCameraTowards (target, smoothFactor)
+  {
+    if (smoothFactor === undefined) { smoothFactor = 0; }
+    this.cameras.main.scrollX = smoothFactor * this.cameras.main.scrollX + (1 - smoothFactor) * (target.x - this.cameras.main.width * 0.5);
+    this.cameras.main.scrollY = smoothFactor * this.cameras.main.scrollY + (1 - smoothFactor) * (target.y - this.cameras.main.height * 0.5);
   }
 }

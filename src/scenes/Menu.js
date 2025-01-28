@@ -6,15 +6,26 @@ class Menu extends Phaser.Scene {
   preload() {
     this.load.path = "./assets/img/";
     
-    this.load.spritesheet([{
-      key: "tileset",
-      frameConfig: {
-        frameWidth: 32,
-        frameHeight: 32,
-        startFrame: 0,
-        endFrame: 3,
+    this.load.spritesheet([
+      {
+        key: "tileset",
+        frameConfig: {
+          frameWidth: 32,
+          frameHeight: 32,
+          startFrame: 0,
+          endFrame: 3,
+        },
       },
-    }]);
+      {
+        key: "player",
+        frameConfig: {
+          frameWidth: 32,
+          frameHeight: 48,
+          startFrame: 0,
+          endFrame: 0,
+        },
+      }
+    ]);
   }
 
   create() {
