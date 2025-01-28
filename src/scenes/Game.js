@@ -36,16 +36,16 @@ class Game extends Phaser.Scene {
 
   update() {
     if (this.keyUP.isDown) {
-      this.cameras.main.y += this.CAMERA_SPEED;
+      this.cameras.main.scrollY -= this.CAMERA_SPEED;
     }
     if (this.keyDOWN.isDown) {
-      this.cameras.main.y -= this.CAMERA_SPEED;
+      this.cameras.main.scrollY += this.CAMERA_SPEED;
     }
     if (this.keyLEFT.isDown) {
-      this.cameras.main.x += this.CAMERA_SPEED;
+      this.cameras.main.scrollX -= this.CAMERA_SPEED;
     }
     if (this.keyRIGHT.isDown) {
-      this.cameras.main.x -= this.CAMERA_SPEED;
+      this.cameras.main.scrollX += this.CAMERA_SPEED;
     }
     if (this.keyF.isDown) {
       this.cameras.main.rotation += 0.01;
@@ -53,7 +53,5 @@ class Game extends Phaser.Scene {
     if (Phaser.Input.Keyboard.JustDown(this.keyR)) {
       this.cameras.main.rotation = 0;
     }
-
-    this.cameras.main.viewport = this.cameras.main.worldView;
   }
 }
