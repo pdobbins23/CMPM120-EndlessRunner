@@ -12,6 +12,9 @@ class Game extends Phaser.Scene {
     this.player.setDepth(1);
     this.player.setDebug(false, false);
 
+    // TODO: Make this better
+    this.cameras.main.setBounds(0, 0, 10000, 0);
+
     const level = [
       [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
       [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
