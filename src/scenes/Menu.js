@@ -20,7 +20,7 @@ class Menu extends Phaser.Scene {
         key: "player",
         frameConfig: {
           frameWidth: 32,
-          frameHeight: 48,
+          frameHeight: 40,
           startFrame: 0,
           endFrame: 0,
         },

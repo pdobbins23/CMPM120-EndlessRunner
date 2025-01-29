@@ -8,7 +8,6 @@ class Game extends Phaser.Scene {
 
     this.player = this.physics.add.sprite(game.config.width / 2, game.config.height / 2, "player", 1);
     this.player.body.setSize(32, 32).setOffset(0, 16);
-    this.playerVel = new Phaser.Math.Vector2(100, 1);
     this.playerSpeed = 350;
     this.player.setDepth(1);
 
@@ -62,14 +61,16 @@ class Game extends Phaser.Scene {
   }
 
   update() {
+    let playerVel = new Phaser.Math.Vector2(0, 0);
+
     if (this.keyUP.isDown) {
-      // this.cameras.main.scrollY -= this.CAMERA_SPEED;
-      if (this.player.body.blocked.down) {
-        this.playerVel.y = -300;
+      if (this.player.body.blocked.down && this.player.body.velocity.y == 0) {
+        playerVel.y = -400;
       }
     }
     if (this.keyDOWN.isDown) {
-      // this.cameras.main.scrollY += this.CAMERA_SPEED;
+      // TODO: Rolling
+      // this.playerSpeed = 500;
     }
     if (this.keyF.isDown) {
       this.player.rotation += 0.01;
@@ -79,6 +80,7 @@ class Game extends Phaser.Scene {
     }
 
     // TODO: Fix velocity
+    this.player.setVelocity(this.playerSpeed, this.player.body.velocity.y + playerVel.y);
 
     this.smoothMoveCameraTowards(this.player);
     this.cameras.main.rotation = this.player.rotation;
