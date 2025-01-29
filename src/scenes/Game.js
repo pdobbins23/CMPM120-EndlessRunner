@@ -7,9 +7,10 @@ class Game extends Phaser.Scene {
     console.log("create: game");
 
     this.player = this.physics.add.sprite(game.config.width / 2, game.config.height / 2, "player", 1);
-    this.player.body.setSize(32, 32).setOffset(0, 16);
+    this.player.body.setSize(32, 32).setOffset(0, 8);
     this.playerSpeed = 350;
     this.player.setDepth(1);
+    this.player.setDebug(false, false);
 
     const level = [
       [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
