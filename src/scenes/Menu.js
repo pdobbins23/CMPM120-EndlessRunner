@@ -5,7 +5,9 @@ class Menu extends Phaser.Scene {
 
   preload() {
     this.load.path = "./assets/img/";
-    
+
+    // TODO: Probably should have a loading splash screen (SEGA)
+    // that loads everything    
     this.load.spritesheet([
       {
         key: "tileset",

@@ -13,8 +13,12 @@ class Game extends Phaser.Scene {
     this.player.setDebug(false, false);
 
     // TODO: Make this better
+    // After a certain amount of time (maybe level transition),
+    // reset positions back to origin
     this.cameras.main.setBounds(0, 0, 10000, 0);
 
+    // TODO: Load chunks from files, randomly stitch, needs heuristics
+    // Also unload chunks that go offscreen
     const level = [
       [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
       [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
@@ -33,6 +37,10 @@ class Game extends Phaser.Scene {
       [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ],
     ];
 
+    // TODO: Probably group some of these
+    // Maps can be shared if reusing same map data
+    // Tiles should probably be tied to each Map
+    // Use multiple layers for each chunk of same type?
     this.maps = [];
     this.tiles = [];
     this.layers = [];
@@ -49,6 +57,7 @@ class Game extends Phaser.Scene {
       this.tiles.push(tiles);
       this.layers.push(layer);
 
+      // TODO: Define this elsewhere?
       map.setCollisionBetween(1, 4, true);
 
       this.physics.add.collider(this.player, layer);
@@ -56,6 +65,7 @@ class Game extends Phaser.Scene {
 
     this.CAMERA_SPEED = 10;
 
+    // NOTE: This is ugly
     this.keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
     this.keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
     this.keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
@@ -65,8 +75,10 @@ class Game extends Phaser.Scene {
   }
 
   update() {
+    // TODO: This probably shouldn't be defined here
     let playerVel = new Phaser.Math.Vector2(0, 0);
 
+    // TODO: Move input into Player?
     if (this.keyUP.isDown) {
       if (this.player.body.blocked.down && this.player.body.velocity.y == 0) {
         playerVel.y = -400;
@@ -90,6 +102,7 @@ class Game extends Phaser.Scene {
     this.cameras.main.rotation = this.player.rotation;
   }
 
+  // TODO: Probably change this a lot, play around with different values
   smoothMoveCameraTowards (target, smoothFactor)
   {
     if (smoothFactor === undefined) { smoothFactor = 0; }

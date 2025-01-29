@@ -1,7 +1,7 @@
 // Name: Peter Dobbins
-// Title: Sonic Boom
+// Title: Sonic BOOM
 // Date: 27/1/25
-// Time Spent: ???
+// Time Spent: 3 hours
 
 "use strict";
 
@@ -18,12 +18,16 @@ let config = {
     pixelArt: true,
   },
   fps: {
+    // FIXME: Probably should disable this for final game
+    // Used to fix weird ghosting issue on high refresh monitors (sorta)
+    // Ultimately, need to research a better longterm solution
     forceSetTimeOut: true,
   },
   physics: {
     default: "arcade",
     arcade: {
       debug: true,
+      // TODO: Find good gravity value
       gravity: { y: 600 },
     },
   },
