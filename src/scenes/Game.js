@@ -38,7 +38,7 @@ class Game extends Phaser.Scene {
     this.layers = [];
     this.solids = [];
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 100; i++) {
       let map = this.make.tilemap({ data: level, tileWidth: 32, tileHeight: 32 });
       let tiles = map.addTilesetImage("tileset");
       let layer = map.createLayer(0, tiles, i * 321, 0);

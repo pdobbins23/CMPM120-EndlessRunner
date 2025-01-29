@@ -6,11 +6,19 @@
 "use strict";
 
 let config = {
-  type: Phaser.AUTO,
+  type: Phaser.CANVAS,
   width: 640,
   height: 480,
+  scale: {
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+    zoom: 1,
+  },
   render: {
     pixelArt: true,
+  },
+  fps: {
+    forceSetTimeOut: true,
   },
   physics: {
     default: "arcade",
