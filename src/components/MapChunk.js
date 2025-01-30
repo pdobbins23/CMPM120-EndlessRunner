@@ -1,0 +1,3 @@
+class MapChunk {
+  constructor() {}
+}

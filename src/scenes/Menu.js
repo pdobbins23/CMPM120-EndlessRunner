@@ -31,8 +31,6 @@ class Menu extends Phaser.Scene {
   }
 
   create() {
-    console.log("create: menu");
-
     this.scene.start("gameScene");
   }
 

@@ -4,11 +4,8 @@ class Game extends Phaser.Scene {
   }
 
   create() {
-    console.log("create: game");
+    this.player = new Player(this, game.config.width / 2, game.config.height / 2, "player", 0);
 
-    this.player = this.physics.add.sprite(game.config.width / 2, game.config.height / 2, "player", 1);
-    this.player.body.setSize(32, 32).setOffset(0, 8);
-    this.playerSpeed = 350;
     this.player.setDepth(1);
     this.player.setDebug(false, false);
 
@@ -96,7 +93,7 @@ class Game extends Phaser.Scene {
     }
 
     // TODO: Fix velocity
-    this.player.setVelocity(this.playerSpeed, this.player.body.velocity.y + playerVel.y);
+    this.player.setVelocity(this.player.moveSpeed, this.player.body.velocity.y + playerVel.y);
 
     this.smoothMoveCameraTowards(this.player);
     this.cameras.main.rotation = this.player.rotation;
