@@ -5,8 +5,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
-    this.body.setSize(32, 32).setOffset(0, 8);
-
     this.moveSpeed = 350;
     this.jumpHeight = -400;
 
@@ -19,11 +17,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     // Setup animations
     this.anims.create({
       key: "run",
-      frameRate: 0,
+      frameRate: 15,
       repeat: -1,
       frames: this.anims.generateFrameNumbers("player", {
-        start: 0,
-        end: 0,
+        start: 1,
+        end: 4,
       })
     });
 
@@ -37,7 +35,17 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       })
     });
 
-    this.play("run");
+    this.run();
+  }
+
+  run() {
+    this.body.setSize(32, 32).setOffset(0, 4);
+    this.play("run", true);
+  }
+
+  roll() {
+    this.body.setSize(30, 24).setOffset(0, 14);
+    this.play("roll", true);
   }
 
   update() {
@@ -48,15 +56,17 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     // Running animation
     if (this.onGround && !this.lastOnGround && !this.rolling)
-      this.play("run", true);
+      this.run();
 
     if (this.onGround) {
       if (this.scene.cursors.up.isDown) {
         vel.y = this.jumpHeight;
-        this.play("roll", true);
+        this.roll();
       } else if (Phaser.Input.Keyboard.JustDown(this.scene.cursors.down)) {
         this.rolling = !this.rolling;
-        this.play(this.rolling ? "roll" : "run", true);
+
+        if (this.rolling) this.roll()
+        else this.run();
       }
     }
 
