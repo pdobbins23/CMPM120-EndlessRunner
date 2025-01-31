@@ -29,8 +29,8 @@ class Game extends Phaser.Scene {
       [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
       [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
       [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
-      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
       [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, ],
+      [ 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, ],
       [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ],
     ];
 
@@ -39,7 +39,7 @@ class Game extends Phaser.Scene {
 
     // NOTE: Test chunks, will generate these later
     for (let i = 0; i < 100; i++) {
-      let chunk = new MapChunk(this, level, "tileset", i * 321, 0);
+      let chunk = new MapChunk(this, level, "tileset", i * 320, 0);
 
       this.chunks.push(chunk);
 
