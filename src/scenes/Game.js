@@ -4,10 +4,10 @@ class Game extends Phaser.Scene {
   }
 
   create() {
-    this.player = new Player(this, game.config.width / 2, game.config.height / 2, "player", 0);
+    this.player = new Player(this, game.config.width / 2, game.config.height / 2);
 
     this.player.setDepth(1);
-    this.player.setDebug(false, false);
+    // this.player.setDebug(false, false);
 
     // TODO: Make this better
     // After a certain amount of time (maybe level transition),
@@ -30,7 +30,7 @@ class Game extends Phaser.Scene {
       [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
       [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
       [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
-      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, ],
       [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ],
     ];
 

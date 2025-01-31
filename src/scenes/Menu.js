@@ -4,30 +4,19 @@ class Menu extends Phaser.Scene {
   }
 
   preload() {
-    this.load.path = "./assets/img/";
+    // TODO: Probably should have a loading splash screen (MEGA)
+    // that loads everything
 
-    // TODO: Probably should have a loading splash screen (SEGA)
-    // that loads everything    
-    this.load.spritesheet([
-      {
-        key: "tileset",
-        frameConfig: {
-          frameWidth: 32,
-          frameHeight: 32,
-          startFrame: 0,
-          endFrame: 3,
-        },
-      },
-      {
-        key: "player",
-        frameConfig: {
-          frameWidth: 32,
-          frameHeight: 40,
-          startFrame: 0,
-          endFrame: 0,
-        },
-      }
-    ]);
+    // Load tile art
+    this.load.spritesheet("tileset", "./assets/img/tileset.png", {
+      frameWidth: 32,
+    });
+
+    // Load player art
+    this.load.spritesheet("player", "./assets/img/player.png", {
+      frameWidth: 32,
+      frameHeight: 40,
+    });
   }
 
   create() {
