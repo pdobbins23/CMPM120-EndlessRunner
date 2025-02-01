@@ -8,6 +8,47 @@ class MapChunk {
 
     this.map.setCollisionBetween(1, 4, true);
 
+    // TODO: Remove hard-coded slope calculation
+    this.layer.setTileIndexCallback(3, (sprite, tile) => {
+      if (sprite.body.blocked.left) return false;
+      
+      // sprite.rotation = -Math.PI / 8;
+      let rawTileX = this.layer.x + tile.x * tileWidth;
+      let rawTileY = this.layer.y + tile.y * tileHeight;
+      let tileX = rawTileX;
+      let tileY = rawTileY + tileHeight;
+
+      let spriteX = sprite.body.x + sprite.body.width / 2;
+      let spriteY = sprite.body.y + sprite.body.height;
+
+      // scene.graphics.fillStyle(0xff0000, 1);
+      // scene.graphics.fillRect(spriteX, spriteY, 5, 5);
+
+      // scene.graphics.fillStyle(0x00ffff, 1);
+      // scene.graphics.fillRect(tileX, tileY, 5, 5);
+      // scene.graphics.lineStyle(2, 0x005500, 1);
+      // scene.graphics.strokeRect(rawTileX, rawTileY, tileWidth, tileHeight);
+      
+      let dx = spriteX - tileX;
+      let dy = tileY - spriteY;
+      
+      let y = 1 * dx + tileHeight / 2; // for slope 1/1
+
+      // scene.graphics.fillStyle(0x005500, 1);
+      // for (let i = 0; i < 32; i++) {
+        // scene.graphics.fillRect(tileX + i, tileY - 1 * i, 2, 2);
+      // }
+
+      if (dy < y && !sprite.jumping) {
+        // console.log(`SLOPE: ${spriteY} -> ${tileY} (${y}) DIST: ${dx}, ${dy}`);
+        sprite.setY(tileY - y);
+        if (sprite.body.velocity.y > 0) sprite.body.velocity.y = 0;
+        sprite.onSlope = true;
+      }
+
+      return true;
+    }, scene);
+
     // TODO: Determine how to store loop information
     // Probably dont need additional info? Just tile data and gravity-switching logic
   }

@@ -9,7 +9,7 @@ class Game extends Phaser.Scene {
     // TODO: Use actual parallax background
     this.cameras.main.setBackgroundColor(0x00ffff);
     
-    this.player = new Player(this, game.config.width / 2, game.config.height / 2);
+    this.player = new Player(this, 50, game.config.height - game.config.height / 6);
 
     this.player.setDepth(1);
     // this.player.setDebug(false, false);
@@ -28,14 +28,14 @@ class Game extends Phaser.Scene {
       [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
       [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
       [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
-      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
-      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
-      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
-      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
       [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, ],
       [ 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, ],
       [ 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, ],
-      [ 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, ],
+      [ 0, 0, 0, 0, 0, 0, 3, 1, 1, 1, ],
+      [ 0, 0, 0, 0, 0, 3, 1, 1, 1, 1, ],
+      [ 0, 0, 0, 0, 3, 1, 1, 1, 1, 1, ],
+      [ 0, 0, 0, 3, 1, 1, 1, 1, 1, 1, ],
+      [ 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, ],
       [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ],
     ];
 
@@ -48,27 +48,25 @@ class Game extends Phaser.Scene {
 
       this.chunks.push(chunk);
 
-      this.physics.add.collider(this.player, chunk.layer, (player, tile) => {
-        if (tile.index == 3) {
-          // TODO: Actually do slope test
-          this.player.setGravity(0, 0);
-          this.player.body.velocity.y = 0;
-        }
-      }, (player, tile) => {
-        return tile.index == 3;
-      });
+      this.physics.add.collider(this.player, chunk.layer);
     }
 
     this.CAMERA_SPEED = 10;
 
     this.cursors = this.input.keyboard.createCursorKeys();
+
+    this.graphics = this.add.graphics();
+    this.graphics.depth = 2;
   }
 
   update() {
     this.player.update();
 
+    // this.graphics.fillStyle(0xffffff, 1);
+    // this.graphics.fillRect(this.player.body.x + this.player.body.width / 2, this.player.body.y + this.player.body.height, 5, 5);
+
     this.smoothMoveCameraTowards(this.player);
-    this.cameras.main.rotation = this.player.rotation;
+    // this.cameras.main.rotation = this.player.rotation;
   }
 
   // TODO: Probably change this a lot, play around with different values

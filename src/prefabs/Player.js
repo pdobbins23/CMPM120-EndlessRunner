@@ -5,10 +5,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
-    this.moveSpeed = 350;
+    this.moveSpeed = 100;
     this.jumpHeight = -400;
 
     this.onGround = false;
+    this.onSlope = false;
     this.lastOnGround = false;
     this.jumping = false;
     this.rolling = false;
@@ -52,16 +53,21 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     let vel = new Phaser.Math.Vector2(0, 0);
 
     this.lastOnGround = this.onGround;
-    this.onGround = this.body.blocked.down && this.body.velocity.y == 0;
+    this.onGround = (this.body.blocked.down || this.onSlope) && this.body.velocity.y == 0;
+    this.onSlope = false;
 
     // Running animation
     if (this.onGround && !this.lastOnGround && !this.rolling)
       this.run();
 
+    if (this.jumping && this.body.velocity.y > 0)
+      this.jumping = false;
+
     if (this.onGround) {
       if (this.scene.cursors.up.isDown) {
         vel.y = this.jumpHeight;
         this.roll();
+        this.jumping = true;
       } else if (Phaser.Input.Keyboard.JustDown(this.scene.cursors.down)) {
         this.rolling = !this.rolling;
 
