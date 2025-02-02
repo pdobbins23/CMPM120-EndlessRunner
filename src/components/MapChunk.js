@@ -39,10 +39,12 @@ class MapChunk {
         // scene.graphics.fillRect(tileX + i, tileY - 1 * i, 2, 2);
       // }
 
-      if (dy < y && !sprite.jumping) {
-        // console.log(`SLOPE: ${spriteY} -> ${tileY} (${y}) DIST: ${dx}, ${dy}`);
+      // TODO: Figure out why there are weird glitches and downwards
+      // teleportation still happening
+      if (dy <= y && sprite.body.velocity.y >= 0) {
+        console.log(`SLOPE: ${spriteY} -> ${tileY} (${y}) DIST: ${dx}, ${dy}`);
         sprite.setY(tileY - y);
-        if (sprite.body.velocity.y > 0) sprite.body.velocity.y = 0;
+        sprite.body.velocity.y = 0;
         sprite.onSlope = true;
       }
 

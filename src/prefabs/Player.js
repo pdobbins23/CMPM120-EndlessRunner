@@ -5,7 +5,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
-    this.moveSpeed = 100;
+    this.moveSpeed = 50;
     this.jumpHeight = -400;
 
     this.onGround = false;
