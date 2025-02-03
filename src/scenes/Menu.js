@@ -20,7 +20,7 @@ class Menu extends Phaser.Scene {
     // that loads everything
 
     // Load tile art
-    this.load.spritesheet("tileset", "./assets/img/tileset.png", {
+    this.load.spritesheet("grid", "./assets/img/grid.png", {
       frameWidth: 32,
     });
 

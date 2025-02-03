@@ -15,6 +15,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.rolling = false;
     this.inLoop = false;
 
+    this.layer = 0;
+
     // Setup animations
     this.anims.create({
       key: "run",
