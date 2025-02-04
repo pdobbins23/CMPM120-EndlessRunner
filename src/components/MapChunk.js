@@ -8,7 +8,7 @@ class MapChunk {
 
     this.map.setCollisionBetween(1, 100, true);
 
-    let td = {tileWidth, tileHeight};
+    let td = {tileWidth, tileHeight, scene};
 
     // TODO: Remove hard-coded slope calculation
     // this.layer.setTileIndexCallback(36, (sprite, tile) => {
@@ -53,6 +53,8 @@ class MapChunk {
     //   return true;
     // }, scene);
 
+    // FIXME: Why does collision with other tiles break when colliding with one of these?
+
     this.layer.setTileIndexCallback(36, this.handleSlope(td, 0, (x) => {
       // Slope: 1/1
       return 1 * x + tileHeight / 2;
@@ -64,13 +66,18 @@ class MapChunk {
     }), scene);
 
     this.layer.setTileIndexCallback(93, this.handleSlope(td, 0, (x) => {
-      // Slope: 1/4
-      return 1/4 * x + tileHeight / 2;
+      // Slope: 1/2
+      return 1/2 * x + tileHeight / 2 + 4;
     }), scene);
 
     this.layer.setTileIndexCallback(94, this.handleSlope(td, 0, (x) => {
-      // Slope: 1/2
-      return 1/2 * x + tileHeight / 2;
+      // Slope: 1/1
+      return 1 * x + tileHeight / 2;
+    }), scene);
+
+    this.layer.setTileIndexCallback(82, this.handleSlope(td, 0, (x) => {
+      // Slope: 1/1
+      return 1/1.2 * x + 4;
     }), scene);
 
     // back layer tiles
@@ -95,9 +102,11 @@ class MapChunk {
     }), scene);
 
     // TODO: Determine how to store loop information
-    // Probably dont need additional info? Just tile data and gravity-switching logic
+    // UPDATE: Slope equations ([m]x + [b]) associated with each slope tile,
+    // probably just hard-coded for now
   }
 
+  // TODO: Take in gravity-switching info
   handleSlope(tileData, layer, slopeEq) {
     return (sprite, tile) => {
       if (sprite.layer != layer) return true;
@@ -105,7 +114,7 @@ class MapChunk {
       // let phaser handle non-slope collision
       if (sprite.body.blocked.left) return false;
 
-      let {tileWidth, tileHeight} = tileData;
+      let {tileWidth, tileHeight, scene} = tileData;
  
       let rawTileX = this.layer.x + tile.x * tileWidth;
       let rawTileY = this.layer.y + tile.y * tileHeight;
@@ -119,6 +128,11 @@ class MapChunk {
       let dy = tileY - spriteY;
     
       let y = slopeEq(dx);
+
+      scene.graphics.fillStyle(0xffff00, 1);
+      for (let x = 0; x < tileWidth; x++) {
+        scene.graphics.fillRect(tileX + x, tileY - slopeEq(x) + tileHeight / 2, 3, 3);
+      }
 
       if (dy <= y && sprite.body.velocity.y >= 0) {
         console.log(`SLOPE: ${spriteY} -> ${tileY} (${y}) DIST: ${dx}, ${dy}`);
