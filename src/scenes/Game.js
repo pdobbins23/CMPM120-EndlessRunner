@@ -4,8 +4,7 @@ class Game extends Phaser.Scene {
   }
 
   preload() {
-    this.load.tilemapCSV('layer0', 'assets/chunks/layer0.csv');
-    this.load.tilemapCSV('layer1', 'assets/chunks/layer1.csv');
+    this.load.tilemapTiledJSON("chunk", "assets/chunks/Chunk.json");
   }
 
   create() {
@@ -14,7 +13,7 @@ class Game extends Phaser.Scene {
     // TODO: Use actual parallax background
     this.cameras.main.setBackgroundColor(0x00ffff);
     
-    this.player = new Player(this, 50, game.config.height - game.config.height / 6);
+    this.player = new Player(this, 50, game.config.height - game.config.height / 5);
 
     this.player.setDepth(1);
     // this.player.setDebug(false, false);
@@ -67,7 +66,7 @@ class Game extends Phaser.Scene {
 
     // NOTE: Test chunks, will generate these later
     for (let i = 0; i < 100; i++) {
-      let chunk = new MapChunk(this, "layer0", "layer1", i * 640, 0);
+      let chunk = new MapChunk(this, "chunk", "grid", i * 640, 0);
 
       this.chunks.push(chunk);
 

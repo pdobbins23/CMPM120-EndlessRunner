@@ -1,114 +1,24 @@
 class MapChunk {
-  constructor(scene, layer, layer1_t, tileset, x, y, tileWidth = 32, tileHeight = 32) {
-    this.map = scene.make.tilemap({ key: layer, tileWidth, tileHeight });
+  constructor(scene, chunk, tileset, x, y, tileWidth = 32, tileHeight = 32) {
+    this.map = scene.make.tilemap({ key: chunk });
+    this.tiles = this.map.addTilesetImage("Main", tileset);
 
-    this.tiles = this.map.addTilesetImage(tileset);
-
-    this.layer = this.map.createLayer(0, this.tiles, x, y);
-    this.layer1 = this.map.createLayer(1, this.tiles, x, y);
-    this.map.layers[1].data = scene.cache.tilemap.get(layer1_t).data;
-
-    // this.solids = this.map.filterTiles(tile => tile.index > 0);
-    // this.slopes = this.map.filterTiles(tile => tile.index == 3);
-
-    this.map.setCollisionBetween(1, 100, true);
+    this.layer = this.map.createLayer("Layer0", this.tiles, x, y);
+    this.layer.setCollisionByProperty({ solid: true });
 
     let td = {tileWidth, tileHeight, scene};
 
-    // TODO: Remove hard-coded slope calculation
-    // this.layer.setTileIndexCallback(36, (sprite, tile) => {
-    //   if (sprite.body.blocked.left) return false;
-      
-    //   // sprite.rotation = -Math.PI / 8;
-    //   let rawTileX = this.layer.x + tile.x * tileWidth;
-    //   let rawTileY = this.layer.y + tile.y * tileHeight;
-    //   let tileX = rawTileX;
-    //   let tileY = rawTileY + tileHeight;
+    const ts = this.map.getTileset("Main");
 
-    //   let spriteX = sprite.body.x + sprite.body.width / 2;
-    //   let spriteY = sprite.body.y + sprite.body.height;
+    for (let i = ts.firstgid; i <= ts.firstgid + ts.total; i++) {
+      const props = ts.getTileProperties(i);
 
-    //   // scene.graphics.fillStyle(0xff0000, 1);
-    //   // scene.graphics.fillRect(spriteX, spriteY, 5, 5);
-
-    //   // scene.graphics.fillStyle(0x00ffff, 1);
-    //   // scene.graphics.fillRect(tileX, tileY, 5, 5);
-    //   // scene.graphics.lineStyle(2, 0x005500, 1);
-    //   // scene.graphics.strokeRect(rawTileX, rawTileY, tileWidth, tileHeight);
-      
-    //   let dx = spriteX - tileX;
-    //   let dy = tileY - spriteY;
-      
-    //   let y = 1 * dx + tileHeight / 2; // for slope 1/1
-
-    //   // scene.graphics.fillStyle(0x005500, 1);
-    //   // for (let i = 0; i < 32; i++) {
-    //     // scene.graphics.fillRect(tileX + i, tileY - 1 * i, 2, 2);
-    //   // }
-
-    //   // TODO: Figure out why there are weird glitches and downwards
-    //   // teleportation still happening
-    //   if (dy <= y && sprite.body.velocity.y >= 0) {
-    //     console.log(`SLOPE: ${spriteY} -> ${tileY} (${y}) DIST: ${dx}, ${dy}`);
-    //     sprite.setY(tileY - y);
-    //     sprite.body.velocity.y = 0;
-    //     sprite.onSlope = true;
-    //   }
-
-    //   return true;
-    // }, scene);
-
-    // FIXME: Why does collision with other tiles break when colliding with one of these?
-
-    this.layer.setTileIndexCallback(36, this.handleSlope(td, 0, (x) => {
-      // Slope: 1/1
-      return 1 * x + tileHeight / 2;
-    }), scene);
-
-    this.layer.setTileIndexCallback(92, this.handleSlope(td, 0, (x) => {
-      // Slope: 1/8
-      return 1/8 * x + tileHeight / 2;
-    }), scene);
-
-    this.layer.setTileIndexCallback(93, this.handleSlope(td, 0, (x) => {
-      // Slope: 1/2
-      return 1/2 * x + tileHeight / 2 + 4;
-    }), scene);
-
-    this.layer.setTileIndexCallback(94, this.handleSlope(td, 0, (x) => {
-      // Slope: 1/1
-      return 1 * x + tileHeight / 2;
-    }), scene);
-
-    this.layer.setTileIndexCallback(82, this.handleSlope(td, 0, (x) => {
-      // Slope: 1/1
-      return 1/1.2 * x + 4;
-    }), scene);
-
-    // back layer tiles
-
-    this.layer.setTileIndexCallback(88, (sprite, tile) => {
-      return sprite.layer != -1;
-    });
-
-    this.layer.setTileIndexCallback(89, this.handleSlope(td, -1, (x) => {
-      // Slope: ?
-      return x;
-    }), scene);
-
-    this.layer.setTileIndexCallback(90, this.handleSlope(td, -1, (x) => {
-      // Slope: ?
-      return x;
-    }), scene);
-
-    this.layer.setTileIndexCallback(91, this.handleSlope(td, -1, (x) => {
-      // Slope: ?
-      return x;
-    }), scene);
-
-    // TODO: Determine how to store loop information
-    // UPDATE: Slope equations ([m]x + [b]) associated with each slope tile,
-    // probably just hard-coded for now
+      if (props && props.slope_m) {
+        this.layer.setTileIndexCallback(i, this.handleSlope(td, 0, (x) => {
+          return props.slope_m * x + props.slope_b;
+        }), scene);
+      }
+    }
   }
 
   // TODO: Take in gravity-switching info
@@ -134,14 +44,20 @@ class MapChunk {
     
       let y = slopeEq(dx);
 
+      scene.graphics.fillStyle(0xff0000, 1);
+      scene.graphics.fillRect(rawTileX, rawTileY, 3, 3);
+
       scene.graphics.fillStyle(0xffff00, 1);
       for (let x = 0; x < tileWidth; x++) {
-        scene.graphics.fillRect(tileX + x, tileY - slopeEq(x) + tileHeight / 2, 3, 3);
+        let y = slopeEq(x);
+
+        if (y >= 0 && y <= tileHeight)
+          scene.graphics.fillRect(tileX + x, tileY - y, 3, 3);
       }
 
       if (dy <= y && sprite.body.velocity.y >= 0) {
         console.log(`SLOPE: ${spriteY} -> ${tileY} (${y}) DIST: ${dx}, ${dy}`);
-        sprite.setY(tileY - y);
+        sprite.setY(tileY - y - sprite.body.height / 2);
         sprite.body.velocity.y = 0;
         sprite.onSlope = true;
       }
