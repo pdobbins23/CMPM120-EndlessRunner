@@ -96,6 +96,7 @@
   <properties>
    <property name="dir" type="int" value="0"/>
    <property name="slope_b" type="float" value="0"/>
+   <property name="slope_dir" type="int" value="0"/>
    <property name="slope_m" type="float" value="1"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
@@ -103,6 +104,7 @@
  <tile id="37">
   <properties>
    <property name="slope_b" type="float" value="32"/>
+   <property name="slope_dir" type="int" value="0"/>
    <property name="slope_m" type="float" value="-1"/>
    <property name="solid" type="bool" value="true"/>
   </properties>

@@ -27,8 +27,6 @@ let config = {
     default: "arcade",
     arcade: {
       debug: true,
-      // TODO: Find good gravity value
-      gravity: { y: 600 },
     },
   },
   scene: [Menu, Game],

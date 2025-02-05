@@ -15,6 +15,7 @@ class Game extends Phaser.Scene {
     
     this.player = new Player(this, 50, game.config.height - game.config.height / 5);
     this.player.setDepth(1);
+    this.player.body.setGravity(0, 600);
 
     // TODO: Make this better
     // After a certain amount of time (maybe level transition),

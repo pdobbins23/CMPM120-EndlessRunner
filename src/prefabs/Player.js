@@ -10,6 +10,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.onGround = false;
     this.onSlope = false;
+    this.gravityDir = 0;
     this.lastOnGround = false;
     this.jumping = false;
     this.rolling = false;
@@ -54,15 +55,18 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   update() {
     let vel = new Phaser.Math.Vector2(0, 0);
 
+    let vertical = this.gravityDir == 0 || this.gravityDir == 2;
+    let horizontal = this.gravityDir == 1 || this.gravityDir == 3;
+
     this.lastOnGround = this.onGround;
-    this.onGround = (this.body.blocked.down || this.onSlope) && this.body.velocity.y == 0;
+    this.onGround = (this.body.blocked.down || this.onSlope) && ((vertical && this.body.velocity.y == 0) || (horizontal && this.body.velocity.x == 0));
     this.onSlope = false;
 
     // Running animation
     if (this.onGround && !this.lastOnGround && !this.rolling)
       this.run();
 
-    if (this.jumping && this.body.velocity.y > 0)
+    if (this.jumping && this.gravityDir == 0 && this.body.velocity.y > 0)
       this.jumping = false;
 
     if (this.onGround) {
@@ -70,6 +74,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         vel.y = this.jumpHeight;
         this.roll();
         this.jumping = true;
+
+        // reset gravity
+        this.gravityDir = 0;
+        this.body.setGravity(0, 600);
       } else if (Phaser.Input.Keyboard.JustDown(this.scene.cursors.down)) {
         this.rolling = !this.rolling;
 
@@ -83,6 +91,19 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     if (this.body.blocked.right)
       console.log("game over?");
 
-    this.setVelocity(this.moveSpeed, this.body.velocity.y + vel.y);
+    switch (this.gravityDir) {
+      case 0: // DOWN
+        this.setVelocity(this.moveSpeed, this.body.velocity.y + vel.y);
+        break;
+      case 1: // RIGHT
+        this.setVelocity(this.body.velocity.x + vel.y, -this.moveSpeed);
+        break;
+      case 2: // UP
+        this.setVelocity(-this.moveSpeed, this.body.velocity.y - vel.y);
+        break;
+      case 3: // LEFT
+        this.setVelocity(this.body.velocity.y - vel.y, this.moveSpeed);
+        break;
+    }
   }
 }
