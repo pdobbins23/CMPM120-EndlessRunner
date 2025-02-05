@@ -52,7 +52,7 @@ class MapChunk {
         let y = slopeEq(x);
 
         if (y >= 0 && y <= tileHeight)
-          scene.graphics.fillRect(tileX + x, tileY - y, 3, 3);
+          scene.graphics.fillRect(tileX + x, tileY - y, 2, 2);
       }
 
       if (dy <= y && sprite.body.velocity.y >= 0) {
