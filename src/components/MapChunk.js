@@ -1,10 +1,15 @@
 class MapChunk {
-  constructor(scene, data, tileset, x, y, tileWidth = 32, tileHeight = 32) {
-    this.map = scene.make.tilemap({ data, tileWidth, tileHeight });
+  constructor(scene, layer, layer1_t, tileset, x, y, tileWidth = 32, tileHeight = 32) {
+    this.map = scene.make.tilemap({ key: layer, tileWidth, tileHeight });
+
     this.tiles = this.map.addTilesetImage(tileset);
+
     this.layer = this.map.createLayer(0, this.tiles, x, y);
-    this.solids = this.map.filterTiles(tile => tile.index > 0);
-    this.slopes = this.map.filterTiles(tile => tile.index == 3);
+    this.layer1 = this.map.createLayer(1, this.tiles, x, y);
+    this.map.layers[1].data = scene.cache.tilemap.get(layer1_t).data;
+
+    // this.solids = this.map.filterTiles(tile => tile.index > 0);
+    // this.slopes = this.map.filterTiles(tile => tile.index == 3);
 
     this.map.setCollisionBetween(1, 100, true);
 
@@ -112,7 +117,7 @@ class MapChunk {
       if (sprite.layer != layer) return true;
 
       // let phaser handle non-slope collision
-      if (sprite.body.blocked.left) return false;
+      // if (sprite.body.blocked.left) return false;
 
       let {tileWidth, tileHeight, scene} = tileData;
  
