@@ -6,6 +6,10 @@ class MapChunk {
     this.layer = this.map.createLayer("Layer0", this.tiles, x, y);
     this.layer.setCollisionByProperty({ solid: true });
 
+    this.layer1 = this.map.createLayer("Layer1", this.tiles, x, y);
+    this.layer1.setCollisionByProperty({ solid: true });
+    this.layer1.setDepth(-1);
+
     let td = {tileWidth, tileHeight, scene};
 
     const ts = this.map.getTileset("Main");
@@ -14,20 +18,35 @@ class MapChunk {
       const props = ts.getTileProperties(i);
 
       if (props && props.slope_m) {
-        this.layer.setTileIndexCallback(i, this.handleSlope(td, 0, (x) => {
+        this.layer.setTileIndexCallback(i, this.handleSlope(td, 0, props.slope_dir, props.slope_gravity, (x) => {
           return props.slope_m * x + props.slope_b;
         }), scene);
       }
     }
   }
 
-  // TODO: Take in gravity-switching info
-  handleSlope(tileData, layer, slopeEq) {
+  handleSlope(tileData, layer, dir, swapGravity, slopeEq) {
     return (sprite, tile) => {
       if (sprite.layer != layer) return true;
-
-      // let phaser handle non-slope collision
-      // if (sprite.body.blocked.left) return false;
+      
+      switch (swapGravity) {
+        case 0: // down
+          sprite.setGravity(0, 600);
+          console.log("GRAVITY: DOWN");
+          break;
+        case 1: // right
+          sprite.setGravity(600, 0);
+          console.log("GRAVITY: RIGHT");
+          break;
+        case 2: // up
+          sprite.setGravity(0, -600);
+          console.log("GRAVITY: UP");
+          break;
+        case 3: // left
+          sprite.setGravity(-600, 0);
+          console.log("GRAVITY: LEFT");
+          break;
+      }
 
       let {tileWidth, tileHeight, scene} = tileData;
  
@@ -56,7 +75,7 @@ class MapChunk {
       }
 
       if (dy <= y && sprite.body.velocity.y >= 0) {
-        console.log(`SLOPE: ${spriteY} -> ${tileY} (${y}) DIST: ${dx}, ${dy}`);
+        // console.log(`SLOPE: ${spriteY} -> ${tileY} (${y}) DIST: ${dx}, ${dy}`);
         sprite.setY(tileY - y - sprite.body.height / 2);
         sprite.body.velocity.y = 0;
         sprite.onSlope = true;
