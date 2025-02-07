@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.11.1" name="Main" tilewidth="32" tileheight="32" tilecount="96" columns="12">
+<tileset version="1.10" tiledversion="1.11.2" name="Main" tilewidth="32" tileheight="32" tilecount="96" columns="12">
  <image source="img/grid.png" width="384" height="256"/>
  <tile id="4">
   <properties>
@@ -42,13 +42,9 @@
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="11">
-  <properties>
-   <property name="solid" type="bool" value="true"/>
-  </properties>
- </tile>
  <tile id="12">
   <properties>
+   <property name="ground_angle" type="int" value="0"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
@@ -86,26 +82,19 @@
  </tile>
  <tile id="35">
   <properties>
-   <property name="slope_b" type="float" value="52"/>
-   <property name="slope_dir" type="int" value="1"/>
-   <property name="slope_m" type="float" value="-2"/>
+   <property name="ground_angle" type="float" value="5.02654825"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="36">
   <properties>
-   <property name="dir" type="int" value="0"/>
-   <property name="slope_b" type="float" value="0"/>
-   <property name="slope_dir" type="int" value="0"/>
-   <property name="slope_m" type="float" value="1"/>
+   <property name="ground_angle" type="float" value="0.78539816"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="37">
   <properties>
-   <property name="slope_b" type="float" value="32"/>
-   <property name="slope_dir" type="int" value="0"/>
-   <property name="slope_m" type="float" value="-1"/>
+   <property name="ground_angle" type="float" value="2.35619449"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
@@ -117,9 +106,7 @@
  </tile>
  <tile id="47">
   <properties>
-   <property name="slope_b" type="float" value="212"/>
-   <property name="slope_dir" type="int" value="1"/>
-   <property name="slope_m" type="float" value="-7"/>
+   <property name="ground_angle" type="float" value="4.85518865"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
@@ -131,9 +118,7 @@
  </tile>
  <tile id="59">
   <properties>
-   <property name="slope_b" type="float" value="-182"/>
-   <property name="slope_dir" type="int" value="1"/>
-   <property name="slope_m" type="float" value="7"/>
+   <property name="ground_angle" type="float" value="1.42799666"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
@@ -145,9 +130,7 @@
  </tile>
  <tile id="71">
   <properties>
-   <property name="slope_b" type="float" value="-20"/>
-   <property name="slope_dir" type="int" value="1"/>
-   <property name="slope_m" type="float" value="2"/>
+   <property name="ground_angle" type="float" value="1.25663706"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
@@ -165,17 +148,13 @@
  </tile>
  <tile id="82">
   <properties>
-   <property name="slope_b" type="int" value="-15"/>
-   <property name="slope_dir" type="int" value="1"/>
-   <property name="slope_m" type="float" value="1"/>
+   <property name="ground_angle" type="float" value="0.78539816"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="83">
   <properties>
-   <property name="slope_b" type="float" value="17"/>
-   <property name="slope_dir" type="int" value="1"/>
-   <property name="slope_m" type="float" value="1.5"/>
+   <property name="ground_angle" type="float" value="1.04719755"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
@@ -200,38 +179,25 @@
  </tile>
  <tile id="91">
   <properties>
-   <property name="slope_b" type="float" value="4"/>
-   <property name="slope_dir" type="int" value="0"/>
-   <property name="slope_m" type="float" value="-0.125"/>
+   <property name="ground_angle" type="float" value="2.98451302"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="92">
   <properties>
-   <property name="slope_b" type="float" value="0"/>
-   <property name="slope_dir" type="int" value="0"/>
-   <property name="slope_m" type="float" value="0.125"/>
+   <property name="ground_angle" type="float" value="0.15707963"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="93">
   <properties>
-   <property name="slope_b" type="float" value="4"/>
-   <property name="slope_dir" type="int" value="0"/>
-   <property name="slope_m" type="float" value="0.5"/>
+   <property name="ground_angle" type="float" value="0.62831853"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="94">
   <properties>
-   <property name="slope_b" type="float" value="20"/>
-   <property name="slope_dir" type="int" value="0"/>
-   <property name="slope_m" type="float" value="0.833"/>
-   <property name="solid" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="95">
-  <properties>
+   <property name="ground_angle" type="float" value="0.78539816"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
