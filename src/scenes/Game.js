@@ -13,9 +13,9 @@ class Game extends Phaser.Scene {
     // TODO: Use actual parallax background
     this.cameras.main.setBackgroundColor(0x00ffff);
     
-    this.player = new Player(this, 50, game.config.height - game.config.height / 5);
+    this.player = new Player(this, 50, game.config.height - game.config.height / 2);
+    this.player.setDebug(false);
     this.player.setDepth(1);
-    this.player.body.setGravity(0, 600);
 
     // TODO: Make this better
     // After a certain amount of time (maybe level transition),
@@ -26,7 +26,7 @@ class Game extends Phaser.Scene {
     this.chunks = [];
 
     // NOTE: Test chunks, will generate these later
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 1; i++) {
       let chunk = new MapChunk(this, "chunk", "grid", i * 640, 0);
 
       this.chunks.push(chunk);
@@ -43,6 +43,8 @@ class Game extends Phaser.Scene {
   }
 
   update() {
+    this.graphics.clear();
+
     this.player.update();
 
     // this.graphics.fillStyle(0xffffff, 1);

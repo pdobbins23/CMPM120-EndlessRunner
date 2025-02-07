@@ -58,7 +58,7 @@
  "nextobjectid":1,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.11.2",
+ "tiledversion":"1.11.1",
  "tileheight":32,
  "tilesets":[
         {
@@ -77,19 +77,29 @@
                  "id":4,
                  "properties":[
                         {
+                         "name":"ground_angle",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"heightmap",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
                          "name":"solid",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"widthmap",
+                         "type":"int",
+                         "value":0
                         }]
                 }, 
                 {
                  "id":5,
                  "properties":[
-                        {
-                         "name":"slope_dir",
-                         "type":"int",
-                         "value":0
-                        }, 
                         {
                          "name":"solid",
                          "type":"bool",
@@ -100,11 +110,6 @@
                  "id":6,
                  "properties":[
                         {
-                         "name":"slope_dir",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
                          "name":"solid",
                          "type":"bool",
                          "value":true
@@ -113,11 +118,6 @@
                 {
                  "id":7,
                  "properties":[
-                        {
-                         "name":"slope_dir",
-                         "type":"int",
-                         "value":0
-                        }, 
                         {
                          "name":"solid",
                          "type":"bool",
@@ -128,35 +128,84 @@
                  "id":8,
                  "properties":[
                         {
-                         "name":"slope_dir",
+                         "name":"flipmap",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"heightmap",
                          "type":"int",
-                         "value":0
+                         "value":2
                         }, 
                         {
                          "name":"solid",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"widthmap",
+                         "type":"int",
+                         "value":2
                         }]
                 }, 
                 {
                  "id":9,
                  "properties":[
                         {
-                         "name":"slope_dir",
+                         "name":"flipmap",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"heightmap",
                          "type":"int",
-                         "value":0
+                         "value":3
                         }, 
                         {
                          "name":"solid",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"widthmap",
+                         "type":"int",
+                         "value":3
                         }]
                 }, 
                 {
                  "id":10,
                  "properties":[
                         {
-                         "name":"slope_dir",
+                         "name":"flipmap",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"heightmap",
+                         "type":"int",
+                         "value":4
+                        }, 
+                        {
+                         "name":"solid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"widthmap",
+                         "type":"int",
+                         "value":4
+                        }]
+                }, 
+                {
+                 "id":12,
+                 "properties":[
+                        {
+                         "name":"ground_angle",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"heightmap",
                          "type":"int",
                          "value":0
                         }, 
@@ -164,34 +213,16 @@
                          "name":"solid",
                          "type":"bool",
                          "value":true
-                        }]
-                }, 
-                {
-                 "id":11,
-                 "properties":[
+                        }, 
                         {
-                         "name":"solid",
-                         "type":"bool",
-                         "value":true
-                        }]
-                }, 
-                {
-                 "id":12,
-                 "properties":[
-                        {
-                         "name":"solid",
-                         "type":"bool",
-                         "value":true
+                         "name":"widthmap",
+                         "type":"int",
+                         "value":0
                         }]
                 }, 
                 {
                  "id":16,
                  "properties":[
-                        {
-                         "name":"slope_dir",
-                         "type":"int",
-                         "value":1
-                        }, 
                         {
                          "name":"solid",
                          "type":"bool",
@@ -202,16 +233,6 @@
                  "id":17,
                  "properties":[
                         {
-                         "name":"gravity",
-                         "type":"int",
-                         "value":3
-                        }, 
-                        {
-                         "name":"slope_dir",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
                          "name":"solid",
                          "type":"bool",
                          "value":true
@@ -221,43 +242,53 @@
                  "id":22,
                  "properties":[
                         {
-                         "name":"slope_dir",
-                         "type":"int",
-                         "value":0
+                         "name":"flipmap",
+                         "type":"bool",
+                         "value":true
                         }, 
                         {
-                         "name":"slope_gravity",
+                         "name":"heightmap",
                          "type":"int",
-                         "value":2
+                         "value":5
                         }, 
                         {
                          "name":"solid",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"widthmap",
+                         "type":"int",
+                         "value":5
                         }]
                 }, 
                 {
                  "id":23,
                  "properties":[
                         {
-                         "name":"slope_dir",
+                         "name":"flipmap",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"heightmap",
                          "type":"int",
-                         "value":1
+                         "value":6
                         }, 
                         {
                          "name":"solid",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"widthmap",
+                         "type":"int",
+                         "value":6
                         }]
                 }, 
                 {
                  "id":28,
                  "properties":[
-                        {
-                         "name":"slope_dir",
-                         "type":"int",
-                         "value":1
-                        }, 
                         {
                          "name":"solid",
                          "type":"bool",
@@ -268,87 +299,87 @@
                  "id":35,
                  "properties":[
                         {
-                         "name":"slope_b",
-                         "type":"float",
-                         "value":52
+                         "name":"flipmap",
+                         "type":"bool",
+                         "value":true
                         }, 
                         {
-                         "name":"slope_dir",
+                         "name":"ground_angle",
+                         "type":"float",
+                         "value":5.02654825
+                        }, 
+                        {
+                         "name":"heightmap",
                          "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"slope_m",
-                         "type":"float",
-                         "value":-2
+                         "value":7
                         }, 
                         {
                          "name":"solid",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"widthmap",
+                         "type":"int",
+                         "value":7
                         }]
                 }, 
                 {
                  "id":36,
                  "properties":[
                         {
-                         "name":"dir",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"slope_b",
+                         "name":"ground_angle",
                          "type":"float",
-                         "value":0
+                         "value":0.78539816
                         }, 
                         {
-                         "name":"slope_dir",
+                         "name":"heightmap",
                          "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"slope_m",
-                         "type":"float",
                          "value":1
                         }, 
                         {
                          "name":"solid",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"widthmap",
+                         "type":"int",
+                         "value":1
                         }]
                 }, 
                 {
                  "id":37,
                  "properties":[
                         {
-                         "name":"slope_b",
-                         "type":"float",
-                         "value":32
+                         "name":"flipmap",
+                         "type":"bool",
+                         "value":true
                         }, 
                         {
-                         "name":"slope_dir",
+                         "name":"ground_angle",
+                         "type":"float",
+                         "value":2.35619449
+                        }, 
+                        {
+                         "name":"heightmap",
                          "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"slope_m",
-                         "type":"float",
-                         "value":-1
+                         "value":1
                         }, 
                         {
                          "name":"solid",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"widthmap",
+                         "type":"int",
+                         "value":1
                         }]
                 }, 
                 {
                  "id":40,
                  "properties":[
-                        {
-                         "name":"slope_dir",
-                         "type":"int",
-                         "value":1
-                        }, 
                         {
                          "name":"solid",
                          "type":"bool",
@@ -359,73 +390,68 @@
                  "id":47,
                  "properties":[
                         {
-                         "name":"slope_b",
-                         "type":"float",
-                         "value":212
+                         "name":"flipmap",
+                         "type":"bool",
+                         "value":true
                         }, 
                         {
-                         "name":"slope_dir",
+                         "name":"ground_angle",
+                         "type":"float",
+                         "value":4.85518865
+                        }, 
+                        {
+                         "name":"heightmap",
                          "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"slope_m",
-                         "type":"float",
-                         "value":-7
+                         "value":8
                         }, 
                         {
                          "name":"solid",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"widthmap",
+                         "type":"int",
+                         "value":8
                         }]
                 }, 
                 {
                  "id":52,
                  "properties":[
                         {
-                         "name":"slope_dir",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"solid",
-                         "type":"bool",
-                         "value":true
-                        }]
-                },
-            
-                {
-                 "id":59,
-                 "properties":[
-                        {
-                         "name":"slope_b",
-                         "type":"float",
-                         "value":-182
-                        }, 
-                        {
-                         "name":"slope_dir",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"slope_m",
-                         "type":"float",
-                         "value":7
-                        }, 
-                        {
                          "name":"solid",
                          "type":"bool",
                          "value":true
                         }]
                 }, 
                 {
-                 "id":64,
+                 "id":59,
                  "properties":[
                         {
-                         "name":"slope_dir",
-                         "type":"int",
-                         "value":1
+                         "name":"ground_angle",
+                         "type":"float",
+                         "value":1.42799666
                         }, 
+                        {
+                         "name":"heightmap",
+                         "type":"int",
+                         "value":8
+                        }, 
+                        {
+                         "name":"solid",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"widthmap",
+                         "type":"int",
+                         "value":8
+                        }]
+                },
+            
+                {
+                 "id":64,
+                 "properties":[
                         {
                          "name":"solid",
                          "type":"bool",
@@ -436,34 +462,29 @@
                  "id":71,
                  "properties":[
                         {
-                         "name":"slope_b",
+                         "name":"ground_angle",
                          "type":"float",
-                         "value":-20
+                         "value":1.25663706
                         }, 
                         {
-                         "name":"slope_dir",
+                         "name":"heightmap",
                          "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"slope_m",
-                         "type":"float",
-                         "value":2
+                         "value":7
                         }, 
                         {
                          "name":"solid",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"widthmap",
+                         "type":"int",
+                         "value":7
                         }]
                 }, 
                 {
                  "id":76,
                  "properties":[
-                        {
-                         "name":"slope_dir",
-                         "type":"int",
-                         "value":1
-                        }, 
                         {
                          "name":"solid",
                          "type":"bool",
@@ -474,16 +495,6 @@
                  "id":77,
                  "properties":[
                         {
-                         "name":"gravity",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"slope_dir",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
                          "name":"solid",
                          "type":"bool",
                          "value":true
@@ -493,53 +504,48 @@
                  "id":82,
                  "properties":[
                         {
-                         "name":"slope_b",
-                         "type":"int",
-                         "value":-15
-                        }, 
-                        {
-                         "name":"slope_dir",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"slope_gravity",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"slope_m",
+                         "name":"ground_angle",
                          "type":"float",
-                         "value":1
+                         "value":0.78539816
+                        }, 
+                        {
+                         "name":"heightmap",
+                         "type":"int",
+                         "value":5
                         }, 
                         {
                          "name":"solid",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"widthmap",
+                         "type":"int",
+                         "value":5
                         }]
                 }, 
                 {
                  "id":83,
                  "properties":[
                         {
-                         "name":"slope_b",
+                         "name":"ground_angle",
                          "type":"float",
-                         "value":17
+                         "value":1.04719755
                         }, 
                         {
-                         "name":"slope_dir",
+                         "name":"heightmap",
                          "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"slope_m",
-                         "type":"float",
-                         "value":1.5
+                         "value":6
                         }, 
                         {
                          "name":"solid",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"widthmap",
+                         "type":"int",
+                         "value":6
                         }]
                 }, 
                 {
@@ -555,11 +561,6 @@
                  "id":89,
                  "properties":[
                         {
-                         "name":"slope_dir",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
                          "name":"solid",
                          "type":"bool",
                          "value":true
@@ -568,21 +569,6 @@
                 {
                  "id":90,
                  "properties":[
-                        {
-                         "name":"slope_b",
-                         "type":"float",
-                         "value":17
-                        }, 
-                        {
-                         "name":"slope_dir",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"slope_m",
-                         "type":"float",
-                         "value":-0.4
-                        }, 
                         {
                          "name":"solid",
                          "type":"bool",
@@ -593,19 +579,9 @@
                  "id":91,
                  "properties":[
                         {
-                         "name":"slope_b",
+                         "name":"ground_angle",
                          "type":"float",
-                         "value":4
-                        }, 
-                        {
-                         "name":"slope_dir",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"slope_m",
-                         "type":"float",
-                         "value":-0.125
+                         "value":2.98451302
                         }, 
                         {
                          "name":"solid",
@@ -617,81 +593,72 @@
                  "id":92,
                  "properties":[
                         {
-                         "name":"slope_b",
+                         "name":"ground_angle",
                          "type":"float",
-                         "value":0
+                         "value":0.15707963
                         }, 
                         {
-                         "name":"slope_dir",
+                         "name":"heightmap",
                          "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"slope_m",
-                         "type":"float",
-                         "value":0.125
+                         "value":2
                         }, 
                         {
                          "name":"solid",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"widthmap",
+                         "type":"int",
+                         "value":2
                         }]
                 }, 
                 {
                  "id":93,
                  "properties":[
                         {
-                         "name":"slope_b",
+                         "name":"ground_angle",
                          "type":"float",
-                         "value":4
+                         "value":0.62831853
                         }, 
                         {
-                         "name":"slope_dir",
+                         "name":"heightmap",
                          "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"slope_m",
-                         "type":"float",
-                         "value":0.5
+                         "value":3
                         }, 
                         {
                          "name":"solid",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"widthmap",
+                         "type":"int",
+                         "value":3
                         }]
                 }, 
                 {
                  "id":94,
                  "properties":[
                         {
-                         "name":"slope_b",
+                         "name":"ground_angle",
                          "type":"float",
-                         "value":20
+                         "value":0.78539816
                         }, 
                         {
-                         "name":"slope_dir",
+                         "name":"heightmap",
                          "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"slope_m",
-                         "type":"float",
-                         "value":0.833
+                         "value":4
                         }, 
                         {
                          "name":"solid",
                          "type":"bool",
                          "value":true
-                        }]
-                }, 
-                {
-                 "id":95,
-                 "properties":[
+                        }, 
                         {
-                         "name":"solid",
-                         "type":"bool",
-                         "value":true
+                         "name":"widthmap",
+                         "type":"int",
+                         "value":4
                         }]
                 }],
          "tilewidth":32

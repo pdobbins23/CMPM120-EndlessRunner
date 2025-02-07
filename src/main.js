@@ -27,6 +27,7 @@ let config = {
     default: "arcade",
     arcade: {
       debug: true,
+      gravity: { y: 600 },
     },
   },
   scene: [Menu, Game],
