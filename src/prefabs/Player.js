@@ -15,7 +15,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.groundAngle = 0;
     
     this.rolling = false;
-    this.airborne = false;
 
     // sensors
     this.sensorBL = {offsetX: -0.75, offsetY: 1, dirX: 0, dirY: 1};
@@ -225,6 +224,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       this.onGround = true;
       this.groundAngle = tileBR.properties.ground_angle;
       this.body.velocity.y = 0;
+    } else {
+      this.onGround = false;
     }
 
     /*let vel = new Phaser.Math.Vector2(0, 0);
