@@ -18,39 +18,16 @@ class MapChunk {
       const props = ts.getTileProperties(i);
 
       if (props && props.slope_m) {
-        this.layer.setTileIndexCallback(i, this.handleSlope(td, 0, props.slope_dir, props.slope_gravity, (x) => {
+        this.layer.setTileIndexCallback(i, this.handleSlope(td, 0, (x) => {
           return props.slope_m * x + props.slope_b;
         }), scene);
       }
     }
   }
 
-  handleSlope(tileData, layer, dir, swapGravity, slopeEq) {
+  handleSlope(tileData, layer, slopeEq) {
     return (sprite, tile) => {
       if (sprite.layer != layer) return true;
-      
-      switch (swapGravity) {
-        case 0: // down
-          sprite.gravityDir = 0;
-          sprite.body.setGravity(0, 600);
-          console.log("GRAVITY: DOWN");
-          break;
-        case 1: // right
-          sprite.gravityDir = 1;
-          sprite.body.setGravity(600, 0);
-          console.log("GRAVITY: RIGHT");
-          break;
-        case 2: // up
-          sprite.gravityDir = 2;
-          sprite.body.setGravity(0, -600);
-          console.log("GRAVITY: UP");
-          break;
-        case 3: // left
-          sprite.gravityDir = 3;
-          sprite.body.setGravity(-600, 0);
-          console.log("GRAVITY: LEFT");
-          break;
-      }
 
       let {tileWidth, tileHeight, scene} = tileData;
  
@@ -80,11 +57,7 @@ class MapChunk {
 
       if (dy <= y && sprite.body.velocity.y >= 0) {
         // console.log(`SLOPE: ${spriteY} -> ${tileY} (${y}) DIST: ${dx}, ${dy}`);
-        if (dir == 0 || dir == 2) {
-          sprite.setY(tileY - y - sprite.body.height / 2);
-        } else if (dir == 1 || dir == 3) {
-          sprite.setX(tileY - y - sprite.body.height / 2);
-        }
+        sprite.setY(tileY - y - sprite.body.height / 2);
         sprite.body.velocity.y = 0;
         sprite.onSlope = true;
       }

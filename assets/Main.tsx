@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.11.2" name="Main" tilewidth="32" tileheight="32" tilecount="96" columns="12">
+<tileset version="1.10" tiledversion="1.11.1" name="Main" tilewidth="32" tileheight="32" tilecount="96" columns="12">
  <image source="img/grid.png" width="384" height="256"/>
  <tile id="4">
   <properties>
@@ -60,7 +60,6 @@
  </tile>
  <tile id="17">
   <properties>
-   <property name="gravity" type="int" value="3"/>
    <property name="slope_dir" type="int" value="1"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
@@ -68,13 +67,14 @@
  <tile id="22">
   <properties>
    <property name="slope_dir" type="int" value="0"/>
-   <property name="slope_gravity" type="int" value="2"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="23">
   <properties>
+   <property name="slope_b" type="float" value="17"/>
    <property name="slope_dir" type="int" value="1"/>
+   <property name="slope_m" type="float" value="-1.7"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
@@ -159,7 +159,6 @@
  </tile>
  <tile id="77">
   <properties>
-   <property name="gravity" type="int" value="0"/>
    <property name="slope_dir" type="int" value="0"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
@@ -168,7 +167,6 @@
   <properties>
    <property name="slope_b" type="int" value="-15"/>
    <property name="slope_dir" type="int" value="1"/>
-   <property name="slope_gravity" type="int" value="1"/>
    <property name="slope_m" type="float" value="1"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
