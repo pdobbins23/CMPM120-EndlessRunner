@@ -120,8 +120,34 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
       if (idx == 0) {
         // extension
+        let etileBL = this.scene.chunks[0].map.getTileAt(tileBLIndex.x, tileBLIndex.y + 1, true, "Layer0");
+
+        if (etileBL !== null && etileBL.properties.solid) {
+          tileBL = etileBL;
+          
+          hm = heightmaps[tileBL.properties.heightmap];
+
+          tileX = this.scene.chunks[0].layer.x + tileBL.x * 32;
+          tileY = this.scene.chunks[0].layer.y + tileBL.y * 32 + 32;
+
+          dx = Math.floor(sensorBLPos.x - tileX);
+          idx = tileBL.properties.flipmap ? hm[32 - dx] : hm[dx];
+        }
       } else if (idx == 32) {
         // regression
+        let rtileBL = this.scene.chunks[0].map.getTileAt(tileBLIndex.x, tileBLIndex.y - 1, true, "Layer0");
+
+        if (rtileBL !== null && rtileBL.properties.solid) {
+          tileBL = rtileBL;
+          
+          hm = heightmaps[tileBL.properties.heightmap];
+
+          tileX = this.scene.chunks[0].layer.x + tileBL.x * 32;
+          tileY = this.scene.chunks[0].layer.y + tileBL.y * 32 + 32;
+
+          dx = Math.floor(sensorBLPos.x - tileX);
+          idx = tileBL.properties.flipmap ? hm[32 - dx] : hm[dx];
+        }
       }
       
       let dy = tileY - sensorBLPos.y - idx;
@@ -141,6 +167,39 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
       let dx = Math.floor(sensorBRPos.x - tileX);
       let idx = tileBR.properties.flipmap ? hm[32 - dx] : hm[dx];
+
+      if (idx == 0) {
+        // extension
+        let etileBR = this.scene.chunks[0].map.getTileAt(tileBRIndex.x, tileBRIndex.y + 1, true, "Layer0");
+
+        if (etileBR !== null && etileBR.properties.solid) {
+          tileBR = etileBR;
+          
+          hm = heightmaps[tileBR.properties.heightmap];
+
+          tileX = this.scene.chunks[0].layer.x + tileBR.x * 32;
+          tileY = this.scene.chunks[0].layer.y + tileBR.y * 32 + 32;
+
+          dx = Math.floor(sensorBRPos.x - tileX);
+          idx = tileBR.properties.flipmap ? hm[32 - dx] : hm[dx];
+        }
+      } else if (idx == 32) {
+        // regression
+        let rtileBR = this.scene.chunks[0].map.getTileAt(tileBRIndex.x, tileBRIndex.y - 1, true, "Layer0");
+
+        if (rtileBR !== null && rtileBR.properties.solid) {
+          tileBR = rtileBR;
+          
+          hm = heightmaps[tileBR.properties.heightmap];
+
+          tileX = this.scene.chunks[0].layer.x + tileBR.x * 32;
+          tileY = this.scene.chunks[0].layer.y + tileBR.y * 32 + 32;
+
+          dx = Math.floor(sensorBRPos.x - tileX);
+          idx = tileBR.properties.flipmap ? hm[32 - dx] : hm[dx];
+        }
+      }
+      
       let dy = tileY - sensorBRPos.y - idx;
 
       // console.log(dx, hm[dx], dy);
