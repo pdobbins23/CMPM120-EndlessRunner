@@ -58,7 +58,7 @@
  "nextobjectid":1,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.11.2",
+ "tiledversion":"1.11.1",
  "tileheight":32,
  "tilesets":[
         {
@@ -82,7 +82,7 @@
                          "value":0
                         }, 
                         {
-                         "name":"heightmap",
+                         "name":"hwmap",
                          "type":"int",
                          "value":0
                         }, 
@@ -90,11 +90,6 @@
                          "name":"solid",
                          "type":"bool",
                          "value":true
-                        }, 
-                        {
-                         "name":"widthmap",
-                         "type":"int",
-                         "value":0
                         }]
                 }, 
                 {

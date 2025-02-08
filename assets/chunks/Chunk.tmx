@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="1">
+<map version="1.10" tiledversion="1.11.1" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="1">
  <editorsettings>
   <export target="Chunk.json" format="json"/>
  </editorsettings>
@@ -8,9 +8,8 @@
   <tile id="4">
    <properties>
     <property name="ground_angle" type="float" value="0"/>
-    <property name="heightmap" type="int" value="0"/>
+    <property name="hwmap" type="int" value="0"/>
     <property name="solid" type="bool" value="true"/>
-    <property name="widthmap" type="int" value="0"/>
    </properties>
   </tile>
   <tile id="5">

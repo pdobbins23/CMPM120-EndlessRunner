@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.11.2" name="Main" tilewidth="32" tileheight="32" tilecount="96" columns="12">
+<tileset version="1.10" tiledversion="1.11.1" name="Main" tilewidth="32" tileheight="32" tilecount="96" columns="12">
  <image source="img/grid.png" width="384" height="256"/>
  <tile id="4">
   <properties>
    <property name="ground_angle" type="float" value="0"/>
-   <property name="heightmap" type="int" value="0"/>
+   <property name="hwmap" type="int" value="0"/>
    <property name="solid" type="bool" value="true"/>
-   <property name="widthmap" type="int" value="0"/>
   </properties>
  </tile>
  <tile id="5">
