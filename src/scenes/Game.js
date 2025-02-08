@@ -14,7 +14,7 @@ class Game extends Phaser.Scene {
     this.cameras.main.setBackgroundColor(0x00ffff);
     
     this.player = new Player(this, 50, game.config.height - game.config.height / 2);
-    this.player.setDebug(false);
+    // this.player.setDebug(false);
     this.player.setDepth(1);
 
     // TODO: Make this better

@@ -94,8 +94,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
       sensorMode = 0;
     } else if ((0.78539816 < this.groundAngle && this.groundAngle <  2.35619449)) { // right wall
-      sensorBLPos = {x: this.x + sensorBLoffset.y * (this.height / 2), y: this.y + sensorBLoffset.x * (this.width / 2)};
-      sensorBRPos = {x: this.x + sensorBRoffset.y * (this.height / 2), y: this.y + sensorBRoffset.x * (this.width / 2)};
+      sensorBLPos = {x: this.x + sensorBLoffset.y * (this.height / 2), y: this.y - sensorBLoffset.x * (this.width / 2)};
+      sensorBRPos = {x: this.x + sensorBRoffset.y * (this.height / 2), y: this.y - sensorBRoffset.x * (this.width / 2)};
       sensorBDir = {x: 1, y: 0};
 
       hwmap = widthmaps;
@@ -115,8 +115,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
       sensorMode = 2;
     } else if (3.926990817 < this.groundAngle && this.groundAngle < 5.497787144) { // left wall
-      sensorBLPos = {x: this.x - sensorBLoffset.y * (this.height / 2), y: this.y - sensorBLoffset.x * (this.width / 2)};
-      sensorBRPos = {x: this.x - sensorBRoffset.y * (this.height / 2), y: this.y - sensorBRoffset.x * (this.width / 2)};
+      sensorBLPos = {x: this.x - sensorBLoffset.y * (this.height / 2), y: this.y + sensorBLoffset.x * (this.width / 2)};
+      sensorBRPos = {x: this.x - sensorBRoffset.y * (this.height / 2), y: this.y + sensorBRoffset.x * (this.width / 2)};
       sensorBDir = {x: -1, y: 0};
 
       hwmap = widthmaps;
@@ -163,9 +163,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       let hm = hwmap[tileBL.properties.hwmap];
 
       let tileX = this.scene.chunks[0].layer.x + tileBL.x * 32 + (sensorMode % 2 == 0 ? 0 : 32);
-      let tileY = this.scene.chunks[0].layer.y + tileBL.y * 32 + (sensorMode % 2 == 0 ? 32 : 0);
+      let tileY = this.scene.chunks[0].layer.y + tileBL.y * 32 + (sensorMode % 2 == 0 ? 32 : 32);
 
-      let offset = sensorMode % 2 == 0 ? Math.floor(sensorBLPos.x - tileX) : Math.floor(sensorBLPos.y - tileY);
+      let offset = sensorMode % 2 == 0 ? Math.floor(sensorBLPos.x - tileX) : Math.floor(tileY - sensorBLPos.y);
       let idx = tileBL.properties.flipmap ? hm[32 - offset] : hm[offset];
 
       if (idx == 0) {
@@ -178,7 +178,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
           hm = hwmap[tileBL.properties.hwmap];
 
           tileX = this.scene.chunks[0].layer.x + tileBL.x * 32 + (sensorMode % 2 == 0 ? 0 : 32);
-          tileY = this.scene.chunks[0].layer.y + tileBL.y * 32 + (sensorMode % 2 == 0 ? 32 : 0);
+          tileY = this.scene.chunks[0].layer.y + tileBL.y * 32 + (sensorMode % 2 == 0 ? 32 : 32);
 
           offset = sensorMode % 2 == 0 ? Math.floor(sensorBLPos.x - tileX) : Math.floor(sensorBLPos.y - tileY);
           idx = tileBL.properties.flipmap ? hm[32 - offset] : hm[offset];
@@ -193,7 +193,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
           hm = hwmap[tileBL.properties.hwmap];
 
           tileX = this.scene.chunks[0].layer.x + tileBL.x * 32 + (sensorMode % 2 == 0 ? 0 : 32);
-          tileY = this.scene.chunks[0].layer.y + tileBL.y * 32 + (sensorMode % 2 == 0 ? 32 : 0);
+          tileY = this.scene.chunks[0].layer.y + tileBL.y * 32 + (sensorMode % 2 == 0 ? 32 : 32);
 
           offset = sensorMode % 2 == 0 ? Math.floor(sensorBLPos.x - tileX) : Math.floor(sensorBLPos.y - tileY);
           idx = tileBL.properties.flipmap ? hm[32 - offset] : hm[offset];
@@ -204,6 +204,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
       if (diff < 28) {
         tileBLdiff = diff;
+      } else {
+        if (sensorMode == 1) console.log(`Hello BL?: ${diff}, tileX: ${tileX}, sensorBLPos.x: ${sensorBLPos.x}, idx: ${idx}, offset: ${offset}, hwmap: ${hm}`);
       }
     }
     
@@ -213,7 +215,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       let tileX = this.scene.chunks[0].layer.x + tileBR.x * 32 + (sensorMode % 2 == 0 ? 0 : 32);
       let tileY = this.scene.chunks[0].layer.y + tileBR.y * 32 + (sensorMode % 2 == 0 ? 32 : 0);
 
-      let offset = sensorMode % 2 == 0 ? Math.floor(sensorBRPos.x - tileX) : Math.floor(sensorBRPos.y - tileY);
+      let offset = sensorMode % 2 == 0 ? Math.floor(sensorBRPos.x - tileX) : Math.floor(tileY - sensorBRPos.y);
       let idx = tileBR.properties.flipmap ? hm[32 - offset] : hm[offset];
 
       if (idx == 0) {
@@ -226,7 +228,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
           hm = hwmap[tileBR.properties.hwmap];
 
           tileX = this.scene.chunks[0].layer.x + tileBR.x * 32 + (sensorMode % 2 == 0 ? 0 : 32);
-          tileY = this.scene.chunks[0].layer.y + tileBR.y * 32 + (sensorMode % 2 == 0 ? 32 : 0);
+          tileY = this.scene.chunks[0].layer.y + tileBR.y * 32 + (sensorMode % 2 == 0 ? 32 : 32);
 
           offset = sensorMode % 2 == 0 ? Math.floor(sensorBRPos.x - tileX) : Math.floor(sensorBRPos.y - tileY);
           idx = tileBR.properties.flipmap ? hm[32 - offset] : hm[offset];
@@ -241,7 +243,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
           hm = hwmap[tileBR.properties.hwmap];
 
           tileX = this.scene.chunks[0].layer.x + tileBR.x * 32 + (sensorMode % 2 == 0 ? 0 : 32);
-          tileY = this.scene.chunks[0].layer.y + tileBR.y * 32 + (sensorMode % 2 == 0 ? 32 : 0);
+          tileY = this.scene.chunks[0].layer.y + tileBR.y * 32 + (sensorMode % 2 == 0 ? 32 : 32);
 
           offset = sensorMode % 2 == 0 ? Math.floor(sensorBRPos.x - tileX) : Math.floor(sensorBRPos.y - tileY);
           idx = tileBR.properties.flipmap ? hm[32 - offset] : hm[offset];
@@ -252,6 +254,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
       if (diff < 28) {
         tileBRdiff = diff;
+
+        if (sensorMode == 1) {
+          console.log(`DIFF: ${diff}, OFFSET: ${offset}, IDX: ${idx}, BRY - TY: ${sensorBRPos.y - tileY}`);
+        }
       }
     }
 
@@ -259,30 +265,38 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       this.setVelocity(this.groundSpeed * Math.cos(this.groundAngle), this.groundSpeed * -Math.sin(this.groundAngle));
     }
 
-    if ((tileBLdiff && !tileBRdiff) || (tileBLdiff <= tileBRdiff)) {
+    if ((tileBLdiff != undefined && tileBRdiff == undefined) || (tileBLdiff <= tileBRdiff)) {
       if (sensorMode % 2 == 0) {
+        console.log(`BL: ${tileBLdiff}, BR: ${tileBRdiff}`);
         this.y += tileBLdiff;
         this.body.velocity.y = 0;
       } else {
-        console.log(`MODE: ${sensorMode}, BL: ${tileBLdiff}`);
+        console.log(`MODE: ${sensorMode}, BL: ${tileBLdiff}, BR: ${tileBRdiff}`);
         this.x += tileBLdiff;
         this.body.velocity.x = 0;
       }
       this.onGround = true;
       this.groundAngle = tileBL.properties.ground_angle;
-    } else if ((tileBRdiff && !tileBLdiff) || (tileBRdiff < tileBLdiff)) {
+      this.scene.graphics.fillStyle(0xFF00FF, 1);
+      this.scene.graphics.fillRect(sensorBLPos.x, sensorBLPos.y, 3, 3);
+    } else if ((tileBRdiff != undefined && tileBLdiff == undefined) || (tileBRdiff < tileBLdiff)) {
       if (sensorMode % 2 == 0) {
+        console.log(`BR: ${tileBRdiff}, BL: ${tileBLdiff}`);
         this.y += tileBRdiff;
         this.body.velocity.y = 0;
       } else {
-        console.log(`MODE: ${sensorMode}, BL: ${tileBRdiff}`);
+        console.log(`MODE: ${sensorMode}, BR: ${tileBRdiff}, BL: ${tileBLdiff}`);
         this.x += tileBRdiff;
         this.body.velocity.x = 0;
       }
       this.onGround = true;
       this.groundAngle = tileBR.properties.ground_angle;
+      this.scene.graphics.fillStyle(0xFF00FF, 1);
+      this.scene.graphics.fillRect(sensorBRPos.x, sensorBRPos.y, 3, 3);
     } else {
       this.onGround = false;
+      this.groundAngle = 0;
+      this.setRotation(0);
     }
 
     /*let vel = new Phaser.Math.Vector2(0, 0);
