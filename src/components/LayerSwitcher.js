@@ -45,13 +45,13 @@ class LayerSwitcher extends Phaser.Physics.Arcade.Sprite {
             }
             break;
           case 2:
-            if (player.y < layerSwitcher.y) {
+            if (player.y < layerSwitcher.y && player.body.velocity.y > 0) {
               player.layer = layerSwitcher.targetLayer;
               console.log(`New Layer: ${layerSwitcher.targetLayer}`);
             }
             break;
           case 3:
-            if (player.y > layerSwitcher.y) {
+            if (player.y > layerSwitcher.y && player.body.player.y < 0) {
               player.layer = layerSwitcher.targetLayer;
               console.log(`New Layer: ${layerSwitcher.targetLayer}`);
             }

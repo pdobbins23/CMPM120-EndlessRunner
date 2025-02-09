@@ -8,7 +8,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.layer = 0;
 
     this.groundSpeed = 500;
-    this.jumpHeight = -400;
+    this.jumpHeight = 400;
 
     this.onGround = false;
     this.lastOnGround = false;
@@ -147,6 +147,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     // this.scene.graphics.fillRect(sensorMRPos.x, sensorMRPos.y, 2, 2);
     // this.scene.graphics.fillRect(sensorTLPos.x, sensorTLPos.y, 2, 2);
     // this.scene.graphics.fillRect(sensorTRPos.x, sensorTRPos.y, 2, 2);
+
+    // Running animation
+    if (this.onGround && !this.lastOnGround && !this.rolling)
+      this.run();
+
+    this.lastOnGround = this.onGround;
 
     // ground sensor check
     let tileBLIndex = this.scene.chunks[0].map.worldToTileXY(sensorBLPos.x, sensorBLPos.y);
@@ -409,29 +415,23 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
       if (diff < 28) {
         tileBRdiff = diff;
-
-      }
-      else {
-        // if (sensorMode == 1) console.log(`Hello BR?: ${diff}, tileX: ${tileX}, tileY: ${tileY}, sensorBRPos.x: ${sensorBRPos.x}, sensorBRPos.y: ${sensorBRPos.y}, idx: ${idx}, offset: ${offset}, hwmap: ${hm}`);
       }
     }
 
-    // TODO: Set ground angle based on current velocity?
-
     if (this.onGround) {
-      let jumpVelocity = 0;
+      let jumpVelocity = {x: 0, y: 0};
 
-      if (this.scene.cursors.up.isDown) {
+      if (this.groundAngle == 0 && this.scene.cursors.up.isDown) {
         this.roll();
         this.onGround = false;
 
-        jumpVelocity = this.jumpHeight;
-
-        this.y -= 29;
+        jumpVelocity = {x: this.jumpHeight * Math.sin(this.groundAngle), y: this.jumpHeight * Math.cos(this.groundAngle)};
       }
 
-      this.setVelocity(this.groundSpeed * Math.cos(this.groundAngle), this.groundSpeed * -Math.sin(this.groundAngle) + jumpVelocity);
+      this.setVelocity(this.groundSpeed * Math.cos(this.groundAngle) - jumpVelocity.x, this.groundSpeed * -Math.sin(this.groundAngle) - jumpVelocity.y);
     }
+
+    if (this.lastOnGround && !this.onGround) return;
 
     if ((tileBLdiff != undefined && tileBRdiff == undefined) || (tileBLdiff <= tileBRdiff)) {
       switch (sensorMode) {
@@ -505,13 +505,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     /*let vel = new Phaser.Math.Vector2(0, 0);
 
-    this.lastOnGround = this.onGround;
     this.onGround = (this.body.blocked.down || this.onSlope) && this.body.velocity.y == 0;
     this.onSlope = false;
 
-    // Running animation
-    if (this.onGround && !this.lastOnGround && !this.rolling)
-      this.run();
 
 
     if (this.onGround) {
