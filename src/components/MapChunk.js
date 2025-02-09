@@ -8,18 +8,15 @@ class MapChunk {
     this.layer1 = this.map.createLayer("Layer1", this.tiles, x, y);
     this.layer1.setDepth(-1);
 
-    // let td = {tileWidth, tileHeight, scene};
+    this.objects = this.map.getObjectLayer("LayerSwaps");
+    this.layerSwitches = [];
 
-    // const ts = this.map.getTileset("Main");
-
-    // for (let i = ts.firstgid; i <= ts.firstgid + ts.total; i++) {
-    //   const props = ts.getTileProperties(i);
-
-    //   if (props && props.slope_m) {
-    //     this.layer.setTileIndexCallback(i, this.handleSlope(td, 0, (x) => {
-    //       return props.slope_m * x + props.slope_b;
-    //     }), scene);
-    //   }
-    // }
+    if (this.objects) {
+      this.objects.objects.forEach((object) => {
+        if (object.properties[2]) {
+          this.layerSwitches.push(new LayerSwitcher(scene, x + object.x, y + object.y, object.properties[0].value, object.properties[1].value, object.properties[2].value));
+        }
+      });
+    }
   }
 }

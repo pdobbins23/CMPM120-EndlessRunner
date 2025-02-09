@@ -29,6 +29,8 @@ class Menu extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 40,
     });
+
+    this.add.sprite("invis", 1, 1);
   }
 
   create() {

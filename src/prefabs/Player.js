@@ -279,7 +279,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         tileBLdiff = diff;
 
         // console.log(`BL What: ${offset}`);
-        if (sensorMode == 2) console.log(`Hello BL?: ${diff}, tileX: ${tileX}, sensorBLPos.x: ${sensorBLPos.x}, idx: ${idx}, offset: ${offset}, hwmap: ${hm}`);
+        // if (sensorMode == 2) console.log(`Hello BL?: ${diff}, tileX: ${tileX}, sensorBLPos.x: ${sensorBLPos.x}, idx: ${idx}, offset: ${offset}, hwmap: ${hm}`);
       } else {
       }
     }
@@ -401,7 +401,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
       }
       else {
-        if (sensorMode == 1) console.log(`Hello BR?: ${diff}, tileX: ${tileX}, tileY: ${tileY}, sensorBRPos.x: ${sensorBRPos.x}, sensorBRPos.y: ${sensorBRPos.y}, idx: ${idx}, offset: ${offset}, hwmap: ${hm}`);
+        // if (sensorMode == 1) console.log(`Hello BR?: ${diff}, tileX: ${tileX}, tileY: ${tileY}, sensorBRPos.x: ${sensorBRPos.x}, sensorBRPos.y: ${sensorBRPos.y}, idx: ${idx}, offset: ${offset}, hwmap: ${hm}`);
       }
     }
 
@@ -429,11 +429,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
           break;
       }
       if (sensorMode % 2 == 0) {
-        console.log(`BL: ${tileBLdiff}, BR: ${tileBRdiff}`);
+        // console.log(`BL: ${tileBLdiff}, BR: ${tileBRdiff}`);
         // this.y += tileBLdiff;
         // this.body.velocity.y = 0;
       } else {
-        console.log(`MODE: ${sensorMode}, BL: ${tileBLdiff}, BR: ${tileBRdiff}`);
+        // console.log(`MODE: ${sensorMode}, BL: ${tileBLdiff}, BR: ${tileBRdiff}`);
         // this.x += tileBLdiff;
         // this.body.velocity.x = 0;
       }
@@ -461,11 +461,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
           break;
       }
       if (sensorMode % 2 == 0) {
-        console.log(`BR: ${tileBRdiff}, BL: ${tileBLdiff}`);
+        // console.log(`BR: ${tileBRdiff}, BL: ${tileBLdiff}`);
         // this.y += tileBRdiff;
         // this.body.velocity.y = 0;
       } else {
-        console.log(`MODE: ${sensorMode}, BR: ${tileBRdiff}, BL: ${tileBLdiff}`);
+        // console.log(`MODE: ${sensorMode}, BR: ${tileBRdiff}, BL: ${tileBLdiff}`);
         // this.x += tileBRdiff;
         // this.body.velocity.x = 0;
       }
