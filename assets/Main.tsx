@@ -20,12 +20,16 @@
  </tile>
  <tile id="7">
   <properties>
+   <property name="flipmap" type="bool" value="true"/>
+   <property name="ground_angle" type="float" value="3.298672286"/>
+   <property name="hwmap" type="int" value="2"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="8">
   <properties>
    <property name="flipmap" type="bool" value="true"/>
+   <property name="ground_angle" type="float" value="2.984513021"/>
    <property name="hwmap" type="int" value="2"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
@@ -33,6 +37,7 @@
  <tile id="9">
   <properties>
    <property name="flipmap" type="bool" value="true"/>
+   <property name="ground_angle" type="float" value="2.513274123"/>
    <property name="hwmap" type="int" value="3"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
@@ -40,6 +45,7 @@
  <tile id="10">
   <properties>
    <property name="flipmap" type="bool" value="true"/>
+   <property name="ground_angle" type="float" value="2.35619449"/>
    <property name="hwmap" type="int" value="4"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
@@ -64,6 +70,7 @@
  <tile id="22">
   <properties>
    <property name="flipmap" type="bool" value="true"/>
+   <property name="ground_angle" type="float" value="2.35619449"/>
    <property name="hwmap" type="int" value="5"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
@@ -71,6 +78,7 @@
  <tile id="23">
   <properties>
    <property name="flipmap" type="bool" value="true"/>
+   <property name="ground_angle" type="float" value="2.094395102"/>
    <property name="hwmap" type="int" value="6"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
@@ -83,7 +91,7 @@
  <tile id="35">
   <properties>
    <property name="flipmap" type="bool" value="true"/>
-   <property name="ground_angle" type="float" value="5.02654825"/>
+   <property name="ground_angle" type="float" value="1.884955592"/>
    <property name="hwmap" type="int" value="7"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
@@ -111,7 +119,7 @@
  <tile id="47">
   <properties>
    <property name="flipmap" type="bool" value="true"/>
-   <property name="ground_angle" type="float" value="4.85518865"/>
+   <property name="ground_angle" type="float" value="1.713595993"/>
    <property name="hwmap" type="int" value="8"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
