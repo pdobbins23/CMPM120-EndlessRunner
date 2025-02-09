@@ -105,8 +105,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
       sensorMode = 1;
     } else if ((2.35619449 <= this.groundAngle && this.groundAngle <= 3.926990817)) { // ceiling mode
-      sensorBLPos = {x: this.x + sensorBLoffset.x * (this.width / 2), y: this.y - sensorBLoffset.y * (this.height / 2)};
-      sensorBRPos = {x: this.x + sensorBRoffset.x * (this.width / 2), y: this.y - sensorBRoffset.y * (this.height / 2)};
+      sensorBLPos = {x: this.x - sensorBLoffset.x * (this.width / 2), y: this.y - sensorBLoffset.y * (this.height / 2)};
+      sensorBRPos = {x: this.x - sensorBRoffset.x * (this.width / 2), y: this.y - sensorBRoffset.y * (this.height / 2)};
       sensorBDir = {x: 0, y: -1};
 
       hwmap = heightmaps;
@@ -256,15 +256,29 @@ class Player extends Phaser.Physics.Arcade.Sprite {
           idx = tileBL.properties.flipmap ? hm[31 - offset] : hm[offset];
         }
       }
-      
-      let diff = sensorMode % 2 == 0 ? tileY - sensorBLPos.y - idx : tileX - sensorBLPos.x - idx;
+
+      let diff = undefined;
+      switch (sensorMode) {
+        case 0:
+          diff = tileY - sensorBLPos.y - idx;
+          break;
+        case 1:
+          diff = tileX - sensorBLPos.x - idx;
+          break;
+        case 2:
+          diff = sensorBLPos.y - tileY - idx;
+          break;
+        case 3:
+          diff = sensorBLPos.x - tileX - idx;
+          break;
+      }
 
       if (diff < 28) {
         tileBLdiff = diff;
 
-        console.log(`BL What: ${offset}`);
+        // console.log(`BL What: ${offset}`);
+        if (sensorMode == 2) console.log(`Hello BL?: ${diff}, tileX: ${tileX}, sensorBLPos.x: ${sensorBLPos.x}, idx: ${idx}, offset: ${offset}, hwmap: ${hm}`);
       } else {
-        if (sensorMode == 1) console.log(`Hello BL?: ${diff}, tileX: ${tileX}, sensorBLPos.x: ${sensorBLPos.x}, idx: ${idx}, offset: ${offset}, hwmap: ${hm}`);
       }
     }
     
@@ -364,7 +378,21 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
       }
       
-      let diff = sensorMode % 2 == 0 ? tileY - sensorBRPos.y - idx : tileX - sensorBRPos.x - idx;
+      let diff = undefined;
+      switch (sensorMode) {
+        case 0:
+          diff = tileY - sensorBRPos.y - idx;
+          break;
+        case 1:
+          diff = tileX - sensorBRPos.x - idx;
+          break;
+        case 2:
+          diff = sensorBRPos.y - tileY - idx;
+          break;
+        case 3:
+          diff = sensorBRPos.x - tileX - idx;
+          break;
+      }
 
       if (diff < 28) {
         tileBRdiff = diff;
@@ -380,28 +408,64 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     if ((tileBLdiff != undefined && tileBRdiff == undefined) || (tileBLdiff <= tileBRdiff)) {
+      switch (sensorMode) {
+        case 0:
+          this.y += tileBLdiff;
+          this.body.velocity.y = 0;
+          break;
+        case 1:
+          this.x += tileBLdiff;
+          this.body.velocity.x = 0;
+          break;
+        case 2:
+          this.y -= tileBLdiff;
+          this.body.velocity.y = 0;
+          break;
+        case 3:
+          this.x -= tileBLdiff;
+          this.body.velocity.x = 0;
+          break;
+      }
       if (sensorMode % 2 == 0) {
         console.log(`BL: ${tileBLdiff}, BR: ${tileBRdiff}`);
-        this.y += tileBLdiff;
-        this.body.velocity.y = 0;
+        // this.y += tileBLdiff;
+        // this.body.velocity.y = 0;
       } else {
         console.log(`MODE: ${sensorMode}, BL: ${tileBLdiff}, BR: ${tileBRdiff}`);
-        this.x += tileBLdiff;
-        this.body.velocity.x = 0;
+        // this.x += tileBLdiff;
+        // this.body.velocity.x = 0;
       }
       this.onGround = true;
       this.groundAngle = tileBL.properties.ground_angle;
       this.scene.graphics.fillStyle(0xFF00FF, 1);
       this.scene.graphics.fillRect(sensorBLPos.x, sensorBLPos.y, 3, 3);
     } else if ((tileBRdiff != undefined && tileBLdiff == undefined) || (tileBRdiff < tileBLdiff)) {
+      switch (sensorMode) {
+        case 0:
+          this.y += tileBRdiff;
+          this.body.velocity.y = 0;
+          break;
+        case 1:
+          this.x += tileBRdiff;
+          this.body.velocity.x = 0;
+          break;
+        case 2:
+          this.y -= tileBRdiff;
+          this.body.velocity.y = 0;
+          break;
+        case 3:
+          this.x -= tileBRdiff;
+          this.body.velocity.x = 0;
+          break;
+      }
       if (sensorMode % 2 == 0) {
         console.log(`BR: ${tileBRdiff}, BL: ${tileBLdiff}`);
-        this.y += tileBRdiff;
-        this.body.velocity.y = 0;
+        // this.y += tileBRdiff;
+        // this.body.velocity.y = 0;
       } else {
         console.log(`MODE: ${sensorMode}, BR: ${tileBRdiff}, BL: ${tileBLdiff}`);
-        this.x += tileBRdiff;
-        this.body.velocity.x = 0;
+        // this.x += tileBRdiff;
+        // this.body.velocity.x = 0;
       }
       this.onGround = true;
       this.groundAngle = tileBR.properties.ground_angle;
