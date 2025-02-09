@@ -142,6 +142,21 @@
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
+ <tile id="48">
+  <properties>
+   <property name="flipmap" type="bool" value="true"/>
+   <property name="ground_angle" type="float" value="4.71238898"/>
+   <property name="hwmap" type="int" value="9"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="49">
+  <properties>
+   <property name="ground_angle" type="float" value="1.570796327"/>
+   <property name="hwmap" type="int" value="9"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
  <tile id="52">
   <properties>
    <property name="flipmap" type="bool" value="true"/>
