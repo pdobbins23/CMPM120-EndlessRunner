@@ -10,7 +10,7 @@
  </tile>
  <tile id="5">
   <properties>
-   <property name="flipmap" type="bool" value="true"/>
+   <property name="flipmap" type="bool" value="false"/>
    <property name="ground_angle" type="float" value="3.926990817"/>
    <property name="hwmap" type="int" value="4"/>
    <property name="solid" type="bool" value="true"/>
@@ -18,7 +18,7 @@
  </tile>
  <tile id="6">
   <properties>
-   <property name="flipmap" type="bool" value="true"/>
+   <property name="flipmap" type="bool" value="false"/>
    <property name="ground_angle" type="float" value="3.769911184"/>
    <property name="hwmap" type="int" value="3"/>
    <property name="solid" type="bool" value="true"/>
@@ -26,7 +26,7 @@
  </tile>
  <tile id="7">
   <properties>
-   <property name="flipmap" type="bool" value="true"/>
+   <property name="flipmap" type="bool" value="false"/>
    <property name="ground_angle" type="float" value="3.298672286"/>
    <property name="hwmap" type="int" value="2"/>
    <property name="solid" type="bool" value="true"/>
@@ -65,7 +65,7 @@
  </tile>
  <tile id="16">
   <properties>
-   <property name="flipmap" type="bool" value="true"/>
+   <property name="flipmap" type="bool" value="false"/>
    <property name="ground_angle" type="float" value="4.188790205"/>
    <property name="hwmap" type="int" value="6"/>
    <property name="solid" type="bool" value="true"/>
@@ -73,7 +73,7 @@
  </tile>
  <tile id="17">
   <properties>
-   <property name="flipmap" type="bool" value="true"/>
+   <property name="flipmap" type="bool" value="false"/>
    <property name="ground_angle" type="float" value="3.926990817"/>
    <property name="hwmap" type="int" value="5"/>
    <property name="solid" type="bool" value="true"/>
@@ -97,7 +97,7 @@
  </tile>
  <tile id="28">
   <properties>
-   <property name="flipmap" type="bool" value="true"/>
+   <property name="flipmap" type="bool" value="false"/>
    <property name="ground_angle" type="float" value="4.398229715"/>
    <property name="hwmap" type="int" value="7"/>
    <property name="solid" type="bool" value="true"/>
@@ -128,7 +128,7 @@
  </tile>
  <tile id="40">
   <properties>
-   <property name="flipmap" type="bool" value="true"/>
+   <property name="flipmap" type="bool" value="false"/>
    <property name="ground_angle" type="float" value="4.569589314"/>
    <property name="hwmap" type="int" value="8"/>
    <property name="solid" type="bool" value="true"/>

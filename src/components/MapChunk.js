@@ -4,9 +4,10 @@ class MapChunk {
     this.tiles = this.map.addTilesetImage("Main", tileset);
 
     this.layer = this.map.createLayer("Layer0", this.tiles, x, y);
+    this.layer.setDepth(3);
 
     this.layer1 = this.map.createLayer("Layer1", this.tiles, x, y);
-    this.layer1.setDepth(-1);
+    this.layer1.setDepth(1);
 
     this.objects = this.map.getObjectLayer("LayerSwaps");
     this.layerSwitches = [];

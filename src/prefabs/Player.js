@@ -157,6 +157,15 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     let lyr = `Layer${this.layer}`;
 
+    switch (this.layer) {
+      case 0: // front
+        this.setDepth(4);
+        break;
+      case 1: // back
+        this.setDepth(2);
+        break;
+    }
+
     let tileBL = this.scene.chunks[0].map.getTileAt(tileBLIndex.x, tileBLIndex.y, true, lyr);
     let tileBR = this.scene.chunks[0].map.getTileAt(tileBRIndex.x, tileBRIndex.y, true, lyr);
 
