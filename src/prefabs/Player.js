@@ -127,6 +127,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       sensorMode = 3;
     }
 
+    this.setRotation(-this.groundAngle);
+
     this.groundSpeed -= 0.125 * Math.sin(this.groundAngle);
     
     /*let sensorMLPos = {x: this.x + this.sensorML.offsetX * (this.width / 2), y: this.y + this.sensorML.offsetY * (this.height / 2)};

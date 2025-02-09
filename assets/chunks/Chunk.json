@@ -7,8 +7,8 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 6, 7, 8, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 1, 5, 5, 6, 7, 8, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 5, 17, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 5, 29, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 5, 41, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -16,7 +16,7 @@
             0, 0, 0, 0, 0, 0, 0, 0, 89, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 89, 77, 78, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 89, 89, 90, 91, 92, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 89, 89, 89, 89, 89, 0, 0, 0, 0, 14, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 13, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":15,
          "id":2,
@@ -33,16 +33,16 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 9, 10, 11, 12, 5, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 1, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 9, 10, 11, 12, 5, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 23, 24, 5, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 36, 5, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 48, 5, 0, 0,
             0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 60, 5, 0, 0,
             0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 72, 5, 0, 0,
-            0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 83, 84, 5, 0, 0,
-            0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 93, 94, 95, 96, 5, 0, 0,
-            13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 5, 5, 5, 5, 5, 13, 13,
+            0, 0, 0, 0, 37, 5, 38, 1, 1, 0, 0, 0, 0, 0, 0, 83, 84, 5, 0, 0,
+            0, 0, 0, 37, 5, 5, 5, 38, 1, 1, 0, 0, 0, 93, 94, 95, 96, 5, 0, 0,
+            13, 13, 13, 5, 5, 5, 5, 5, 13, 13, 13, 13, 13, 5, 5, 5, 5, 5, 13, 13,
             5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
          "height":15,
          "id":1,
@@ -53,9 +53,76 @@
          "width":20,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":3,
+         "name":"LayerSwaps",
+         "objects":[
+                {
+                 "height":0,
+                 "id":1,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"layer",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"radius",
+                         "type":"float",
+                         "value":128
+                        }, 
+                        {
+                         "name":"switch",
+                         "type":"int",
+                         "value":1
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":416.666666666667,
+                 "y":288.666666666667
+                }, 
+                {
+                 "height":0,
+                 "id":2,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"layer",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"radius",
+                         "type":"float",
+                         "value":128
+                        }, 
+                        {
+                         "name":"switch",
+                         "type":"int",
+                         "value":0
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":583.333333333333,
+                 "y":287.333333333333
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":3,
- "nextobjectid":1,
+ "nextlayerid":4,
+ "nextobjectid":3,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.1",
@@ -96,6 +163,21 @@
                  "id":5,
                  "properties":[
                         {
+                         "name":"flipmap",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"ground_angle",
+                         "type":"float",
+                         "value":3.926990817
+                        }, 
+                        {
+                         "name":"hwmap",
+                         "type":"int",
+                         "value":4
+                        }, 
+                        {
                          "name":"solid",
                          "type":"bool",
                          "value":true
@@ -104,6 +186,21 @@
                 {
                  "id":6,
                  "properties":[
+                        {
+                         "name":"flipmap",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"ground_angle",
+                         "type":"float",
+                         "value":3.769911184
+                        }, 
+                        {
+                         "name":"hwmap",
+                         "type":"int",
+                         "value":3
+                        }, 
                         {
                          "name":"solid",
                          "type":"bool",
@@ -229,6 +326,21 @@
                  "id":16,
                  "properties":[
                         {
+                         "name":"flipmap",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"ground_angle",
+                         "type":"float",
+                         "value":4.188790205
+                        }, 
+                        {
+                         "name":"hwmap",
+                         "type":"int",
+                         "value":6
+                        }, 
+                        {
                          "name":"solid",
                          "type":"bool",
                          "value":true
@@ -237,6 +349,21 @@
                 {
                  "id":17,
                  "properties":[
+                        {
+                         "name":"flipmap",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"ground_angle",
+                         "type":"float",
+                         "value":3.926990817
+                        }, 
+                        {
+                         "name":"hwmap",
+                         "type":"int",
+                         "value":5
+                        }, 
                         {
                          "name":"solid",
                          "type":"bool",
@@ -294,6 +421,21 @@
                 {
                  "id":28,
                  "properties":[
+                        {
+                         "name":"flipmap",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"ground_angle",
+                         "type":"float",
+                         "value":4.398229715
+                        }, 
+                        {
+                         "name":"hwmap",
+                         "type":"int",
+                         "value":7
+                        }, 
                         {
                          "name":"solid",
                          "type":"bool",
@@ -371,6 +513,21 @@
                  "id":40,
                  "properties":[
                         {
+                         "name":"flipmap",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"ground_angle",
+                         "type":"float",
+                         "value":4.569589314
+                        }, 
+                        {
+                         "name":"hwmap",
+                         "type":"int",
+                         "value":8
+                        }, 
+                        {
                          "name":"solid",
                          "type":"bool",
                          "value":true
@@ -404,6 +561,21 @@
                  "id":52,
                  "properties":[
                         {
+                         "name":"flipmap",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"ground_angle",
+                         "type":"float",
+                         "value":4.855188646
+                        }, 
+                        {
+                         "name":"hwmap",
+                         "type":"int",
+                         "value":8
+                        }, 
+                        {
                          "name":"solid",
                          "type":"bool",
                          "value":true
@@ -433,6 +605,21 @@
                  "id":64,
                  "properties":[
                         {
+                         "name":"flipmap",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"ground_angle",
+                         "type":"float",
+                         "value":5.026548246
+                        }, 
+                        {
+                         "name":"hwmap",
+                         "type":"int",
+                         "value":7
+                        }, 
+                        {
                          "name":"solid",
                          "type":"bool",
                          "value":true
@@ -461,6 +648,21 @@
                  "id":76,
                  "properties":[
                         {
+                         "name":"flipmap",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"ground_angle",
+                         "type":"float",
+                         "value":5.235987756
+                        }, 
+                        {
+                         "name":"hwmap",
+                         "type":"int",
+                         "value":6
+                        }, 
+                        {
                          "name":"solid",
                          "type":"bool",
                          "value":true
@@ -469,6 +671,21 @@
                 {
                  "id":77,
                  "properties":[
+                        {
+                         "name":"flipmap",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"ground_angle",
+                         "type":"float",
+                         "value":5.497787144
+                        }, 
+                        {
+                         "name":"hwmap",
+                         "type":"int",
+                         "value":5
+                        }, 
                         {
                          "name":"solid",
                          "type":"bool",
@@ -517,6 +734,16 @@
                  "id":88,
                  "properties":[
                         {
+                         "name":"ground_angle",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"hwmap",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
                          "name":"solid",
                          "type":"bool",
                          "value":true
@@ -525,6 +752,21 @@
                 {
                  "id":89,
                  "properties":[
+                        {
+                         "name":"flipmap",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"ground_angle",
+                         "type":"float",
+                         "value":5.497787144
+                        }, 
+                        {
+                         "name":"hwmap",
+                         "type":"int",
+                         "value":4
+                        }, 
                         {
                          "name":"solid",
                          "type":"bool",
@@ -535,6 +777,21 @@
                  "id":90,
                  "properties":[
                         {
+                         "name":"flipmap",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"ground_angle",
+                         "type":"float",
+                         "value":5.654866776
+                        }, 
+                        {
+                         "name":"hwmap",
+                         "type":"int",
+                         "value":3
+                        }, 
+                        {
                          "name":"solid",
                          "type":"bool",
                          "value":true
@@ -544,9 +801,19 @@
                  "id":91,
                  "properties":[
                         {
+                         "name":"flipmap",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
                          "name":"ground_angle",
                          "type":"float",
-                         "value":2.98451302
+                         "value":6.126105675
+                        }, 
+                        {
+                         "name":"hwmap",
+                         "type":"int",
+                         "value":2
                         }, 
                         {
                          "name":"solid",
