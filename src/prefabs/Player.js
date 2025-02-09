@@ -7,7 +7,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.layer = 0;
 
-    this.groundSpeed = 500;
+    this.groundSpeed = 200;
     this.jumpHeight = 400;
 
     this.onGround = false;
@@ -15,6 +15,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.groundAngle = 0;
     
     this.rolling = false;
+
+    this.groundSensorL = new Sensor(scene, {x: -0.75, y: 1, width: this.width, height: this.height}, {x: 0, y: 1});
+    this.groundSensorR = new Sensor(scene, {x: 0.75, y: 1, width: this.width, height: this.height}, {x: 0, y: 1});
+
+    this.ceilingSensorL = new Sensor(scene, {x: -0.75, y: -1, width: this.width, height: this.height}, {x: 0, y: -1});
+    this.ceilingSensorR = new Sensor(scene, {x: 0.75, y: -1, width: this.width, height: this.height}, {x: 0, y: -1});
 
     // Setup animations
     this.anims.create({
@@ -51,37 +57,14 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   update() {
-    const heightmaps = [
-      [32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32],
-      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5],
-      [5, 6, 6, 6, 7, 7, 7, 7, 8, 8, 9, 9, 9, 10, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18],
-      [19, 19, 20, 21, 21, 22, 23, 23, 24, 25, 26, 26, 27, 28, 29, 29, 30, 31, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13],
-      [14, 15, 16, 18, 19, 20, 22, 23, 24, 26, 27, 29, 30, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 6, 8, 10, 12, 14, 16, 19, 22, 24, 28, 31, 32, 32, 32, 32, 32],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, 13, 21, 32],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32],
-    ];
-    const widthmaps = [
-      [32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32],
-      [32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
-      [32, 21, 13, 7, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [32, 32, 32, 32, 32, 31, 28, 24, 22, 19, 16, 14, 12, 10, 8, 6, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 30, 29, 27, 26, 24, 23, 22, 20, 19, 18, 16, 15, 14],
-      [13, 12, 11, 9, 8, 7, 6, 5, 4, 3, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 31, 30, 29, 29, 28, 27, 26, 26, 25, 24, 23, 23, 22, 21, 21, 20, 19, 19],
-      [18, 18, 17, 17, 16, 16, 15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 10, 9, 9, 9, 8, 8, 7, 7, 7, 7, 6, 6, 6, 5],
-      [5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    ];
-
-    const sensorBLoffset = {x: -0.75, y: 1};
-    const sensorBRoffset = {x: 0.75, y: 1};
-    
     let sensorBLPos = undefined;
     let sensorBRPos = undefined;
     let sensorBDir = undefined;
+
+    let sensorTLPos = undefined;
+    let sensorTRPos = undefined;
+    let sensorTDir = undefined;
+    
     let hwmap = undefined;
     let sensorMode = 0;
 
@@ -89,6 +72,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       sensorBLPos = {x: this.x + sensorBLoffset.x * (this.width / 2), y: this.y + sensorBLoffset.y * (this.height / 2)};
       sensorBRPos = {x: this.x + sensorBRoffset.x * (this.width / 2), y: this.y + sensorBRoffset.y * (this.height / 2)};
       sensorBDir = {x: 0, y: 1};
+
+      sensorTLPos = {x: this.x + sensorTLoffset.x * (this.width / 2), y: this.y + sensorTLoffset.y * (this.height / 2)};
+      sensorTRPos = {x: this.x + sensorTRoffset.x * (this.width / 2), y: this.y + sensorTRoffset.y * (this.height / 2)};
+      sensorTDir = {x: 0, y: -1};
 
       hwmap = heightmaps;
 
@@ -99,6 +86,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       sensorBLPos = {x: this.x + sensorBLoffset.y * (this.height / 2), y: this.y - sensorBLoffset.x * (this.width / 2)};
       sensorBRPos = {x: this.x + sensorBRoffset.y * (this.height / 2), y: this.y - sensorBRoffset.x * (this.width / 2)};
       sensorBDir = {x: 1, y: 0};
+
+      sensorTLPos = {x: this.x + sensorTLoffset.y * (this.height / 2), y: this.y - sensorTLoffset.x * (this.width / 2)};
+      sensorTRPos = {x: this.x + sensorTRoffset.y * (this.height / 2), y: this.y - sensorTRoffset.x * (this.width / 2)};
+      sensorTDir = {x: -1, y: 0};
 
       hwmap = widthmaps;
       // hwmap = heightmaps;
@@ -111,6 +102,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       sensorBRPos = {x: this.x - sensorBRoffset.x * (this.width / 2), y: this.y - sensorBRoffset.y * (this.height / 2)};
       sensorBDir = {x: 0, y: -1};
 
+      sensorTLPos = {x: this.x - sensorTLoffset.x * (this.width / 2), y: this.y - sensorTLoffset.y * (this.height / 2)};
+      sensorTRPos = {x: this.x - sensorTRoffset.x * (this.width / 2), y: this.y - sensorTRoffset.y * (this.height / 2)};
+      sensorTDir = {x: 0, y: 1};
+
       hwmap = heightmaps;
 
       this.setRotation(-Math.PI);
@@ -120,6 +115,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       sensorBLPos = {x: this.x - sensorBLoffset.y * (this.height / 2), y: this.y + sensorBLoffset.x * (this.width / 2)};
       sensorBRPos = {x: this.x - sensorBRoffset.y * (this.height / 2), y: this.y + sensorBRoffset.x * (this.width / 2)};
       sensorBDir = {x: -1, y: 0};
+
+      sensorTLPos = {x: this.x - sensorTLoffset.y * (this.height / 2), y: this.y + sensorTLoffset.x * (this.width / 2)};
+      sensorTRPos = {x: this.x - sensorTRoffset.y * (this.height / 2), y: this.y + sensorTRoffset.x * (this.width / 2)};
+      sensorTDir = {x: 1, y: 0};
 
       hwmap = widthmaps;
       // hwmap = heightmaps;
@@ -145,8 +144,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.scene.graphics.fillRect(sensorBRPos.x, sensorBRPos.y, 3, 3);
     // this.scene.graphics.fillRect(sensorMLPos.x, sensorMLPos.y, 2, 2);
     // this.scene.graphics.fillRect(sensorMRPos.x, sensorMRPos.y, 2, 2);
-    // this.scene.graphics.fillRect(sensorTLPos.x, sensorTLPos.y, 2, 2);
-    // this.scene.graphics.fillRect(sensorTRPos.x, sensorTRPos.y, 2, 2);
+    this.scene.graphics.fillRect(sensorTLPos.x, sensorTLPos.y, 3, 3);
+    this.scene.graphics.fillRect(sensorTRPos.x, sensorTRPos.y, 3, 3);
 
     // Running animation
     if (this.onGround && !this.lastOnGround && !this.rolling)
