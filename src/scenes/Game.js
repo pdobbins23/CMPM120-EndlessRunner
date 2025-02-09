@@ -39,7 +39,7 @@ class Game extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
 
     this.graphics = this.add.graphics();
-    this.graphics.depth = 2;
+    this.graphics.depth = 5;
   }
 
   update() {

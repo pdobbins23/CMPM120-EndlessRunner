@@ -67,7 +67,7 @@ class Sensor {
     
     if ((0 <= groundAngle && groundAngle <= 0.78539816) || (5.49778714 <= groundAngle && groundAngle <= 6.28318531)) { // floor mode
       this.x = x + this.offset.x * (this.offset.width / 2);
-      this.y = y + this.offset.y * (this.offset.height/ 2);
+      this.y = y + this.offset.y * (this.offset.height / 2);
 
       sensorDir = {x: this.direction.x, y: this.direction.y};
 
@@ -93,8 +93,8 @@ class Sensor {
 
       this.sensorMode = 2;
     } else if (3.926990817 < groundAngle && groundAngle < 5.497787144) { // left wall
-      this.x = x - this.offset.y * (this.height / 2);
-      this.y = y + this.offset.x * (this.width / 2);
+      this.x = x - this.offset.y * (this.offset.height / 2);
+      this.y = y + this.offset.x * (this.offset.width / 2);
 
       sensorDir = {x: -this.direction.y, y: this.direction.x};
 
@@ -118,7 +118,8 @@ class Sensor {
 
     // debug tiles
     if (this.debug) {
-      this.scene.graphics.fillRect(tileX, tileY);
+      this.scene.graphics.lineStyle(1, 0xFFFF00, 1);
+      this.scene.graphics.strokeRect(tileX, tileY, 32, 32);
     }
 
     let hm = hwmap[tile.properties.hwmap];
