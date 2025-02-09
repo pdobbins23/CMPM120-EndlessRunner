@@ -416,8 +416,21 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       }
     }
 
+    // TODO: Set ground angle based on current velocity?
+
     if (this.onGround) {
-      this.setVelocity(this.groundSpeed * Math.cos(this.groundAngle), this.groundSpeed * -Math.sin(this.groundAngle));
+      let jumpVelocity = 0;
+
+      if (this.scene.cursors.up.isDown) {
+        this.roll();
+        this.onGround = false;
+
+        jumpVelocity = this.jumpHeight;
+
+        this.y -= 29;
+      }
+
+      this.setVelocity(this.groundSpeed * Math.cos(this.groundAngle), this.groundSpeed * -Math.sin(this.groundAngle) + jumpVelocity);
     }
 
     if ((tileBLdiff != undefined && tileBRdiff == undefined) || (tileBLdiff <= tileBRdiff)) {
@@ -500,8 +513,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     if (this.onGround && !this.lastOnGround && !this.rolling)
       this.run();
 
-    if (this.jumping && this.body.velocity.y > 0)
-      this.jumping = false;
 
     if (this.onGround) {
       if (this.scene.cursors.up.isDown) {
