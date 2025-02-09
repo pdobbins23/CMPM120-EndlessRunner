@@ -7,7 +7,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.layer = 0;
 
-    this.groundSpeed = 200;
+    this.groundSpeed = 500;
     this.jumpHeight = 400;
 
     this.onGround = false;
@@ -57,95 +57,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   update() {
-    /*let sensorBLPos = undefined;
-    let sensorBRPos = undefined;
-    let sensorBDir = undefined;
-
-    let sensorTLPos = undefined;
-    let sensorTRPos = undefined;
-    let sensorTDir = undefined;
-    
-    let hwmap = undefined;
-    let sensorMode = 0;
-
-    if ((0 <= this.groundAngle && this.groundAngle <= 0.78539816) || (5.49778714 <= this.groundAngle && this.groundAngle <= 6.28318531)) { // floor mode
-      sensorBLPos = {x: this.x + sensorBLoffset.x * (this.width / 2), y: this.y + sensorBLoffset.y * (this.height / 2)};
-      sensorBRPos = {x: this.x + sensorBRoffset.x * (this.width / 2), y: this.y + sensorBRoffset.y * (this.height / 2)};
-      sensorBDir = {x: 0, y: 1};
-
-      sensorTLPos = {x: this.x + sensorTLoffset.x * (this.width / 2), y: this.y + sensorTLoffset.y * (this.height / 2)};
-      sensorTRPos = {x: this.x + sensorTRoffset.x * (this.width / 2), y: this.y + sensorTRoffset.y * (this.height / 2)};
-      sensorTDir = {x: 0, y: -1};
-
-      hwmap = heightmaps;
-
-      this.setRotation(0);
-
-      sensorMode = 0;
-    } else if ((0.78539816 < this.groundAngle && this.groundAngle <  2.35619449)) { // right wall
-      sensorBLPos = {x: this.x + sensorBLoffset.y * (this.height / 2), y: this.y - sensorBLoffset.x * (this.width / 2)};
-      sensorBRPos = {x: this.x + sensorBRoffset.y * (this.height / 2), y: this.y - sensorBRoffset.x * (this.width / 2)};
-      sensorBDir = {x: 1, y: 0};
-
-      sensorTLPos = {x: this.x + sensorTLoffset.y * (this.height / 2), y: this.y - sensorTLoffset.x * (this.width / 2)};
-      sensorTRPos = {x: this.x + sensorTRoffset.y * (this.height / 2), y: this.y - sensorTRoffset.x * (this.width / 2)};
-      sensorTDir = {x: -1, y: 0};
-
-      hwmap = widthmaps;
-      // hwmap = heightmaps;
-
-      this.setRotation(-Math.PI / 2);
-
-      sensorMode = 1;
-    } else if ((2.35619449 <= this.groundAngle && this.groundAngle <= 3.926990817)) { // ceiling mode
-      sensorBLPos = {x: this.x - sensorBLoffset.x * (this.width / 2), y: this.y - sensorBLoffset.y * (this.height / 2)};
-      sensorBRPos = {x: this.x - sensorBRoffset.x * (this.width / 2), y: this.y - sensorBRoffset.y * (this.height / 2)};
-      sensorBDir = {x: 0, y: -1};
-
-      sensorTLPos = {x: this.x - sensorTLoffset.x * (this.width / 2), y: this.y - sensorTLoffset.y * (this.height / 2)};
-      sensorTRPos = {x: this.x - sensorTRoffset.x * (this.width / 2), y: this.y - sensorTRoffset.y * (this.height / 2)};
-      sensorTDir = {x: 0, y: 1};
-
-      hwmap = heightmaps;
-
-      this.setRotation(-Math.PI);
-
-      sensorMode = 2;
-    } else if (3.926990817 < this.groundAngle && this.groundAngle < 5.497787144) { // left wall
-      sensorBLPos = {x: this.x - sensorBLoffset.y * (this.height / 2), y: this.y + sensorBLoffset.x * (this.width / 2)};
-      sensorBRPos = {x: this.x - sensorBRoffset.y * (this.height / 2), y: this.y + sensorBRoffset.x * (this.width / 2)};
-      sensorBDir = {x: -1, y: 0};
-
-      sensorTLPos = {x: this.x - sensorTLoffset.y * (this.height / 2), y: this.y + sensorTLoffset.x * (this.width / 2)};
-      sensorTRPos = {x: this.x - sensorTRoffset.y * (this.height / 2), y: this.y + sensorTRoffset.x * (this.width / 2)};
-      sensorTDir = {x: 1, y: 0};
-
-      hwmap = widthmaps;
-      // hwmap = heightmaps;
-
-      this.setRotation(-3 * Math.PI / 2);
-
-      sensorMode = 3;
-    }*/
-
     this.setRotation(-this.groundAngle);
 
-    this.groundSpeed -= 0.125 * Math.sin(this.groundAngle);
-    
-    /*let sensorMLPos = {x: this.x + this.sensorML.offsetX * (this.width / 2), y: this.y + this.sensorML.offsetY * (this.height / 2)};
-    let sensorMRPos = {x: this.x + this.sensorMR.offsetX * (this.width / 2), y: this.y + this.sensorMR.offsetY * (this.height / 2)};
-    let sensorTLPos = {x: this.x + this.sensorTL.offsetX * (this.width / 2), y: this.y + this.sensorTL.offsetY * (this.height / 2)};
-    let sensorTRPos = {x: this.x + this.sensorTR.offsetX * (this.width / 2), y: this.y + this.sensorTR.offsetY * (this.height / 2)};*/
-
-    // debug stuff
-    // this.scene.graphics.fillStyle(0xFFFF00, 1);
-    // this.scene.graphics.fillRect(this.x, this.y, 2, 2);
-    // this.scene.graphics.fillRect(sensorBLPos.x, sensorBLPos.y, 3, 3);
-    // this.scene.graphics.fillRect(sensorBRPos.x, sensorBRPos.y, 3, 3);
-    // this.scene.graphics.fillRect(sensorMLPos.x, sensorMLPos.y, 2, 2);
-    // this.scene.graphics.fillRect(sensorMRPos.x, sensorMRPos.y, 2, 2);
-    // this.scene.graphics.fillRect(sensorTLPos.x, sensorTLPos.y, 3, 3);
-    // this.scene.graphics.fillRect(sensorTRPos.x, sensorTRPos.y, 3, 3);
+    this.groundSpeed -= 0.125 * Math.sin(this.groundAngle) * 10;
 
     // Running animation
     if (this.onGround && !this.lastOnGround && !this.rolling)
@@ -153,297 +67,44 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.lastOnGround = this.onGround;
 
-    // ground sensor check
-    // let tileBLIndex = this.scene.chunks[0].map.worldToTileXY(sensorBLPos.x, sensorBLPos.y);
-    // let tileBRIndex = this.scene.chunks[0].map.worldToTileXY(sensorBRPos.x, sensorBRPos.y);
-
-    // draw tiles
-    // this.scene.graphics.lineStyle(1, 0xFFFF00, 1);
-    // this.scene.graphics.strokeRect(this.scene.chunks[0].layer.x + tileBLIndex.x * 32, this.scene.chunks[0].layer.y + tileBLIndex.y * 32, 32, 32);
-    // this.scene.graphics.strokeRect(this.scene.chunks[0].layer.x + tileBRIndex.x * 32, this.scene.chunks[0].layer.y + tileBRIndex.y * 32, 32, 32);
-
-    let lyr = `Layer${this.layer}`;
+    let layer = undefined;
+    let layerName = `Layer${this.layer}`;
 
     switch (this.layer) {
       case 0: // front
         this.setDepth(4);
+        layer = this.scene.chunks[0].layer;
         break;
       case 1: // back
         this.setDepth(2);
+        layer = this.scene.chunks[0].layer1;
         break;
     }
-
-    /*let tileBL = this.scene.chunks[0].map.getTileAt(tileBLIndex.x, tileBLIndex.y, true, lyr);
-    let tileBR = this.scene.chunks[0].map.getTileAt(tileBRIndex.x, tileBRIndex.y, true, lyr);
-
-    let tileBLdiff = undefined;
-    let tileBRdiff = undefined;
-
-    if (tileBL.properties.solid) {
-      let hm = hwmap[tileBL.properties.hwmap];
-
-      let tileX = this.scene.chunks[0].layer.x + tileBL.x * 32;
-      let tileY = this.scene.chunks[0].layer.y + tileBL.y * 32;
-
-      let offset = undefined;
-      switch (sensorMode) {
-        case 0: // floor
-          tileY += 32;
-          offset = sensorBLPos.x - tileX;
-          break;
-        case 1: // right wall
-          tileX += 32;
-          tileY += 32;
-          offset = tileY - sensorBLPos.y;
-          break;
-        case 2: // ceiling
-          tileX += 32;
-          offset = tileX - sensorBLPos.x;
-          break;
-        case 3: // left wall
-          offset = sensorBLPos.y - tileY;
-          break;
-      }
-      offset = Math.floor(offset);
-      let idx = tileBL.properties.flipmap ? hm[31 - offset] : hm[offset];
-
-      if (idx == 0) {
-        // extension
-        let etileBL = this.scene.chunks[0].map.getTileAt(tileBLIndex.x + sensorBDir.x, tileBLIndex.y + sensorBDir.y, true, lyr);
-
-        if (etileBL !== null && etileBL.properties.solid) {
-          tileBL = etileBL;
-          
-          hm = hwmap[tileBL.properties.hwmap];
-
-          tileX = this.scene.chunks[0].layer.x + tileBL.x * 32;
-          tileY = this.scene.chunks[0].layer.y + tileBL.y * 32;
-
-          switch (sensorMode) {
-            case 0: // floor
-              tileY += 32;
-              offset = sensorBLPos.x - tileX;
-              break;
-            case 1: // right wall
-              tileX += 32;
-              tileY += 32;
-              offset = tileY - sensorBLPos.y;
-              break;
-            case 2: // ceiling
-              tileX += 32;
-              offset = tileX - sensorBLPos.x;
-              break;
-            case 3: // left wall
-              offset = sensorBLPos.y - tileY;
-              break;
-          }
-          offset = Math.floor(offset);
-          idx = tileBL.properties.flipmap ? hm[31 - offset] : hm[offset];
-        }
-      } else if (idx == 32) {
-        // regression
-        let rtileBL = this.scene.chunks[0].map.getTileAt(tileBLIndex.x - sensorBDir.x, tileBLIndex.y - sensorBDir.y, true, lyr);
-
-        if (rtileBL !== null && rtileBL.properties.solid) {
-          tileBL = rtileBL;
-          
-          hm = hwmap[tileBL.properties.hwmap];
-
-          tileX = this.scene.chunks[0].layer.x + tileBL.x * 32;
-          tileY = this.scene.chunks[0].layer.y + tileBL.y * 32;
-
-          switch (sensorMode) {
-            case 0: // floor
-              tileY += 32;
-              offset = sensorBLPos.x - tileX;
-              break;
-            case 1: // right wall
-              tileX += 32;
-              tileY += 32;
-              offset = tileY - sensorBLPos.y;
-              break;
-            case 2: // ceiling
-              tileX += 32;
-              offset = tileX - sensorBLPos.x;
-              break;
-            case 3: // left wall
-              offset = sensorBLPos.y - tileY;
-              break;
-          }
-          offset = Math.floor(offset);
-          idx = tileBL.properties.flipmap ? hm[31 - offset] : hm[offset];
-        }
-      }
-
-      let diff = undefined;
-      switch (sensorMode) {
-        case 0:
-          diff = tileY - sensorBLPos.y - idx;
-          break;
-        case 1:
-          diff = tileX - sensorBLPos.x - idx;
-          break;
-        case 2:
-          diff = sensorBLPos.y - tileY - idx;
-          break;
-        case 3:
-          diff = sensorBLPos.x - tileX - idx;
-          break;
-      }
-
-      if (diff < 28) {
-        tileBLdiff = diff;
-
-        // console.log(`BL What: ${offset}`);
-        // if (sensorMode == 2) console.log(`Hello BL?: ${diff}, tileX: ${tileX}, sensorBLPos.x: ${sensorBLPos.x}, idx: ${idx}, offset: ${offset}, hwmap: ${hm}`);
-      } else {
-      }
-    }
-    
-    if (tileBR.properties.solid) {
-      let hm = hwmap[tileBR.properties.hwmap];
-
-      let tileX = this.scene.chunks[0].layer.x + tileBR.x * 32;
-      let tileY = this.scene.chunks[0].layer.y + tileBR.y * 32;
-
-      let offset = undefined;
-      switch (sensorMode) {
-        case 0: // floor
-          tileY += 32;
-          offset = sensorBRPos.x - tileX;
-          break;
-        case 1: // right wall
-          tileX += 32;
-          tileY += 32;
-          offset = tileY - sensorBRPos.y;
-          break;
-        case 2: // ceiling
-          tileX += 32;
-          offset = tileX - sensorBRPos.x;
-          break;
-        case 3: // left wall
-          offset = sensorBRPos.y - tileY;
-          break;
-      }
-      offset = Math.floor(offset);
-      let idx = tileBR.properties.flipmap ? hm[31 - offset] : hm[offset];
-
-      if (idx == 0) {
-        // extension
-        let etileBR = this.scene.chunks[0].map.getTileAt(tileBRIndex.x + sensorBDir.x, tileBRIndex.y + sensorBDir.y, true, lyr);
-
-        if (etileBR !== null && etileBR.properties.solid) {
-          tileBR = etileBR;
-          
-          hm = hwmap[tileBR.properties.hwmap];
-
-          tileX = this.scene.chunks[0].layer.x + tileBR.x * 32;
-          tileY = this.scene.chunks[0].layer.y + tileBR.y * 32;
-
-          switch (sensorMode) {
-            case 0: // floor
-              tileY += 32;
-              offset = sensorBRPos.x - tileX;
-              break;
-            case 1: // right wall
-              tileX += 32;
-              tileY += 32;
-              offset = tileY - sensorBRPos.y;
-              break;
-            case 2: // ceiling
-              tileX += 32;
-              offset = tileX - sensorBRPos.x;
-              break;
-            case 3: // left wall
-              offset = sensorBRPos.y - tileY;
-              break;
-          }
-          offset = Math.floor(offset);
-          idx = tileBR.properties.flipmap ? hm[31 - offset] : hm[offset];
-        }
-      } else if (idx == 32) {
-        // regression
-        let rtileBR = this.scene.chunks[0].map.getTileAt(tileBRIndex.x - sensorBDir.x, tileBRIndex.y - sensorBDir.y, true, lyr);
-
-        if (rtileBR !== null && rtileBR.properties.solid) {
-          tileBR = rtileBR;
-          
-          hm = hwmap[tileBR.properties.hwmap];
-
-          tileX = this.scene.chunks[0].layer.x + tileBR.x * 32;
-          tileY = this.scene.chunks[0].layer.y + tileBR.y * 32;
-
-          switch (sensorMode) {
-            case 0: // floor
-              tileY += 32;
-              offset = sensorBRPos.x - tileX;
-              break;
-            case 1: // right wall
-              tileX += 32;
-              tileY += 32;
-              offset = tileY - sensorBRPos.y;
-              break;
-            case 2: // ceiling
-              tileX += 32;
-              offset = tileX - sensorBRPos.x;
-              break;
-            case 3: // left wall
-              offset = sensorBRPos.y - tileY;
-              break;
-          }
-          offset = Math.floor(offset);
-          idx = tileBR.properties.flipmap ? hm[31 - offset] : hm[offset];
-        }
-      }
-      
-      let diff = undefined;
-      switch (sensorMode) {
-        case 0:
-          diff = tileY - sensorBRPos.y - idx;
-          break;
-        case 1:
-          diff = tileX - sensorBRPos.x - idx;
-          break;
-        case 2:
-          diff = sensorBRPos.y - tileY - idx;
-          break;
-        case 3:
-          diff = sensorBRPos.x - tileX - idx;
-          break;
-      }
-
-      if (diff < 28) {
-        tileBRdiff = diff;
-      }
-    }*/
 
     if (this.onGround) {
       let jumpVelocity = {x: 0, y: 0};
 
-      if (this.groundAngle == 0 && this.scene.cursors.up.isDown) {
-        this.roll();
-        this.onGround = false;
+      if (this.scene.cursors.up.isDown) {
+        if (this.groundAngle == 0) {
+          this.roll();
+          this.onGround = false;
 
-        jumpVelocity = {x: this.jumpHeight * Math.sin(this.groundAngle), y: this.jumpHeight * Math.cos(this.groundAngle)};
+          jumpVelocity = {x: this.jumpHeight * Math.sin(this.groundAngle), y: this.jumpHeight * Math.cos(this.groundAngle)};
+        }
+      } else if (Phaser.Input.Keyboard.JustDown(this.scene.cursors.down)) {
+        this.rolling = !this.rolling;
+
+        if (this.rolling) this.roll()
+        else this.run();
       }
 
       this.setVelocity(this.groundSpeed * Math.cos(this.groundAngle) - jumpVelocity.x, this.groundSpeed * -Math.sin(this.groundAngle) - jumpVelocity.y);
     }
 
-    // if (this.lastOnGround && !this.onGround) return;
+    if (this.lastOnGround && !this.onGround) return;
 
-    let layer = undefined;
-    switch (this.layer) {
-      case 0:
-        layer = this.scene.chunks[0].layer;
-        break;
-      case 1:
-        layer = this.scene.chunks[0].layer1;
-        break;
-    }
-
-    let groundSensorLres = this.groundSensorL.process(this.x, this.y, this.scene.chunks[0].map, layer, lyr, this.groundAngle);
-    let groundSensorRres = this.groundSensorR.process(this.x, this.y, this.scene.chunks[0].map, layer, lyr, this.groundAngle);
+    let groundSensorLres = this.groundSensorL.process(this.x, this.y, this.scene.chunks[0].map, layer, layerName, this.groundAngle);
+    let groundSensorRres = this.groundSensorR.process(this.x, this.y, this.scene.chunks[0].map, layer, layerName, this.groundAngle);
 
     if (groundSensorLres.diff != null && (groundSensorRres.diff == null || (groundSensorLres.diff <= groundSensorRres.diff))) {
       switch (this.groundSensorL.sensorMode) {
@@ -464,8 +125,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
           this.body.velocity.x = 0;
           break;
       }
-
-      console.log(`GL: ${groundSensorLres.diff}`);
 
       this.onGround = true;
       this.groundAngle = groundSensorLres.groundAngle;
@@ -490,8 +149,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
           this.body.velocity.x = 0;
           break;
       }
-
-      console.log(`GR: ${groundSensorRres.diff}`);
 
       this.onGround = true;
       this.groundAngle = groundSensorRres.groundAngle;

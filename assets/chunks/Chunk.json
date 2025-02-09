@@ -73,7 +73,7 @@
                         {
                          "name":"radius",
                          "type":"float",
-                         "value":200
+                         "value":128
                         }, 
                         {
                          "name":"switch",
@@ -84,8 +84,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":416,
-                 "y":209.333
+                 "x":416.666666666667,
+                 "y":132.666333333333
                 }, 
                 {
                  "height":0,

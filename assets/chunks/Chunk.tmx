@@ -313,10 +313,10 @@
 </data>
  </layer>
  <objectgroup id="3" name="LayerSwaps">
-  <object id="1" x="416" y="209.333">
+  <object id="1" x="416.667" y="132.666">
    <properties>
     <property name="layer" type="int" value="1"/>
-    <property name="radius" type="float" value="200"/>
+    <property name="radius" type="float" value="128"/>
     <property name="switch" type="int" value="1"/>
    </properties>
    <point/>
