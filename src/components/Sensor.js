@@ -24,54 +24,183 @@ const WIDTHMAPS = [
 ];
 
 class Sensor {
-  constructor(scene, offset, direction) {
+  constructor(scene, offset, direction, debug = false) {
     this.scene = scene;
 
     this.x = 0;
     this.y = 0;
     this.offset = offset;
     this.direction = direction;
+    this.sensorMode = 0;
+
+    this.debug = debug;
   }
 
-  process(x, y, map, layer, groundAngle) {
+  calcOffset(tileX, tileY) {
+    let offset = undefined;
+
+    switch (this.sensorMode) {
+      case 0: // floor
+        tileY += 32;
+        offset = this.x - tileX;
+        break;
+      case 1: // right wall
+        tileX += 32;
+        tileY += 32;
+        offset = tileY - this.y;
+        break;
+      case 2: // ceiling
+        tileX += 32;
+        offset = tileX - this.x;
+        break;
+      case 3: // left wall
+        offset = this.y - tileY;
+        break;
+    }
+
+    return {tileX, tileY, offset: Math.floor(offset)};
+  }
+
+  process(x, y, map, layer, layerName, groundAngle) {
+    let sensorDir = undefined;
     let hwmap = undefined;
-    let sensorMode = 0;
     
     if ((0 <= groundAngle && groundAngle <= 0.78539816) || (5.49778714 <= groundAngle && groundAngle <= 6.28318531)) { // floor mode
       this.x = x + this.offset.x * (this.offset.width / 2);
       this.y = y + this.offset.y * (this.offset.height/ 2);
 
-      sensorBLPos = {x: this.x + sensorBLoffset.x * (this.width / 2), y: this.y + sensorBLoffset.y * (this.height / 2)};
-      sensorBRPos = {x: this.x + sensorBRoffset.x * (this.width / 2), y: this.y + sensorBRoffset.y * (this.height / 2)};
-      sensorBDir = {x: 0, y: 1};
+      sensorDir = {x: this.direction.x, y: this.direction.y};
 
       hwmap = HEIGHTMAPS;
 
-      sensorMode = 0;
+      this.sensorMode = 0;
     } else if ((0.78539816 < groundAngle && groundAngle <  2.35619449)) { // right wall
-      sensorBLPos = {x: this.x + sensorBLoffset.y * (this.height / 2), y: this.y - sensorBLoffset.x * (this.width / 2)};
-      sensorBRPos = {x: this.x + sensorBRoffset.y * (this.height / 2), y: this.y - sensorBRoffset.x * (this.width / 2)};
-      sensorBDir = {x: 1, y: 0};
+      this.x = x + this.offset.y * (this.offset.height / 2);
+      this.y = y - this.offset.x * (this.offset.width / 2);
+
+      sensorDir = {x: this.direction.y, y: this.direction.x};
 
       hwmap = WIDTHMAPS;
 
-      sensorMode = 1;
+      this.sensorMode = 1;
     } else if ((2.35619449 <= groundAngle && groundAngle <= 3.926990817)) { // ceiling mode
-      sensorBLPos = {x: this.x - sensorBLoffset.x * (this.width / 2), y: this.y - sensorBLoffset.y * (this.height / 2)};
-      sensorBRPos = {x: this.x - sensorBRoffset.x * (this.width / 2), y: this.y - sensorBRoffset.y * (this.height / 2)};
-      sensorBDir = {x: 0, y: -1};
+      this.x = x - this.offset.x * (this.offset.width / 2);
+      this.y = y - this.offset.y * (this.offset.height / 2);
+
+      sensorDir = {x: this.direction.x, y: -this.direction.y};
 
       hwmap = HEIGHTMAPS;
 
-      sensorMode = 2;
+      this.sensorMode = 2;
     } else if (3.926990817 < groundAngle && groundAngle < 5.497787144) { // left wall
-      sensorBLPos = {x: this.x - sensorBLoffset.y * (this.height / 2), y: this.y + sensorBLoffset.x * (this.width / 2)};
-      sensorBRPos = {x: this.x - sensorBRoffset.y * (this.height / 2), y: this.y + sensorBRoffset.x * (this.width / 2)};
-      sensorBDir = {x: -1, y: 0};
+      this.x = x - this.offset.y * (this.height / 2);
+      this.y = y + this.offset.x * (this.width / 2);
+
+      sensorDir = {x: -this.direction.y, y: this.direction.x};
 
       hwmap = WIDTHMAPS;
 
-      sensorMode = 3;
+      this.sensorMode = 3;
+    }
+
+    // debug sensors
+    this.drawDebug(0xFFFF00);
+
+    let tileIndex = map.worldToTileXY(this.x, this.y);
+    let tile = map.getTileAt(tileIndex.x, tileIndex.y, true, layerName);
+
+    if (!tile || !tile.properties.solid) {
+      return {diff: null, groundAngle: null};
+    }
+
+    let tileX = layer.x + tile.x * 32;
+    let tileY = layer.y + tile.y * 32;
+
+    // debug tiles
+    if (this.debug) {
+      this.scene.graphics.fillRect(tileX, tileY);
+    }
+
+    let hm = hwmap[tile.properties.hwmap];
+
+    let offsetRes = this.calcOffset(tileX, tileY, this.sensorMode);
+
+    tileX = offsetRes.tileX;
+    tileY = offsetRes.tileY;
+    let offset = offsetRes.offset;
+
+    let idx = tile.properties.flipmap ? hm[31 - offset] : hm[offset];
+
+    if (idx == 0) {
+      // extension
+      let tileExt = map.getTileAt(tileIndex.x + sensorDir.x, tileIndex.y + sensorDir.y, true, layerName);
+
+      if (tileExt !== null && tileExt.properties.solid) {
+        tile = tileExt;
+
+        hm = hwmap[tile.properties.hwmap];
+
+        tileX = layer.x + tile.x * 32;
+        tileY = layer.y + tile.y * 32;
+
+        let offsetRes = this.calcOffset(tileX, tileY, this.sensorMode);
+
+        tileX = offsetRes.tileX;
+        tileY = offsetRes.tileY;
+        offset = offsetRes.offset;
+
+        idx = tile.properties.flipmap ? hm[31 - offset] : hm[offset];
+      }
+    } else if (idx == 32) {
+      // regression
+      let tileReg = map.getTileAt(tileIndex.x - sensorDir.x, tileIndex.y - sensorDir.y, true, layerName);
+
+      if (tileReg !== null && tileReg.properties.solid) {
+        tile = tileReg;
+
+        hm = hwmap[tile.properties.hwmap];
+
+        tileX = layer.x + tile.x * 32;
+        tileY = layer.y + tile.y * 32;
+
+        let offsetRes = this.calcOffset(tileX, tileY, this.sensorMode);
+
+        tileX = offsetRes.tileX;
+        tileY = offsetRes.tileY;
+        offset = offsetRes.offset;
+
+        idx = tile.properties.flipmap ? hm[31 - offset] : hm[offset];
+      }
+    }
+
+    let diff = undefined;
+
+    switch (this.sensorMode) {
+      case 0: // floor
+        diff = tileY - this.y - idx;
+        break;
+      case 1: // right wall
+        diff = tileX - this.x - idx;
+        break;
+      case 2: // ceiling
+        diff = this.y - tileY - idx;
+        break;
+      case 3: // left wall
+        diff = this.x - tileX - idx;
+        break;
+    }
+
+    if (diff < 28) {
+      return {diff, groundAngle: tile.properties.ground_angle};
+    }
+
+    return {diff: null, groundAngle: null};
+  }
+
+  drawDebug(color) {
+    if (this.debug) {
+      this.scene.graphics.fillStyle(color, 1);
+      this.scene.graphics.fillRect(this.x, this.y, 3, 3);
     }
   }
 }

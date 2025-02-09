@@ -16,11 +16,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     
     this.rolling = false;
 
-    this.groundSensorL = new Sensor(scene, {x: -0.75, y: 1, width: this.width, height: this.height}, {x: 0, y: 1});
-    this.groundSensorR = new Sensor(scene, {x: 0.75, y: 1, width: this.width, height: this.height}, {x: 0, y: 1});
+    this.groundSensorL = new Sensor(scene, {x: -0.75, y: 1, width: this.width, height: this.height}, {x: 0, y: 1}, true);
+    this.groundSensorR = new Sensor(scene, {x: 0.75, y: 1, width: this.width, height: this.height}, {x: 0, y: 1}, true);
 
-    this.ceilingSensorL = new Sensor(scene, {x: -0.75, y: -1, width: this.width, height: this.height}, {x: 0, y: -1});
-    this.ceilingSensorR = new Sensor(scene, {x: 0.75, y: -1, width: this.width, height: this.height}, {x: 0, y: -1});
+    this.ceilingSensorL = new Sensor(scene, {x: -0.75, y: -1, width: this.width, height: this.height}, {x: 0, y: -1}, true);
+    this.ceilingSensorR = new Sensor(scene, {x: 0.75, y: -1, width: this.width, height: this.height}, {x: 0, y: -1}, true);
 
     // Setup animations
     this.anims.create({
@@ -57,7 +57,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   update() {
-    let sensorBLPos = undefined;
+    /*let sensorBLPos = undefined;
     let sensorBRPos = undefined;
     let sensorBDir = undefined;
 
@@ -126,7 +126,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       this.setRotation(-3 * Math.PI / 2);
 
       sensorMode = 3;
-    }
+    }*/
 
     this.setRotation(-this.groundAngle);
 
@@ -138,14 +138,14 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     let sensorTRPos = {x: this.x + this.sensorTR.offsetX * (this.width / 2), y: this.y + this.sensorTR.offsetY * (this.height / 2)};*/
 
     // debug stuff
-    this.scene.graphics.fillStyle(0xFFFF00, 1);
-    this.scene.graphics.fillRect(this.x, this.y, 2, 2);
-    this.scene.graphics.fillRect(sensorBLPos.x, sensorBLPos.y, 3, 3);
-    this.scene.graphics.fillRect(sensorBRPos.x, sensorBRPos.y, 3, 3);
+    // this.scene.graphics.fillStyle(0xFFFF00, 1);
+    // this.scene.graphics.fillRect(this.x, this.y, 2, 2);
+    // this.scene.graphics.fillRect(sensorBLPos.x, sensorBLPos.y, 3, 3);
+    // this.scene.graphics.fillRect(sensorBRPos.x, sensorBRPos.y, 3, 3);
     // this.scene.graphics.fillRect(sensorMLPos.x, sensorMLPos.y, 2, 2);
     // this.scene.graphics.fillRect(sensorMRPos.x, sensorMRPos.y, 2, 2);
-    this.scene.graphics.fillRect(sensorTLPos.x, sensorTLPos.y, 3, 3);
-    this.scene.graphics.fillRect(sensorTRPos.x, sensorTRPos.y, 3, 3);
+    // this.scene.graphics.fillRect(sensorTLPos.x, sensorTLPos.y, 3, 3);
+    // this.scene.graphics.fillRect(sensorTRPos.x, sensorTRPos.y, 3, 3);
 
     // Running animation
     if (this.onGround && !this.lastOnGround && !this.rolling)
@@ -154,13 +154,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.lastOnGround = this.onGround;
 
     // ground sensor check
-    let tileBLIndex = this.scene.chunks[0].map.worldToTileXY(sensorBLPos.x, sensorBLPos.y);
-    let tileBRIndex = this.scene.chunks[0].map.worldToTileXY(sensorBRPos.x, sensorBRPos.y);
+    // let tileBLIndex = this.scene.chunks[0].map.worldToTileXY(sensorBLPos.x, sensorBLPos.y);
+    // let tileBRIndex = this.scene.chunks[0].map.worldToTileXY(sensorBRPos.x, sensorBRPos.y);
 
     // draw tiles
-    this.scene.graphics.lineStyle(1, 0xFFFF00, 1);
-    this.scene.graphics.strokeRect(this.scene.chunks[0].layer.x + tileBLIndex.x * 32, this.scene.chunks[0].layer.y + tileBLIndex.y * 32, 32, 32);
-    this.scene.graphics.strokeRect(this.scene.chunks[0].layer.x + tileBRIndex.x * 32, this.scene.chunks[0].layer.y + tileBRIndex.y * 32, 32, 32);
+    // this.scene.graphics.lineStyle(1, 0xFFFF00, 1);
+    // this.scene.graphics.strokeRect(this.scene.chunks[0].layer.x + tileBLIndex.x * 32, this.scene.chunks[0].layer.y + tileBLIndex.y * 32, 32, 32);
+    // this.scene.graphics.strokeRect(this.scene.chunks[0].layer.x + tileBRIndex.x * 32, this.scene.chunks[0].layer.y + tileBRIndex.y * 32, 32, 32);
 
     let lyr = `Layer${this.layer}`;
 
@@ -173,7 +173,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         break;
     }
 
-    let tileBL = this.scene.chunks[0].map.getTileAt(tileBLIndex.x, tileBLIndex.y, true, lyr);
+    /*let tileBL = this.scene.chunks[0].map.getTileAt(tileBLIndex.x, tileBLIndex.y, true, lyr);
     let tileBR = this.scene.chunks[0].map.getTileAt(tileBRIndex.x, tileBRIndex.y, true, lyr);
 
     let tileBLdiff = undefined;
@@ -415,7 +415,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       if (diff < 28) {
         tileBRdiff = diff;
       }
-    }
+    }*/
 
     if (this.onGround) {
       let jumpVelocity = {x: 0, y: 0};
@@ -430,75 +430,77 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       this.setVelocity(this.groundSpeed * Math.cos(this.groundAngle) - jumpVelocity.x, this.groundSpeed * -Math.sin(this.groundAngle) - jumpVelocity.y);
     }
 
-    if (this.lastOnGround && !this.onGround) return;
+    // if (this.lastOnGround && !this.onGround) return;
 
-    if ((tileBLdiff != undefined && tileBRdiff == undefined) || (tileBLdiff <= tileBRdiff)) {
-      switch (sensorMode) {
+    let layer = undefined;
+    switch (this.layer) {
+      case 0:
+        layer = this.scene.chunks[0].layer;
+        break;
+      case 1:
+        layer = this.scene.chunks[0].layer1;
+        break;
+    }
+
+    let groundSensorLres = this.groundSensorL.process(this.x, this.y, this.scene.chunks[0].map, layer, lyr, this.groundAngle);
+    let groundSensorRres = this.groundSensorR.process(this.x, this.y, this.scene.chunks[0].map, layer, lyr, this.groundAngle);
+
+    if (groundSensorLres.diff != null && (groundSensorRres.diff == null || (groundSensorLres.diff <= groundSensorRres.diff))) {
+      switch (this.groundSensorL.sensorMode) {
         case 0:
-          this.y += tileBLdiff;
+          this.y += groundSensorLres.diff;
           this.body.velocity.y = 0;
           break;
         case 1:
-          this.x += tileBLdiff;
+          this.x += groundSensorLres.diff;
           this.body.velocity.x = 0;
           break;
         case 2:
-          this.y -= tileBLdiff;
+          this.y -= groundSensorLres.diff;
           this.body.velocity.y = 0;
           break;
         case 3:
-          this.x -= tileBLdiff;
+          this.x -= groundSensorLres.diff;
           this.body.velocity.x = 0;
           break;
       }
-      if (sensorMode % 2 == 0) {
-        // console.log(`BL: ${tileBLdiff}, BR: ${tileBRdiff}`);
-        // this.y += tileBLdiff;
-        // this.body.velocity.y = 0;
-      } else {
-        // console.log(`MODE: ${sensorMode}, BL: ${tileBLdiff}, BR: ${tileBRdiff}`);
-        // this.x += tileBLdiff;
-        // this.body.velocity.x = 0;
-      }
+
+      console.log(`GL: ${groundSensorLres.diff}`);
+
       this.onGround = true;
-      this.groundAngle = tileBL.properties.ground_angle;
-      this.scene.graphics.fillStyle(0xFF00FF, 1);
-      this.scene.graphics.fillRect(sensorBLPos.x, sensorBLPos.y, 3, 3);
-    } else if ((tileBRdiff != undefined && tileBLdiff == undefined) || (tileBRdiff < tileBLdiff)) {
-      switch (sensorMode) {
+      this.groundAngle = groundSensorLres.groundAngle;
+
+      this.groundSensorL.drawDebug(0xFF00FF);
+    } else if (groundSensorRres.diff != null && (groundSensorLres.diff == null || (groundSensorRres.diff < groundSensorLres.diff))) {
+      switch (this.groundSensorR.sensorMode) {
         case 0:
-          this.y += tileBRdiff;
+          this.y += groundSensorRres.diff;
           this.body.velocity.y = 0;
           break;
         case 1:
-          this.x += tileBRdiff;
+          this.x += groundSensorRres.diff;
           this.body.velocity.x = 0;
           break;
         case 2:
-          this.y -= tileBRdiff;
+          this.y -= groundSensorRres.diff;
           this.body.velocity.y = 0;
           break;
         case 3:
-          this.x -= tileBRdiff;
+          this.x -= groundSensorRres.diff;
           this.body.velocity.x = 0;
           break;
       }
-      if (sensorMode % 2 == 0) {
-        // console.log(`BR: ${tileBRdiff}, BL: ${tileBLdiff}`);
-        // this.y += tileBRdiff;
-        // this.body.velocity.y = 0;
-      } else {
-        // console.log(`MODE: ${sensorMode}, BR: ${tileBRdiff}, BL: ${tileBLdiff}`);
-        // this.x += tileBRdiff;
-        // this.body.velocity.x = 0;
-      }
+
+      console.log(`GR: ${groundSensorRres.diff}`);
+
       this.onGround = true;
-      this.groundAngle = tileBR.properties.ground_angle;
-      this.scene.graphics.fillStyle(0xFF00FF, 1);
-      this.scene.graphics.fillRect(sensorBRPos.x, sensorBRPos.y, 3, 3);
+      this.groundAngle = groundSensorRres.groundAngle;
+
+      this.groundSensorR.drawDebug(0xFF00FF);
     } else {
       this.onGround = false;
       this.groundAngle = 0;
+
       this.setRotation(0);
     }
 
