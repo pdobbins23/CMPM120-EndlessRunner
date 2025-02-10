@@ -12,10 +12,18 @@ class MapChunk {
     this.objects = this.map.getObjectLayer("LayerSwaps");
     this.layerSwitches = [];
 
+    this.rings = [];
+
     if (this.objects) {
       this.objects.objects.forEach((object) => {
-        if (object.properties[2]) {
-          this.layerSwitches.push(new LayerSwitcher(scene, x + object.x, y + object.y, object.properties[0].value, object.properties[1].value, object.properties[2].value));
+        if (object.properties.length == 1) {
+          if (object.properties[0].value) {
+            this.rings.push(new Ring(scene, x + object.x, y + object.y));
+          }
+        } else if (object.properties.length == 3) {
+          if (object.properties[2]) {
+            this.layerSwitches.push(new LayerSwitcher(scene, x + object.x, y + object.y, object.properties[0].value, object.properties[1].value, object.properties[2].value));
+          }
         }
       });
     }

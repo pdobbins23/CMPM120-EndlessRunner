@@ -7,7 +7,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.layer = 0;
 
-    this.groundSpeed = 50;
+    this.groundSpeed = 500;
     this.jumpHeight = 400;
 
     this.onGround = false;
@@ -210,6 +210,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.ceilingSensorR.drawDebug(0xFF00FF);
       }
     }
+
+    return;
 
     let pushSensorLres = this.pushSensorL.process(this.x, this.y, this.scene.chunks[0].map, layer, layerName, this.groundAngle, 0, true);
     let pushSensorRres = this.pushSensorR.process(this.x, this.y, this.scene.chunks[0].map, layer, layerName, this.groundAngle, 0, true);

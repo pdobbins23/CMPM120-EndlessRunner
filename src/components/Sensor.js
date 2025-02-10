@@ -149,6 +149,7 @@ class Sensor {
     tileX = offsetRes.tileX;
     tileY = offsetRes.tileY;
     let offset = offsetRes.offset;
+    let diffExt = 0;
 
     let idx = tile.properties.flipmap ? hm[31 - offset] : hm[offset];
 
@@ -160,6 +161,7 @@ class Sensor {
         tile = tileExt;
 
         hm = hwmap[tile.properties.hwmap];
+        diffExt = 32;
 
         tileX = layer.x + tile.x * 32;
         tileY = layer.y + tile.y * 32;
@@ -226,6 +228,10 @@ class Sensor {
         }
         break;
     }
+
+    console.log(`${diff} : ${diffExt}`);
+
+    // diff += diffExt;
 
     this.scene.graphics.fillStyle(0xFF00FF);
     this.scene.graphics.fillRect(tileX, tileY, 5, 5);
