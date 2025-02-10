@@ -10,6 +10,9 @@ class Game extends Phaser.Scene {
     // TODO: Use localStorage.getItem && setItem for storing player data
     
     // background
+    this.water0 = this.add.tileSprite(0, 112, 0, 0, "background", 0).setOrigin(0);
+    this.water0.setDepth(-2);
+
     this.water1 = this.add.tileSprite(0, 0, 0, 0, "background", 0).setOrigin(0);
     this.water1.setDepth(-2);
 
@@ -47,14 +50,14 @@ class Game extends Phaser.Scene {
     // TODO: Make this better
     // After a certain amount of time (maybe level transition),
     // reset positions back to origin
-    this.cameras.main.setBounds(0, 0, 64000, 720);
+    this.cameras.main.setBounds(0, 0, 64000, 800);
 
     // TODO: Reassess this setup
     this.chunks = [];
 
     // NOTE: Test chunks, will generate these later
     for (let i = 0; i < 1; i++) {
-      let chunk = new MapChunk(this, "smallRamp", "grid", i * 640, 0);
+      let chunk = new MapChunk(this, "tallLoop", "grid", i * 640, 0);
 
       this.chunks.push(chunk);
 
@@ -72,6 +75,7 @@ class Game extends Phaser.Scene {
   update() {
     this.graphics.clear();
 
+    this.water0.tilePositionX += 0.5;
     this.water1.tilePositionX += 0.3;
     this.water2.tilePositionX += 0.15;
     this.water3.tilePositionX += 0.1;
