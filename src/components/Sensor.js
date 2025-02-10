@@ -36,25 +36,45 @@ class Sensor {
     this.debug = debug;
   }
 
-  calcOffset(tileX, tileY) {
+  calcOffset(tileX, tileY, flipMaps) {
     let offset = undefined;
 
     switch (this.sensorMode) {
       case 0: // floor
-        tileY += 32;
-        offset = this.x - tileX;
+        if (flipMaps) {
+          tileX += 32;
+          tileY += 32;
+          offset = tileY - this.y;
+        } else {
+          tileY += 32;
+          offset = this.x - tileX;
+        }
         break;
       case 1: // right wall
-        tileX += 32;
-        tileY += 32;
-        offset = tileY - this.y;
+        if (flipMaps) {
+          tileX += 32;
+          offset = tileX - this.x;
+        } else {
+          tileX += 32;
+          tileY += 32;
+          offset = tileY - this.y;
+        }
         break;
       case 2: // ceiling
-        tileX += 32;
-        offset = tileX - this.x;
+        if (flipMaps) {
+          offset = this.y - tileY;
+        } else {
+          tileX += 32;
+          offset = tileX - this.x;
+        }
         break;
       case 3: // left wall
-        offset = this.y - tileY;
+        if (flipMaps) {
+          tileY += 32;
+          offset = this.x - tileX;
+        } else {
+          offset = this.y - tileY;
+        }
         break;
     }
 
@@ -124,7 +144,7 @@ class Sensor {
 
     let hm = hwmap[tile.properties.hwmap];
 
-    let offsetRes = this.calcOffset(tileX, tileY, this.sensorMode);
+    let offsetRes = this.calcOffset(tileX, tileY, flipMaps);
 
     tileX = offsetRes.tileX;
     tileY = offsetRes.tileY;
@@ -144,7 +164,7 @@ class Sensor {
         tileX = layer.x + tile.x * 32;
         tileY = layer.y + tile.y * 32;
 
-        let offsetRes = this.calcOffset(tileX, tileY, this.sensorMode);
+        let offsetRes = this.calcOffset(tileX, tileY, flipMaps);
 
         tileX = offsetRes.tileX;
         tileY = offsetRes.tileY;
@@ -164,7 +184,7 @@ class Sensor {
         tileX = layer.x + tile.x * 32;
         tileY = layer.y + tile.y * 32;
 
-        let offsetRes = this.calcOffset(tileX, tileY, this.sensorMode);
+        let offsetRes = this.calcOffset(tileX, tileY, flipMaps);
 
         tileX = offsetRes.tileX;
         tileY = offsetRes.tileY;
@@ -178,18 +198,37 @@ class Sensor {
 
     switch (this.sensorMode) {
       case 0: // floor
-        diff = tileY - this.y - idx;
+        if (flipMaps) {
+          diff = tileX - this.x - idx;
+        } else {
+          diff = tileY - this.y - idx;
+        }
         break;
       case 1: // right wall
-        diff = tileX - this.x - idx;
+        if (flipMaps) {
+          diff = this.y - tileY - idx;
+        } else {
+          diff = tileX - this.x - idx;
+        }
         break;
       case 2: // ceiling
-        diff = this.y - tileY - idx;
+        if (flipMaps) {
+          diff = this.x - tileX - idx;
+        } else {
+          diff = this.y - tileY - idx;
+        }
         break;
       case 3: // left wall
-        diff = this.x - tileX - idx;
+        if (flipMaps) {
+          diff = tileY - this.y - idx;
+        } else {
+          diff = this.x - tileX - idx;
+        }
         break;
     }
+
+    this.scene.graphics.fillStyle(0xFF00FF);
+    this.scene.graphics.fillRect(tileX, tileY, 5, 5);
 
     if (diff < tolerance) {
       return {diff, groundAngle: tile.properties.ground_angle};

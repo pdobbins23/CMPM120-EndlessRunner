@@ -7,7 +7,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.layer = 0;
 
-    this.groundSpeed = 500;
+    this.groundSpeed = 50;
     this.jumpHeight = 400;
 
     this.onGround = false;
@@ -213,7 +213,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     let pushSensorLres = this.pushSensorL.process(this.x, this.y, this.scene.chunks[0].map, layer, layerName, this.groundAngle, 0, true);
     let pushSensorRres = this.pushSensorR.process(this.x, this.y, this.scene.chunks[0].map, layer, layerName, this.groundAngle, 0, true);
-
     
     if (pushSensorLres.diff != null && (pushSensorRres.diff == null || (pushSensorLres.diff <= pushSensorRres.diff))) {
       switch (this.pushSensorL.sensorMode) {
@@ -235,11 +234,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
           break;
       }
 
+      console.log(`PL: ${pushSensorLres.diff}`);
+
       this.pushSensorL.drawDebug(0xFF00FF);
     } else if (pushSensorRres.diff != null && (pushSensorLres.diff == null || (pushSensorRres.diff < pushSensorLres.diff))) {
       switch (this.pushSensorR.sensorMode) {
         case 0:
-          this.x -= pushSensorRres.diff;
+          this.x += pushSensorRres.diff;
           this.body.velocity.x = 0;
           break;
         case 1:
@@ -247,7 +248,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
           this.body.velocity.y = 0;
           break;
         case 2:
-          this.x += pushSensorRres.diff;
+          this.x -= pushSensorRres.diff;
           this.body.velocity.x = 0;
           break;
         case 3:
@@ -255,6 +256,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
           this.body.velocity.y = 0;
           break;
       }
+
+      console.log(`PR: ${pushSensorRres.diff}`);
 
       this.pushSensorR.drawDebug(0xFF00FF);
     }
