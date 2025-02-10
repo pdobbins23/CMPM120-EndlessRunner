@@ -16,11 +16,14 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     
     this.rolling = false;
 
-    this.groundSensorL = new Sensor(scene, {x: -0.75, y: 1, width: this.width, height: this.height}, {x: 0, y: 1}, true);
-    this.groundSensorR = new Sensor(scene, {x: 0.75, y: 1, width: this.width, height: this.height}, {x: 0, y: 1}, true);
+    this.groundSensorL = new Sensor(scene, {x: -0.6, y: 1, width: this.width, height: this.height}, {x: 0, y: 1}, true);
+    this.groundSensorR = new Sensor(scene, {x: 0.6, y: 1, width: this.width, height: this.height}, {x: 0, y: 1}, true);
 
-    this.ceilingSensorL = new Sensor(scene, {x: -0.75, y: -1, width: this.width, height: this.height}, {x: 0, y: -1}, true);
-    this.ceilingSensorR = new Sensor(scene, {x: 0.75, y: -1, width: this.width, height: this.height}, {x: 0, y: -1}, true);
+    this.ceilingSensorL = new Sensor(scene, {x: -0.6, y: -0.5, width: this.width, height: this.height}, {x: 0, y: -1}, true);
+    this.ceilingSensorR = new Sensor(scene, {x: 0.6, y: -0.5, width: this.width, height: this.height}, {x: 0, y: -1}, true);
+
+    this.pushSensorL = new Sensor(scene, {x: -0.75, y: 0, width: this.width, height: this.height}, {x: -1, y: 0}, true);
+    this.pushSensorR = new Sensor(scene, {x: 0.75, y: 0, width: this.width, height: this.height}, {x: 1, y: 0}, true);
 
     // Setup animations
     this.anims.create({
@@ -159,33 +162,101 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       this.groundAngle = 0;
 
       this.setRotation(0);
-    }
 
-    /*let vel = new Phaser.Math.Vector2(0, 0);
+      let ceilingSensorLres = this.ceilingSensorL.process(this.x, this.y, this.scene.chunks[0].map, layer, layerName, this.groundAngle, 0);
+      let ceilingSensorRres = this.ceilingSensorR.process(this.x, this.y, this.scene.chunks[0].map, layer, layerName, this.groundAngle, 0);
+      
+      if (ceilingSensorLres.diff != null && (ceilingSensorRres.diff == null || (ceilingSensorLres.diff <= ceilingSensorRres.diff))) {
+        switch (this.ceilingSensorL.sensorMode) {
+          case 0:
+            this.y -= ceilingSensorLres.diff;
+            this.body.velocity.y = 0;
+            break;
+          case 1:
+            this.x -= ceilingSensorLres.diff;
+            this.body.velocity.x = 0;
+            break;
+          case 2:
+            this.y += ceilingSensorLres.diff;
+            this.body.velocity.y = 0;
+            break;
+          case 3:
+            this.x += ceilingSensorLres.diff;
+            this.body.velocity.x = 0;
+            break;
+        }
 
-    this.onGround = (this.body.blocked.down || this.onSlope) && this.body.velocity.y == 0;
-    this.onSlope = false;
+        this.ceilingSensorL.drawDebug(0xFF00FF);
+      } else if (ceilingSensorRres.diff != null && (ceilingSensorLres.diff == null || (ceilingSensorRres.diff < ceilingSensorLres.diff))) {
+        switch (this.ceilingSensorR.sensorMode) {
+          case 0:
+            this.y -= ceilingSensorRres.diff;
+            this.body.velocity.y = 0;
+            break;
+          case 1:
+            this.x -= ceilingSensorRres.diff;
+            this.body.velocity.x = 0;
+            break;
+          case 2:
+            this.y += ceilingSensorRres.diff;
+            this.body.velocity.y = 0;
+            break;
+          case 3:
+            this.x += ceilingSensorRres.diff;
+            this.body.velocity.x = 0;
+            break;
+        }
 
-
-
-    if (this.onGround) {
-      if (this.scene.cursors.up.isDown) {
-        vel.y = this.jumpHeight;
-        this.roll();
-        this.jumping = true;
-      } else if (Phaser.Input.Keyboard.JustDown(this.scene.cursors.down)) {
-        this.rolling = !this.rolling;
-
-        if (this.rolling) this.roll()
-        else this.run();
+        this.ceilingSensorR.drawDebug(0xFF00FF);
       }
     }
 
-    // NOTE: Ran into wall
-    // TODO: Trigger game over
-    if (this.body.blocked.right)
-      console.log("game over?");*/
+    let pushSensorLres = this.pushSensorL.process(this.x, this.y, this.scene.chunks[0].map, layer, layerName, this.groundAngle, 0, true);
+    let pushSensorRres = this.pushSensorR.process(this.x, this.y, this.scene.chunks[0].map, layer, layerName, this.groundAngle, 0, true);
 
-    // this.setVelocity(this.moveSpeed, this.body.velocity.y + vel.y);
+    
+    if (pushSensorLres.diff != null && (pushSensorRres.diff == null || (pushSensorLres.diff <= pushSensorRres.diff))) {
+      switch (this.pushSensorL.sensorMode) {
+        case 0:
+          this.x -= pushSensorLres.diff;
+          this.body.velocity.x = 0;
+          break;
+        case 1:
+          this.y += pushSensorLres.diff;
+          this.body.velocity.y = 0;
+          break;
+        case 2:
+          this.x += pushSensorLres.diff;
+          this.body.velocity.x = 0;
+          break;
+        case 3:
+          this.y -= pushSensorLres.diff;
+          this.body.velocity.y = 0;
+          break;
+      }
+
+      this.pushSensorL.drawDebug(0xFF00FF);
+    } else if (pushSensorRres.diff != null && (pushSensorLres.diff == null || (pushSensorRres.diff < pushSensorLres.diff))) {
+      switch (this.pushSensorR.sensorMode) {
+        case 0:
+          this.x -= pushSensorRres.diff;
+          this.body.velocity.x = 0;
+          break;
+        case 1:
+          this.y += pushSensorRres.diff;
+          this.body.velocity.y = 0;
+          break;
+        case 2:
+          this.x += pushSensorRres.diff;
+          this.body.velocity.x = 0;
+          break;
+        case 3:
+          this.y -= pushSensorRres.diff;
+          this.body.velocity.y = 0;
+          break;
+      }
+
+      this.pushSensorR.drawDebug(0xFF00FF);
+    }
   }
 }

@@ -61,7 +61,7 @@ class Sensor {
     return {tileX, tileY, offset: Math.floor(offset)};
   }
 
-  process(x, y, map, layer, layerName, groundAngle) {
+  process(x, y, map, layer, layerName, groundAngle, tolerance = 28, flipMaps = false) {
     let sensorDir = undefined;
     let hwmap = undefined;
     
@@ -71,7 +71,7 @@ class Sensor {
 
       sensorDir = {x: this.direction.x, y: this.direction.y};
 
-      hwmap = HEIGHTMAPS;
+      hwmap = flipMaps ? WIDTHMAPS : HEIGHTMAPS;
 
       this.sensorMode = 0;
     } else if ((0.78539816 < groundAngle && groundAngle <  2.35619449)) { // right wall
@@ -80,7 +80,7 @@ class Sensor {
 
       sensorDir = {x: this.direction.y, y: this.direction.x};
 
-      hwmap = WIDTHMAPS;
+      hwmap = flipMaps ? HEIGHTMAPS : WIDTHMAPS;
 
       this.sensorMode = 1;
     } else if ((2.35619449 <= groundAngle && groundAngle <= 3.926990817)) { // ceiling mode
@@ -89,7 +89,7 @@ class Sensor {
 
       sensorDir = {x: this.direction.x, y: -this.direction.y};
 
-      hwmap = HEIGHTMAPS;
+      hwmap = flipMaps ? WIDTHMAPS : HEIGHTMAPS;
 
       this.sensorMode = 2;
     } else if (3.926990817 < groundAngle && groundAngle < 5.497787144) { // left wall
@@ -98,7 +98,7 @@ class Sensor {
 
       sensorDir = {x: -this.direction.y, y: this.direction.x};
 
-      hwmap = WIDTHMAPS;
+      hwmap = flipMaps ? HEIGHTMAPS : WIDTHMAPS;
 
       this.sensorMode = 3;
     }
@@ -191,7 +191,7 @@ class Sensor {
         break;
     }
 
-    if (diff < 28) {
+    if (diff < tolerance) {
       return {diff, groundAngle: tile.properties.ground_angle};
     }
 
