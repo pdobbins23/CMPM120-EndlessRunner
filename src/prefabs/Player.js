@@ -75,7 +75,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     let layer = undefined;
     let layerName = `Layer${this.layer}`;
 
-    let chunkX = Math.floor(this.x / 1280);
+    let chunkX = Math.floor(this.x / 1280) - this.scene.worldChunkOffset;
 
     switch (this.layer) {
       case 0: // front

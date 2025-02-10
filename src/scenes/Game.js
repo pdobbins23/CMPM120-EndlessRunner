@@ -52,18 +52,14 @@ class Game extends Phaser.Scene {
     // reset positions back to origin
     this.cameras.main.setBounds(0, 0, Infinity, 800);
 
-    // TODO: Reassess this setup
     this.chunks = [];
+    this.worldChunkOffset = 0;
 
-    // NOTE: Test chunks, will generate these later
-    for (let i = 0; i < 100; i++) {
-      let chunks = ["flat", "smallHill", "smallRamp", "tallLoop", "loop"];
-      let chunk = new MapChunk(this, chunks[Math.floor(Math.random() * chunks.length)], "grid", i * 1280, 0);
-
-      this.chunks.push(chunk);
-
-      this.physics.add.collider(this.player, chunk.layer);
-    }
+    // first three chunks are always fixed
+    this.chunks.push(new MapChunk(this, "flat", "grid", 0 * 1280, 0));
+    this.chunks.push(new MapChunk(this, "smallHill", "grid", 1 * 1280, 0));
+    this.chunks.push(new MapChunk(this, "loop", "grid", 2 * 1280, 0));
+    this.chunks.push(new MapChunk(this, "flat", "grid", 3 * 1280, 0));
 
     this.CAMERA_SPEED = 10;
 
@@ -87,6 +83,22 @@ class Game extends Phaser.Scene {
     this.hills.setFrame(this.hillsAnimator.anims.currentFrame.textureFrame);
 
     this.player.update();
+
+    let playerChunkX = Math.floor(this.player.x / 1280);
+
+    if (playerChunkX - this.worldChunkOffset + 5 > this.chunks.length) {
+      let chunks = ["flat", "smallHill", "smallRamp", "tallLoop", "loop"];
+      let chunk = new MapChunk(this, chunks[Math.floor(Math.random() * chunks.length)], "grid", (4 + this.worldChunkOffset) * 1280, 0);
+
+      this.chunks.push(chunk);
+
+      // this.physics.add.collider(this.player, chunk.layer);
+    }
+
+    if (playerChunkX - this.worldChunkOffset > 2) {
+      this.chunks.splice(0, 1);
+      this.worldChunkOffset += 1;
+    }
 
     // this.graphics.fillStyle(0xffffff, 1);
     // this.graphics.fillRect(this.player.body.x + this.player.body.width / 2, this.player.body.y + this.player.body.height, 5, 5);
