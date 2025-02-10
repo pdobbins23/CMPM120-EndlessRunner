@@ -4,14 +4,41 @@ class Game extends Phaser.Scene {
   }
 
   preload() {
-    this.load.tilemapTiledJSON("chunk", "assets/chunks/Chunk.json");
   }
 
   create() {
     // TODO: Use localStorage.getItem && setItem for storing player data
     
-    // TODO: Use actual parallax background
-    this.cameras.main.setBackgroundColor(0x00ffff);
+    // background
+    this.water1 = this.add.tileSprite(0, 0, 0, 0, "background", 0).setOrigin(0);
+    this.water1.setDepth(-2);
+
+    this.water2 = this.add.tileSprite(0, 0, 0, 0, "background", 1).setOrigin(0);
+    this.water2.setDepth(-2);
+
+    this.water3 = this.add.tileSprite(0, 0, 0, 0, "background", 2).setOrigin(0);
+    this.water3.setDepth(-2);
+
+    this.anims.create({
+      key: "hills",
+      frameRate: 500,
+      repeat: -1,
+      frames: this.anims.generateFrameNumbers("background", {
+        start: 3,
+        end: 4,
+      })
+    });
+
+    this.hillsAnimator = this.add.sprite(0, 0, "background").setVisible(false);
+    this.hillsAnimator.play("hills");
+    this.hills = this.add.tileSprite(0, 0, 0, 0, "background", 3).setOrigin(0);
+    this.hills.setDepth(0);
+    
+    this.mountains = this.add.tileSprite(0, 0, 0, 0, "background", 5).setOrigin(0);
+    this.mountains.setDepth(-1);
+
+    this.sky = this.add.tileSprite(0, 0, 0, 0, "background", 6).setOrigin(0);
+    this.sky.setDepth(-3);
     
     this.player = new Player(this, 50, game.config.height - game.config.height / 2);
     // this.player.setDebug(false);
@@ -20,14 +47,14 @@ class Game extends Phaser.Scene {
     // TODO: Make this better
     // After a certain amount of time (maybe level transition),
     // reset positions back to origin
-    this.cameras.main.setBounds(0, 0, 64000, 0);
+    this.cameras.main.setBounds(0, 0, 64000, 720);
 
     // TODO: Reassess this setup
     this.chunks = [];
 
     // NOTE: Test chunks, will generate these later
     for (let i = 0; i < 1; i++) {
-      let chunk = new MapChunk(this, "chunk", "grid", i * 640, 0);
+      let chunk = new MapChunk(this, "smallRamp", "grid", i * 640, 0);
 
       this.chunks.push(chunk);
 
@@ -44,6 +71,15 @@ class Game extends Phaser.Scene {
 
   update() {
     this.graphics.clear();
+
+    this.water1.tilePositionX += 0.3;
+    this.water2.tilePositionX += 0.15;
+    this.water3.tilePositionX += 0.1;
+    this.hills.tilePositionX += 0.05;
+    this.mountains.tilePositionX += 0.025;
+    this.sky.tilePositionX += 0.01;
+
+    this.hills.setFrame(this.hillsAnimator.anims.currentFrame.textureFrame);
 
     this.player.update();
 

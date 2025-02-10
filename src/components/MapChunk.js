@@ -9,7 +9,7 @@ class MapChunk {
     this.layer1 = this.map.createLayer("Layer1", this.tiles, x, y);
     this.layer1.setDepth(1);
 
-    this.objects = this.map.getObjectLayer("LayerSwaps");
+    this.objects = this.map.getObjectLayer("Objects");
     this.layerSwitches = [];
 
     this.rings = [];

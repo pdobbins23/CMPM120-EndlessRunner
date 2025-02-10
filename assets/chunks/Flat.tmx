@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.1" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="27">
+<map version="1.10" tiledversion="1.11.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="4">
  <editorsettings>
-  <export target="Chunk.json" format="json"/>
+  <export target="Flat.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="Main" tilewidth="32" tileheight="32" tilecount="96" columns="12">
   <image source="../img/grid.png" width="384" height="256"/>
@@ -274,204 +274,72 @@
    </properties>
   </tile>
  </tileset>
- <layer id="2" name="Layer1" width="20" height="15">
+ <layer id="2" name="Layer1" width="30" height="20">
   <data encoding="csv">
-0,0,0,0,0,0,0,0,5,5,6,7,8,9,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,5,17,18,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,5,29,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,5,41,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,1,5,49,0,0,0,0,0,0,50,0,0,0,
-0,0,0,0,0,0,0,1,5,49,1,1,1,1,1,1,50,0,0,0,
-0,0,0,0,0,0,0,1,89,49,1,0,0,0,0,0,50,0,0,0,
-0,0,0,0,0,0,0,1,89,49,1,0,0,0,0,0,50,0,0,0,
-0,0,0,0,0,0,0,1,89,49,0,0,0,0,0,0,50,0,0,0,
-0,0,0,0,0,0,0,0,89,53,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,89,65,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,89,77,78,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,89,89,90,91,92,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,89,89,89,89,89,89,89,89,89,89,13,13,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="1" name="Layer0" width="20" height="15">
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,1,9,10,11,5,5,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,24,5,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,36,5,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,48,5,0,0,
-0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,50,5,0,0,
-0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,50,5,0,0,
-0,0,0,0,0,0,0,0,1,1,1,0,0,0,1,1,50,5,0,0,
-0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,50,5,0,0,
-0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,0,50,5,0,0,
-0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,60,5,0,0,
-0,0,1,1,1,1,13,1,0,0,0,0,0,0,0,0,72,5,0,0,
-0,0,1,1,1,1,5,1,1,0,0,0,0,0,0,83,84,5,0,0,
-1,1,1,1,1,1,5,1,1,1,0,0,0,93,94,95,96,5,0,0,
-13,13,13,13,13,13,5,13,13,13,13,13,13,5,5,5,5,5,13,13,
-5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5
-</data>
- </layer>
- <objectgroup id="3" name="LayerSwaps">
-  <object id="1" x="416.667" y="132.666">
-   <properties>
-    <property name="layer" type="int" value="1"/>
-    <property name="radius" type="float" value="128"/>
-    <property name="switch" type="int" value="1"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="2" x="625.333" y="210.667">
-   <properties>
-    <property name="layer" type="int" value="0"/>
-    <property name="radius" type="float" value="200"/>
-    <property name="switch" type="int" value="0"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="3" x="416" y="397.333">
+ <objectgroup id="3" name="Objects">
+  <object id="1" x="335" y="500">
    <properties>
     <property name="ring" type="bool" value="true"/>
    </properties>
    <point/>
   </object>
-  <object id="4" x="449.333" y="392">
+  <object id="2" x="623" y="501">
    <properties>
     <property name="ring" type="bool" value="true"/>
    </properties>
    <point/>
   </object>
-  <object id="5" x="481.333" y="375.333">
-   <properties>
-    <property name="ring" type="bool" value="true"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="6" x="508.667" y="348.667">
-   <properties>
-    <property name="ring" type="bool" value="true"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="7" x="521.333" y="307.333">
-   <properties>
-    <property name="ring" type="bool" value="true"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="8" x="520" y="255.333">
-   <properties>
-    <property name="ring" type="bool" value="true"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="9" x="520" y="209.333">
-   <properties>
-    <property name="ring" type="bool" value="true"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="10" x="520" y="164.667">
-   <properties>
-    <property name="ring" type="bool" value="true"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="11" x="514" y="116.667">
-   <properties>
-    <property name="ring" type="bool" value="true"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="12" x="494.667" y="82">
-   <properties>
-    <property name="ring" type="bool" value="true"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="13" x="468.667" y="56">
-   <properties>
-    <property name="ring" type="bool" value="true"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="14" x="431.333" y="42">
-   <properties>
-    <property name="ring" type="bool" value="true"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="15" x="396.667" y="40.6667">
-   <properties>
-    <property name="ring" type="bool" value="true"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="16" x="363.333" y="61.3333">
-   <properties>
-    <property name="ring" type="bool" value="true"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="17" x="340" y="89.3333">
-   <properties>
-    <property name="ring" type="bool" value="true"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="18" x="322" y="118.667">
-   <properties>
-    <property name="ring" type="bool" value="true"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="19" x="311.333" y="154.667">
-   <properties>
-    <property name="ring" type="bool" value="true"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="20" x="308" y="196">
-   <properties>
-    <property name="ring" type="bool" value="true"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="21" x="310.667" y="230.667">
-   <properties>
-    <property name="ring" type="bool" value="true"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="22" x="308" y="266.667">
-   <properties>
-    <property name="ring" type="bool" value="true"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="23" x="312.667" y="305.333">
-   <properties>
-    <property name="ring" type="bool" value="true"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="24" x="328" y="350.667">
-   <properties>
-    <property name="ring" type="bool" value="true"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="25" x="357.333" y="378">
-   <properties>
-    <property name="ring" type="bool" value="true"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="26" x="378.667" y="388.667">
+  <object id="3" x="481" y="502">
    <properties>
     <property name="ring" type="bool" value="true"/>
    </properties>
    <point/>
   </object>
  </objectgroup>
+ <layer id="1" name="Layer0" width="30" height="20">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
+5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5
+</data>
+ </layer>
 </map>
