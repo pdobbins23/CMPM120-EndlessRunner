@@ -16,21 +16,23 @@ class Load extends Phaser.Scene {
       this.scene.start("menuScene");
     });
     
-    // Load tile art
     this.load.spritesheet("grid", "./assets/img/grid.png", {
       frameWidth: 32,
     });
 
-    // Load player art
     this.load.spritesheet("player", "./assets/img/player.png", {
       frameWidth: 32,
       frameHeight: 40,
     });
 
-    // load background
     this.load.spritesheet("background", "./assets/img/background.png", {
       frameWidth: 1280,
       frameHeight: 720,
+    });
+
+    this.load.spritesheet("title", "./assets/img/title.png", {
+      frameWidth: 320,
+      frameHeight: 240,
     });
 
     this.load.image("ring", "./assets/img/ring.png");
