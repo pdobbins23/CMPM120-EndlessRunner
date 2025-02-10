@@ -1,3 +1,5 @@
+const BASE_GROUND_SPEED = 500;
+
 class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
     super(scene, x, y, "player");
@@ -7,7 +9,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.layer = 0;
 
-    this.groundSpeed = 500;
+    this.groundSpeed = BASE_GROUND_SPEED;
     this.jumpHeight = 400;
 
     this.onGround = false;
@@ -73,14 +75,16 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     let layer = undefined;
     let layerName = `Layer${this.layer}`;
 
+    let chunkX = Math.floor(this.x / 1280);
+
     switch (this.layer) {
       case 0: // front
         this.setDepth(4);
-        layer = this.scene.chunks[0].layer;
+        layer = this.scene.chunks[chunkX].layer;
         break;
       case 1: // back
         this.setDepth(2);
-        layer = this.scene.chunks[0].layer1;
+        layer = this.scene.chunks[chunkX].layer1;
         break;
     }
 
@@ -99,6 +103,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         if (this.rolling) this.roll()
         else this.run();
+      } else if (this.groundAngle == 0 && this.groundSpeed < BASE_GROUND_SPEED) {
+        this.groundSpeed = BASE_GROUND_SPEED;
       }
 
       this.setVelocity(this.groundSpeed * Math.cos(this.groundAngle) - jumpVelocity.x, this.groundSpeed * -Math.sin(this.groundAngle) - jumpVelocity.y);
@@ -106,8 +112,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     if (this.lastOnGround && !this.onGround) return;
 
-    let groundSensorLres = this.groundSensorL.process(this.x, this.y, this.scene.chunks[0].map, layer, layerName, this.groundAngle);
-    let groundSensorRres = this.groundSensorR.process(this.x, this.y, this.scene.chunks[0].map, layer, layerName, this.groundAngle);
+    let groundSensorLres = this.groundSensorL.process(this.x, this.y, this.scene.chunks[chunkX].map, layer, layerName, this.groundAngle);
+    let groundSensorRres = this.groundSensorR.process(this.x, this.y, this.scene.chunks[chunkX].map, layer, layerName, this.groundAngle);
 
     if (groundSensorLres.diff != null && (groundSensorRres.diff == null || (groundSensorLres.diff <= groundSensorRres.diff))) {
       switch (this.groundSensorL.sensorMode) {
@@ -159,12 +165,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       this.groundSensorR.drawDebug(0xFF00FF);
     } else {
       this.onGround = false;
-      this.groundAngle = 0;
+      // this.groundAngle = 0;
 
       this.setRotation(0);
 
-      let ceilingSensorLres = this.ceilingSensorL.process(this.x, this.y, this.scene.chunks[0].map, layer, layerName, this.groundAngle, 0);
-      let ceilingSensorRres = this.ceilingSensorR.process(this.x, this.y, this.scene.chunks[0].map, layer, layerName, this.groundAngle, 0);
+      let ceilingSensorLres = this.ceilingSensorL.process(this.x, this.y, this.scene.chunks[chunkX].map, layer, layerName, this.groundAngle, 0);
+      let ceilingSensorRres = this.ceilingSensorR.process(this.x, this.y, this.scene.chunks[chunkX].map, layer, layerName, this.groundAngle, 0);
       
       if (ceilingSensorLres.diff != null && (ceilingSensorRres.diff == null || (ceilingSensorLres.diff <= ceilingSensorRres.diff))) {
         switch (this.ceilingSensorL.sensorMode) {
@@ -213,8 +219,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     return;
 
-    let pushSensorLres = this.pushSensorL.process(this.x, this.y, this.scene.chunks[0].map, layer, layerName, this.groundAngle, 0, true);
-    let pushSensorRres = this.pushSensorR.process(this.x, this.y, this.scene.chunks[0].map, layer, layerName, this.groundAngle, 0, true);
+    let pushSensorLres = this.pushSensorL.process(this.x, this.y, this.scene.chunks[chunkX].map, layer, layerName, this.groundAngle, 0, true);
+    let pushSensorRres = this.pushSensorR.process(this.x, this.y, this.scene.chunks[chunkX].map, layer, layerName, this.groundAngle, 0, true);
     
     if (pushSensorLres.diff != null && (pushSensorRres.diff == null || (pushSensorLres.diff <= pushSensorRres.diff))) {
       switch (this.pushSensorL.sensorMode) {

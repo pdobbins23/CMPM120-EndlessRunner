@@ -22,6 +22,7 @@ class LayerSwitcher extends Phaser.Physics.Arcade.Sprite {
 
     this.body.allowGravity = false;
     this.body.setImmovable(true);
+    this.setVisible(false);
 
     this.targetLayer = targetLayer;
     this.switchType = switchType;

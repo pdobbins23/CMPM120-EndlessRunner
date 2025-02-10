@@ -37,6 +37,7 @@ class Load extends Phaser.Scene {
 
     this.load.image("ring", "./assets/img/ring.png");
 
+    this.load.tilemapTiledJSON("loop", "assets/chunks/Loop.json");
     this.load.tilemapTiledJSON("tallLoop", "assets/chunks/TallLoop.json");
     this.load.tilemapTiledJSON("flat", "assets/chunks/Flat.json");
     this.load.tilemapTiledJSON("smallHill", "assets/chunks/SmallHill.json");

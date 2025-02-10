@@ -9,15 +9,12 @@ class Ring extends Phaser.Physics.Arcade.Sprite {
     this.body.setSize(24, 24);
     this.body.allowGravity = false;
 
-    scene.physics.add.collider(
+    scene.physics.add.overlap(
       scene.player,
       this,
-      null,
       (player, ring) => {
         scene.ringCount += 1;
         this.destroy();
-
-        return true;
       }
     );
   }
