@@ -21,7 +21,7 @@ let config = {
     // FIXME: Probably should disable this for final game
     // Used to fix weird ghosting issue on high refresh monitors (sorta)
     // Ultimately, need to research a better longterm solution
-    // forceSetTimeOut: true,
+    forceSetTimeOut: true,
   },
   physics: {
     default: "arcade",
