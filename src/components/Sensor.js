@@ -229,7 +229,7 @@ class Sensor {
         break;
     }
 
-    console.log(`${diff} : ${diffExt}`);
+    // console.log(`${diff} : ${diffExt}`);
 
     // diff += diffExt;
 

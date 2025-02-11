@@ -86,13 +86,15 @@ class Game extends Phaser.Scene {
 
     let playerChunkX = Math.floor(this.player.x / 1280);
 
+    console.log(playerChunkX, this.worldChunkOffset);
+
     if (playerChunkX - this.worldChunkOffset + 5 > this.chunks.length) {
       let chunks = ["flat", "smallHill", "smallRamp", "tallLoop", "loop"];
-      let chunk = new MapChunk(this, chunks[Math.floor(Math.random() * chunks.length)], "grid", (4 + this.worldChunkOffset) * 1280, 0);
+      let chunk = new MapChunk(this, chunks[Math.floor(Math.random() * chunks.length)], "grid", (this.worldChunkOffset + this.chunks.length) * 1280, 0);
 
       this.chunks.push(chunk);
 
-      // this.physics.add.collider(this.player, chunk.layer);
+      console.log(`Added chunk: ${(4 + this.worldChunkOffset)}`);
     }
 
     if (playerChunkX - this.worldChunkOffset > 2) {
@@ -100,11 +102,7 @@ class Game extends Phaser.Scene {
       this.worldChunkOffset += 1;
     }
 
-    // this.graphics.fillStyle(0xffffff, 1);
-    // this.graphics.fillRect(this.player.body.x + this.player.body.width / 2, this.player.body.y + this.player.body.height, 5, 5);
-
     this.smoothMoveCameraTowards(this.player);
-    // this.cameras.main.rotation = this.player.rotation;
   }
 
   // TODO: Probably change this a lot, play around with different values
