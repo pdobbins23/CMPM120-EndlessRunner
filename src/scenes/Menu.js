@@ -57,21 +57,78 @@ class Menu extends Phaser.Scene {
 
     const music = this.sound.add("titleMusic");
 
-    music.play();
+    const introMusic = this.sound.add("intro");
+
+    this.presents = this.add.image(0, 0, "presents").setScale(2).setDepth(9).setOrigin(0);
+
+    this.intro = this.add.image(-game.config.width / 2 + 40, -game.config.height / 2 + 40, "intro").setScale(4).setOrigin(0).setDepth(10);
+    this.introLayer = this.add.image(-150 - game.config.width / 2, -game.config.height /2, "introLayer").setScale(4).setOrigin(0).setDepth(11);
+    this.playingIntro = true;
+    this.introStage = 0;
+
+    introMusic.play();
+
+    introMusic.once("complete", () => {
+      music.play();
+
+      this.introLayer.setVisible(false);
+    });
   }
 
   update() {
-    this.water1.tilePositionX += 0.3;
-    this.water2.tilePositionX += 0.15;
-    this.water3.tilePositionX += 0.1;
-    this.hills.tilePositionX += 0.05;
-    this.mountains.tilePositionX += 0.025;
-    this.sky.tilePositionX += 0.01;
+    if (this.playingIntro) {
+      switch (this.introStage) {
+        case 0:
+          this.introLayer.x += 4;
 
-    this.hills.setFrame(this.hillsAnimator.anims.currentFrame.textureFrame);
+          if (this.introLayer.x > 50) {
+            this.introLayer.setVisible(false);
 
-    if (Phaser.Input.Keyboard.JustDown(this.enterKey)) {
-      this.scene.start("gameScene");
+            this.time.delayedCall(1500, () => {
+              this.cameras.main.fadeOut(500, 0, 0, 0);
+              this.cameras.main.once("camerafadeoutcomplete", () => {
+                this.introStage = 2;
+              });
+            });
+
+            this.introStage = 1;
+          }
+          break;
+        case 2:
+          this.intro.setVisible(false);
+          this.cameras.main.fadeIn(500, 0, 0, 0);
+          this.cameras.main.once("camerafadeincomplete", () => {
+            this.time.delayedCall(3700, () => {
+              this.cameras.main.fadeOut(500, 0, 0, 0);
+              this.cameras.main.once("camerafadeoutcomplete", () => {
+                this.introStage = 4;
+              });
+            });
+          });
+          this.introStage = 3;
+          break;
+        case 4:
+          this.presents.setVisible(false);
+          this.cameras.main.fadeIn(500, 0, 0, 0);
+          this.cameras.main.once("camerafadeincomplete", () => {
+            this.playingIntro = false;
+          });
+          this.introStage = 5;
+          break;
+      }
+    } else {
+      this.water1.tilePositionX += 0.3;
+      this.water2.tilePositionX += 0.15;
+      this.water3.tilePositionX += 0.1;
+      this.hills.tilePositionX += 0.05;
+      this.mountains.tilePositionX += 0.025;
+      this.sky.tilePositionX += 0.01;
+
+      this.hills.setFrame(this.hillsAnimator.anims.currentFrame.textureFrame);
+
+      if (Phaser.Input.Keyboard.JustDown(this.enterKey)) {
+        this.scene.start("gameScene");
+      }
     }
   }
 }

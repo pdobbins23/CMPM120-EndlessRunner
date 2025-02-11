@@ -45,9 +45,14 @@ class Load extends Phaser.Scene {
 
     this.add.sprite("invis", 1, 1);
 
+    this.load.image("intro", "assets/img/intro.png");
+    this.load.image("introLayer", "assets/img/introlayer.png");
+    this.load.image("presents", "assets/img/present.png");
+
     this.load.audio("titleMusic", "assets/sfx/title.mp3");
     this.load.audio("levelMusic", "assets/sfx/level.mp3");
     this.load.audio("jump", "assets/sfx/jump.wav");
     this.load.audio("pickup", "assets/sfx/pickup.wav");
+    this.load.audio("intro", "assets/sfx/intro.mp3");
   }
 }
