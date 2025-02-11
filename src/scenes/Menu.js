@@ -62,7 +62,7 @@ class Menu extends Phaser.Scene {
     this.presents = this.add.image(0, 0, "presents").setScale(2).setDepth(9).setOrigin(0);
 
     this.intro = this.add.image(-game.config.width / 2 + 40, -game.config.height / 2 + 40, "intro").setScale(4).setOrigin(0).setDepth(10);
-    this.introLayer = this.add.image(-150 - game.config.width / 2, -game.config.height /2, "introLayer").setScale(4).setOrigin(0).setDepth(11);
+    this.introLayer = this.physics.add.sprite(-150 - game.config.width / 2, -game.config.height /2, "introLayer").setScale(4).setOrigin(0).setDepth(11).setDebug(false);
     this.playingIntro = true;
     this.introStage = 0;
 
@@ -75,11 +75,11 @@ class Menu extends Phaser.Scene {
     });
   }
 
-  update() {
+  update(time, delta) {
     if (this.playingIntro) {
       switch (this.introStage) {
         case 0:
-          this.introLayer.x += 4;
+          this.introLayer.setVelocity(550, 0);
 
           if (this.introLayer.x > 50) {
             this.introLayer.setVisible(false);
@@ -117,12 +117,12 @@ class Menu extends Phaser.Scene {
           break;
       }
     } else {
-      this.water1.tilePositionX += 0.3;
-      this.water2.tilePositionX += 0.15;
-      this.water3.tilePositionX += 0.1;
-      this.hills.tilePositionX += 0.05;
-      this.mountains.tilePositionX += 0.025;
-      this.sky.tilePositionX += 0.01;
+      this.water1.tilePositionX += (60 * delta) / 1000;
+      this.water2.tilePositionX += (30 * delta) / 1000;
+      this.water3.tilePositionX += (15 * delta) / 1000;
+      this.hills.tilePositionX += (10 * delta) / 1000;
+      this.mountains.tilePositionX += (5 * delta) / 1000;
+      this.sky.tilePositionX += (2.5 * delta) / 1000;
 
       this.hills.setFrame(this.hillsAnimator.anims.currentFrame.textureFrame);
 

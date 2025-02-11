@@ -1,7 +1,14 @@
 // Name: Peter Dobbins
 // Title: Sonic BOOM
 // Date: 27/1/25
-// Time Spent: 5 hours
+// Time Spent: 30 hours
+// Creative Tilt:
+//  I recreated the physics from the original Sonic the Hedgehog game.
+//  The physics includes slopes and loops.
+//  The game is also endless, and uses a system to randomly generate map
+//  chunks and stitch them together as the player is moving through the
+//  level.
+//  I made all of the art and sound effects for the game.
 
 "use strict";
 

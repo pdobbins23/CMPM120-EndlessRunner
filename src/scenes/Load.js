@@ -13,8 +13,11 @@ class Load extends Phaser.Scene {
 
     this.load.on('complete', () => {
       loadingBar.destroy();
-      this.scene.start("menuScene");
+
+      this.add.image(0, 0, "loadingDone").setOrigin(0);
     });
+
+    this.load.image("loadingDone", "assets/img/loadingdone.png");
     
     this.load.spritesheet("grid", "./assets/img/grid.png", {
       frameWidth: 32,
@@ -54,5 +57,11 @@ class Load extends Phaser.Scene {
     this.load.audio("jump", "assets/sfx/jump.wav");
     this.load.audio("pickup", "assets/sfx/pickup.wav");
     this.load.audio("intro", "assets/sfx/intro.mp3");
+  }
+
+  create() {
+    this.input.on("pointerdown", () => {
+      this.scene.start("menuScene");
+    });
   }
 }

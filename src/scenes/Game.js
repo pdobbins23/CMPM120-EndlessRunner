@@ -43,7 +43,7 @@ class Game extends Phaser.Scene {
     this.sky = this.add.tileSprite(0, 0, 0, 0, "background", 6).setOrigin(0);
     this.sky.setDepth(-3).setScrollFactor(0);
     
-    this.player = new Player(this, 50, game.config.height - game.config.height / 2);
+    this.player = new Player(this, 50, 700);
     // this.player.setDebug(false);
     this.player.setDepth(1);
 
@@ -51,6 +51,14 @@ class Game extends Phaser.Scene {
     // After a certain amount of time (maybe level transition),
     // reset positions back to origin
     this.cameras.main.setBounds(0, 0, Infinity, 800);
+
+    this.add.image(30, 30, "ring").setScrollFactor(0).setDepth(100);
+    this.ringCount = 0;
+    this.ringCountText = this.add.text(60, 13, '0', {
+      fontFamily: 'Arial',
+      fontSize: '30px',
+      color: '#ffffff',
+    }).setScrollFactor(0).setDepth(100);
 
     this.chunks = [];
     this.worldChunkOffset = 0;
@@ -96,16 +104,18 @@ class Game extends Phaser.Scene {
     this.pickupSound = this.sound.add("pickup");
   }
 
-  update() {
+  update(time, delta) {
     this.graphics.clear();
 
-    this.water0.tilePositionX += 0.5;
-    this.water1.tilePositionX += 0.3;
-    this.water2.tilePositionX += 0.15;
-    this.water3.tilePositionX += 0.1;
-    this.hills.tilePositionX += 0.05;
-    this.mountains.tilePositionX += 0.025;
-    this.sky.tilePositionX += 0.01;
+    this.ringCountText.setText(`${this.ringCount}`);
+
+    this.water0.tilePositionX += (100 * delta) / 1000;
+    this.water1.tilePositionX += (60 * delta) / 1000;
+    this.water2.tilePositionX += (30 * delta) / 1000;
+    this.water3.tilePositionX += (15 * delta) / 1000;
+    this.hills.tilePositionX += (10 * delta) / 1000;
+    this.mountains.tilePositionX += (5 * delta) / 1000;
+    this.sky.tilePositionX += (2.5 * delta) / 1000;
 
     this.hills.setFrame(this.hillsAnimator.anims.currentFrame.textureFrame);
 
@@ -113,7 +123,7 @@ class Game extends Phaser.Scene {
 
     let playerChunkX = Math.floor(this.player.x / 1280);
 
-    console.log(playerChunkX, this.worldChunkOffset);
+    // console.log(playerChunkX, this.worldChunkOffset);
 
     if (playerChunkX - this.worldChunkOffset + 5 > this.chunks.length) {
       let chunks = ["flat", "smallHill", "smallRamp", "tallLoop", "loop"];
@@ -121,7 +131,7 @@ class Game extends Phaser.Scene {
 
       this.chunks.push(chunk);
 
-      console.log(`Added chunk: ${(4 + this.worldChunkOffset)}`);
+      // console.log(`Added chunk: ${(4 + this.worldChunkOffset)}`);
     }
 
     if (playerChunkX - this.worldChunkOffset > 2) {
