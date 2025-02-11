@@ -47,5 +47,7 @@ class Load extends Phaser.Scene {
 
     this.load.audio("titleMusic", "assets/sfx/title.mp3");
     this.load.audio("levelMusic", "assets/sfx/level.mp3");
+    this.load.audio("jump", "assets/sfx/jump.wav");
+    this.load.audio("pickup", "assets/sfx/pickup.wav");
   }
 }

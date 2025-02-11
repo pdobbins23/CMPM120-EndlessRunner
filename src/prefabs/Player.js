@@ -97,6 +97,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
           this.onGround = false;
 
           jumpVelocity = {x: this.jumpHeight * Math.sin(this.groundAngle), y: this.jumpHeight * Math.cos(this.groundAngle)};
+
+          this.scene.jumpSound.play();
         }
       } else if (Phaser.Input.Keyboard.JustDown(this.scene.cursors.down)) {
         this.rolling = !this.rolling;

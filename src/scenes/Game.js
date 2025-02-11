@@ -91,6 +91,9 @@ class Game extends Phaser.Scene {
     music.once("complete", () => {
       music.play("loopSection");
     });
+
+    this.jumpSound = this.sound.add("jump");
+    this.pickupSound = this.sound.add("pickup");
   }
 
   update() {

@@ -15,6 +15,7 @@ class Ring extends Phaser.Physics.Arcade.Sprite {
       (player, ring) => {
         scene.ringCount += 1;
         this.destroy();
+        scene.pickupSound.play();
       }
     );
   }
