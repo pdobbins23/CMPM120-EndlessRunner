@@ -54,6 +54,10 @@ class Menu extends Phaser.Scene {
     this.sky = this.add.tileSprite(0, 0, 0, 0, "background", 6).setOrigin(0);
 
     this.enterKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+
+    const music = this.sound.add("titleMusic");
+
+    music.play();
   }
 
   update() {

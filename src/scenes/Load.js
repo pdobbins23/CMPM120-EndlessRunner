@@ -44,5 +44,8 @@ class Load extends Phaser.Scene {
     this.load.tilemapTiledJSON("smallRamp", "assets/chunks/SmallRamp.json");
 
     this.add.sprite("invis", 1, 1);
+
+    this.load.audio("titleMusic", "assets/sfx/title.mp3");
+    this.load.audio("levelMusic", "assets/sfx/level.mp3");
   }
 }

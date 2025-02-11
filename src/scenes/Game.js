@@ -67,6 +67,30 @@ class Game extends Phaser.Scene {
 
     this.graphics = this.add.graphics();
     this.graphics.depth = 5;
+
+    this.sound.stopAll();
+
+    const music = this.sound.add("levelMusic");
+
+    music.addMarker({
+      name: "startSection",
+      start: 0,
+      duration: 15,
+      config: { loop: false },
+    });
+
+    music.addMarker({
+      name: "loopSection",
+      start: 15,
+      duration: 80,
+      config: { loop: true },
+    });
+    
+    music.play("startSection");
+
+    music.once("complete", () => {
+      music.play("loopSection");
+    });
   }
 
   update() {
