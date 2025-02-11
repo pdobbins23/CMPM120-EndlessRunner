@@ -233,8 +233,10 @@ class Sensor {
 
     // diff += diffExt;
 
-    this.scene.graphics.fillStyle(0xFF00FF);
-    this.scene.graphics.fillRect(tileX, tileY, 5, 5);
+    if (this.debug) {
+      this.scene.graphics.fillStyle(0xFF00FF);
+      this.scene.graphics.fillRect(tileX, tileY, 5, 5);
+    }
 
     if (diff < tolerance) {
       return {diff, groundAngle: tile.properties.ground_angle};

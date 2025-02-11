@@ -18,14 +18,14 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     
     this.rolling = false;
 
-    this.groundSensorL = new Sensor(scene, {x: -0.6, y: 1, width: this.width, height: this.height}, {x: 0, y: 1}, true);
-    this.groundSensorR = new Sensor(scene, {x: 0.6, y: 1, width: this.width, height: this.height}, {x: 0, y: 1}, true);
+    this.groundSensorL = new Sensor(scene, {x: -0.6, y: 1, width: this.width, height: this.height}, {x: 0, y: 1}, false);
+    this.groundSensorR = new Sensor(scene, {x: 0.6, y: 1, width: this.width, height: this.height}, {x: 0, y: 1}, false);
 
-    this.ceilingSensorL = new Sensor(scene, {x: -0.6, y: -0.5, width: this.width, height: this.height}, {x: 0, y: -1}, true);
-    this.ceilingSensorR = new Sensor(scene, {x: 0.6, y: -0.5, width: this.width, height: this.height}, {x: 0, y: -1}, true);
+    this.ceilingSensorL = new Sensor(scene, {x: -0.6, y: -0.5, width: this.width, height: this.height}, {x: 0, y: -1}, false);
+    this.ceilingSensorR = new Sensor(scene, {x: 0.6, y: -0.5, width: this.width, height: this.height}, {x: 0, y: -1}, false);
 
-    this.pushSensorL = new Sensor(scene, {x: -0.75, y: 0, width: this.width, height: this.height}, {x: -1, y: 0}, true);
-    this.pushSensorR = new Sensor(scene, {x: 0.75, y: 0, width: this.width, height: this.height}, {x: 1, y: 0}, true);
+    this.pushSensorL = new Sensor(scene, {x: -0.75, y: 0, width: this.width, height: this.height}, {x: -1, y: 0}, false);
+    this.pushSensorR = new Sensor(scene, {x: 0.75, y: 0, width: this.width, height: this.height}, {x: 1, y: 0}, false);
 
     // Setup animations
     this.anims.create({

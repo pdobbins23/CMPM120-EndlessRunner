@@ -47,6 +47,8 @@ class Game extends Phaser.Scene {
     // this.player.setDebug(false);
     this.player.setDepth(1);
 
+    this.cameras.main.startFollow(this.player, true, 1, 1);
+
     // TODO: Make this better
     // After a certain amount of time (maybe level transition),
     // reset positions back to origin
@@ -138,15 +140,5 @@ class Game extends Phaser.Scene {
       this.chunks.splice(0, 1);
       this.worldChunkOffset += 1;
     }
-
-    this.smoothMoveCameraTowards(this.player);
-  }
-
-  // TODO: Probably change this a lot, play around with different values
-  smoothMoveCameraTowards (target, smoothFactor)
-  {
-    if (smoothFactor === undefined) { smoothFactor = 0; }
-    this.cameras.main.scrollX = smoothFactor * this.cameras.main.scrollX + (1 - smoothFactor) * (target.x - this.cameras.main.width * 0.5);
-    this.cameras.main.scrollY = smoothFactor * this.cameras.main.scrollY + (1 - smoothFactor) * (target.y - this.cameras.main.height * 0.5);
   }
 }
