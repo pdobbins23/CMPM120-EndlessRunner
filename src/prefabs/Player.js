@@ -98,11 +98,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         break;
     }
 
-    if (!this.onGround && !this.lastOnGround) {
-      this.groundAngle = 0;
-      this.setRotation(0);
-    }
-
     if (this.onGround) {
       let jumpVelocity = {x: 0, y: 0};
 
