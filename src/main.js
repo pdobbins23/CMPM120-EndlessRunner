@@ -1,5 +1,5 @@
 // Name: Peter Dobbins
-// Title: Sonic BOOM
+// Title: Sonic VROOM
 // Date: 27/1/25
 // Time Spent: 30 hours
 // Creative Tilt:
@@ -9,6 +9,7 @@
 //  chunks and stitch them together as the player is moving through the
 //  level.
 //  I made all of the art and sound effects for the game.
+//  I did NOT make the music for this game. Sources are located in the README.
 
 "use strict";
 
@@ -23,12 +24,6 @@ let config = {
   },
   render: {
     pixelArt: true,
-  },
-  fps: {
-    // FIXME: Probably should disable this for final game
-    // Used to fix weird ghosting issue on high refresh monitors (sorta)
-    // Ultimately, need to research a better longterm solution
-    // forceSetTimeOut: true,
   },
   physics: {
     default: "arcade",

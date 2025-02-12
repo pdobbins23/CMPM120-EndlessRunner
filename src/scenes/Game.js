@@ -43,9 +43,12 @@ class Game extends Phaser.Scene {
     this.sky = this.add.tileSprite(0, 0, 0, 0, "background", 6).setOrigin(0);
     this.sky.setDepth(-3).setScrollFactor(0);
     
-    this.player = new Player(this, 50, 700);
+    this.player = new Player(this, 50, 600);
     // this.player.setDebug(false);
     this.player.setDepth(1);
+
+    this.gameOver = false;
+    this.gameOverScreen = this.add.image(0, 0, "gameOver").setOrigin(0).setDepth(1000).setScrollFactor(0).setVisible(false);
 
     this.cameras.main.startFollow(this.player, true, 1, 1);
 
@@ -104,41 +107,54 @@ class Game extends Phaser.Scene {
 
     this.jumpSound = this.sound.add("jump");
     this.pickupSound = this.sound.add("pickup");
+
+    this.starting = true;
+    this.player.body.allowGravity = false;
+
+    this.cameras.main.fadeIn(500, 0, 0, 0);
+    this.cameras.main.once("camerafadeincomplete", () => {
+      this.starting = false;
+      this.player.body.allowGravity = true;
+    });
   }
 
   update(time, delta) {
+    if (this.starting) return;
+    
     this.graphics.clear();
-
+    
     this.ringCountText.setText(`${this.ringCount}`);
 
-    this.water0.tilePositionX += (100 * delta) / 1000;
-    this.water1.tilePositionX += (60 * delta) / 1000;
-    this.water2.tilePositionX += (30 * delta) / 1000;
-    this.water3.tilePositionX += (15 * delta) / 1000;
-    this.hills.tilePositionX += (10 * delta) / 1000;
-    this.mountains.tilePositionX += (5 * delta) / 1000;
-    this.sky.tilePositionX += (2.5 * delta) / 1000;
+    if (!this.gameOver) {
+      this.water0.tilePositionX += (100 * delta) / 1000;
+      this.water1.tilePositionX += (60 * delta) / 1000;
+      this.water2.tilePositionX += (30 * delta) / 1000;
+      this.water3.tilePositionX += (15 * delta) / 1000;
+      this.hills.tilePositionX += (10 * delta) / 1000;
+      this.mountains.tilePositionX += (5 * delta) / 1000;
+      this.sky.tilePositionX += (2.5 * delta) / 1000;
 
-    this.hills.setFrame(this.hillsAnimator.anims.currentFrame.textureFrame);
+      this.hills.setFrame(this.hillsAnimator.anims.currentFrame.textureFrame);
 
-    this.player.update();
+      this.player.update();
 
-    let playerChunkX = Math.floor(this.player.x / 1280);
+      let playerChunkX = Math.floor(this.player.x / 1280);
 
-    // console.log(playerChunkX, this.worldChunkOffset);
+      // console.log(playerChunkX, this.worldChunkOffset);
 
-    if (playerChunkX - this.worldChunkOffset + 5 > this.chunks.length) {
-      let chunks = ["flat", "smallHill", "smallRamp", "tallLoop", "loop"];
-      let chunk = new MapChunk(this, chunks[Math.floor(Math.random() * chunks.length)], "grid", (this.worldChunkOffset + this.chunks.length) * 1280, 0);
+      if (playerChunkX - this.worldChunkOffset + 5 > this.chunks.length) {
+        let chunks = ["flat", "smallHill", "smallRamp", "tallLoop", "loop"];
+        let chunk = new MapChunk(this, chunks[Math.floor(Math.random() * chunks.length)], "grid", (this.worldChunkOffset + this.chunks.length) * 1280, 0);
 
-      this.chunks.push(chunk);
+        this.chunks.push(chunk);
 
-      // console.log(`Added chunk: ${(4 + this.worldChunkOffset)}`);
-    }
+        // console.log(`Added chunk: ${(4 + this.worldChunkOffset)}`);
+      }
 
-    if (playerChunkX - this.worldChunkOffset > 2) {
-      this.chunks.splice(0, 1);
-      this.worldChunkOffset += 1;
+      if (playerChunkX - this.worldChunkOffset > 2) {
+        this.chunks.splice(0, 1);
+        this.worldChunkOffset += 1;
+      }
     }
   }
 }

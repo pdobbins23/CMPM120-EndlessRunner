@@ -55,9 +55,9 @@ class Menu extends Phaser.Scene {
 
     this.enterKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
-    const music = this.sound.add("titleMusic");
+    this.music = this.sound.add("titleMusic");
 
-    const introMusic = this.sound.add("intro");
+    this.introMusic = this.sound.add("intro");
 
     this.presents = this.add.image(0, 0, "presents").setScale(2).setDepth(9).setOrigin(0);
 
@@ -66,13 +66,7 @@ class Menu extends Phaser.Scene {
     this.playingIntro = true;
     this.introStage = 0;
 
-    introMusic.play();
-
-    introMusic.once("complete", () => {
-      music.play();
-
-      this.introLayer.setVisible(false);
-    });
+    this.starting = false;
   }
 
   update(time, delta) {
@@ -84,10 +78,13 @@ class Menu extends Phaser.Scene {
           if (this.introLayer.x > 50) {
             this.introLayer.setVisible(false);
 
-            this.time.delayedCall(1500, () => {
+            this.introMusic.play();
+
+            this.introMusic.once("complete", () => {
               this.cameras.main.fadeOut(500, 0, 0, 0);
               this.cameras.main.once("camerafadeoutcomplete", () => {
                 this.introStage = 2;
+                this.music.play();
               });
             });
 
@@ -126,8 +123,12 @@ class Menu extends Phaser.Scene {
 
       this.hills.setFrame(this.hillsAnimator.anims.currentFrame.textureFrame);
 
-      if (Phaser.Input.Keyboard.JustDown(this.enterKey)) {
-        this.scene.start("gameScene");
+      if (!this.starting && Phaser.Input.Keyboard.JustDown(this.enterKey)) {
+        this.cameras.main.fadeOut(500, 0, 0, 0);
+        this.cameras.main.once("camerafadeoutcomplete", () => {
+          this.scene.start("gameScene");
+        });
+        this.starting = true;
       }
     }
   }

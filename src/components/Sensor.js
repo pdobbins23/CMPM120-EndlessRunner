@@ -138,7 +138,7 @@ class Sensor {
 
     // debug tiles
     if (this.debug) {
-      this.scene.graphics.lineStyle(1, 0xFFFF00, 1);
+      this.scene.graphics.lineStyle(1, flipMaps ? 0xFF0000 : 0xFFFF00, 1);
       this.scene.graphics.strokeRect(tileX, tileY, 32, 32);
     }
 
@@ -208,7 +208,7 @@ class Sensor {
         break;
       case 1: // right wall
         if (flipMaps) {
-          diff = this.y - tileY - idx;
+          diff = tileY - this.y - idx;
         } else {
           diff = tileX - this.x - idx;
         }

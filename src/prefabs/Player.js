@@ -24,7 +24,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.ceilingSensorL = new Sensor(scene, {x: -0.6, y: -0.5, width: this.width, height: this.height}, {x: 0, y: -1}, false);
     this.ceilingSensorR = new Sensor(scene, {x: 0.6, y: -0.5, width: this.width, height: this.height}, {x: 0, y: -1}, false);
 
-    this.pushSensorL = new Sensor(scene, {x: -0.75, y: 0, width: this.width, height: this.height}, {x: -1, y: 0}, false);
+    // this.pushSensorL = new Sensor(scene, {x: -0.75, y: 0, width: this.width, height: this.height}, {x: -1, y: 0}, false);
     this.pushSensorR = new Sensor(scene, {x: 0.75, y: 0, width: this.width, height: this.height}, {x: 1, y: 0}, false);
 
     // Setup animations
@@ -45,6 +45,16 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       frames: this.anims.generateFrameNumbers("player", {
         start: 5,
         end: 5,
+      })
+    });
+
+    this.anims.create({
+      key: "gameOver",
+      frameRate: 0,
+      repeat: -1,
+      frames: this.anims.generateFrameNumbers("player", {
+        start: 6,
+        end: 6,
       })
     });
 
@@ -88,6 +98,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         break;
     }
 
+    if (!this.onGround && !this.lastOnGround) {
+      this.groundAngle = 0;
+      this.setRotation(0);
+    }
+
     if (this.onGround) {
       let jumpVelocity = {x: 0, y: 0};
 
@@ -111,6 +126,84 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
       this.setVelocity(this.groundSpeed * Math.cos(this.groundAngle) - jumpVelocity.x, this.groundSpeed * -Math.sin(this.groundAngle) - jumpVelocity.y);
     }
+
+    // let pushSensorLres = this.pushSensorL.process(this.x, this.y, this.scene.chunks[chunkX].map, layer, layerName, this.groundAngle, 0, true);
+    let pushSensorRres = this.pushSensorR.process(this.x, this.y, this.scene.chunks[chunkX].map, layer, layerName, this.groundAngle, 0, true);
+    
+    if (pushSensorRres.diff != null && pushSensorRres.groundAngle == 0) {
+      switch (this.pushSensorR.sensorMode) {
+        case 0:
+          this.x += pushSensorRres.diff;
+          this.body.velocity.x = 0;
+          break;
+        case 1:
+          this.y += pushSensorRres.diff;
+          this.body.velocity.y = 0;
+          break;
+        case 2:
+          this.x -= pushSensorRres.diff;
+          this.body.velocity.x = 0;
+          break;
+        case 3:
+          this.y -= pushSensorRres.diff;
+          this.body.velocity.y = 0;
+          break;
+      }
+
+      // game over
+      this.gameOver();
+
+      this.pushSensorR.drawDebug(0xFF00FF);
+
+      return;
+    }    
+    /*if (pushSensorLres.diff != null && (pushSensorRres.diff == null || (pushSensorLres.diff <= pushSensorRres.diff))) {
+      switch (this.pushSensorL.sensorMode) {
+        case 0:
+          this.x -= pushSensorLres.diff;
+          this.body.velocity.x = 0;
+          break;
+        case 1:
+          this.y += pushSensorLres.diff;
+          this.body.velocity.y = 0;
+          break;
+        case 2:
+          this.x += pushSensorLres.diff;
+          this.body.velocity.x = 0;
+          break;
+        case 3:
+          this.y -= pushSensorLres.diff;
+          this.body.velocity.y = 0;
+          break;
+      }
+
+      console.log(`PL: ${pushSensorLres.diff}`);
+
+      this.pushSensorL.drawDebug(0xFF00FF);
+    } else if (pushSensorRres.diff != null && (pushSensorLres.diff == null || (pushSensorRres.diff < pushSensorLres.diff))) {
+      switch (this.pushSensorR.sensorMode) {
+        case 0:
+          this.x += pushSensorRres.diff;
+          this.body.velocity.x = 0;
+          break;
+        case 1:
+          this.y += pushSensorRres.diff;
+          this.body.velocity.y = 0;
+          break;
+        case 2:
+          this.x -= pushSensorRres.diff;
+          this.body.velocity.x = 0;
+          break;
+        case 3:
+          this.y -= pushSensorRres.diff;
+          this.body.velocity.y = 0;
+          break;
+      }
+
+      console.log(`PR: ${pushSensorRres.diff}, ${this.pushSensorR.sensorMode}`);
+
+      this.pushSensorR.drawDebug(0xFF00FF);
+    }*/
 
     if (this.lastOnGround && !this.onGround) return;
 
@@ -169,7 +262,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       this.onGround = false;
       // this.groundAngle = 0;
 
-      this.setRotation(0);
+      // this.setRotation(0);
 
       let ceilingSensorLres = this.ceilingSensorL.process(this.x, this.y, this.scene.chunks[chunkX].map, layer, layerName, this.groundAngle, 0);
       let ceilingSensorRres = this.ceilingSensorR.process(this.x, this.y, this.scene.chunks[chunkX].map, layer, layerName, this.groundAngle, 0);
@@ -218,58 +311,27 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.ceilingSensorR.drawDebug(0xFF00FF);
       }
     }
+  }
 
-    return;
+  gameOver() {
+    this.setVelocity(0, -300);
+    this.play("gameOver");
+    this.scene.gameOver = true;
 
-    let pushSensorLres = this.pushSensorL.process(this.x, this.y, this.scene.chunks[chunkX].map, layer, layerName, this.groundAngle, 0, true);
-    let pushSensorRres = this.pushSensorR.process(this.x, this.y, this.scene.chunks[chunkX].map, layer, layerName, this.groundAngle, 0, true);
-    
-    if (pushSensorLres.diff != null && (pushSensorRres.diff == null || (pushSensorLres.diff <= pushSensorRres.diff))) {
-      switch (this.pushSensorL.sensorMode) {
-        case 0:
-          this.x -= pushSensorLres.diff;
-          this.body.velocity.x = 0;
-          break;
-        case 1:
-          this.y += pushSensorLres.diff;
-          this.body.velocity.y = 0;
-          break;
-        case 2:
-          this.x += pushSensorLres.diff;
-          this.body.velocity.x = 0;
-          break;
-        case 3:
-          this.y -= pushSensorLres.diff;
-          this.body.velocity.y = 0;
-          break;
-      }
+    this.scene.sound.stopAll();
 
-      console.log(`PL: ${pushSensorLres.diff}`);
+    this.scene.time.delayedCall(3000, () => {
+      this.scene.gameOverScreen.setVisible(true);
 
-      this.pushSensorL.drawDebug(0xFF00FF);
-    } else if (pushSensorRres.diff != null && (pushSensorLres.diff == null || (pushSensorRres.diff < pushSensorLres.diff))) {
-      switch (this.pushSensorR.sensorMode) {
-        case 0:
-          this.x += pushSensorRres.diff;
-          this.body.velocity.x = 0;
-          break;
-        case 1:
-          this.y += pushSensorRres.diff;
-          this.body.velocity.y = 0;
-          break;
-        case 2:
-          this.x -= pushSensorRres.diff;
-          this.body.velocity.x = 0;
-          break;
-        case 3:
-          this.y -= pushSensorRres.diff;
-          this.body.velocity.y = 0;
-          break;
-      }
+      this.scene.time.delayedCall(3000, () => {
+        this.scene.cameras.main.fadeOut(500, 0, 0, 0);
 
-      console.log(`PR: ${pushSensorRres.diff}`);
-
-      this.pushSensorR.drawDebug(0xFF00FF);
-    }
+        this.scene.cameras.main.once("camerafadeoutcomplete", () => {
+          this.scene.time.delayedCall(750, () => {
+            this.scene.scene.start("menuScene");
+          });
+        });
+      });
+    });
   }
 }
