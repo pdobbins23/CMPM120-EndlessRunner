@@ -52,12 +52,16 @@ class Load extends Phaser.Scene {
     this.load.image("introLayer", "assets/img/introlayer.png");
     this.load.image("presents", "assets/img/present.png");
     this.load.image("gameOver", "assets/img/gameover.png");
+    this.load.image("instructions", "assets/img/instructions.png");
+    this.load.image("credits", "assets/img/credits.png");
 
     this.load.audio("titleMusic", "assets/sfx/title.mp3");
     this.load.audio("levelMusic", "assets/sfx/level.mp3");
+    this.load.audio("creditsMusic", "assets/sfx/credits.mp3");
     this.load.audio("jump", "assets/sfx/jump.wav");
     this.load.audio("pickup", "assets/sfx/pickup.wav");
     this.load.audio("intro", "assets/sfx/intro.mp3");
+    this.load.audio("hit", "assets/sfx/hit.wav");
   }
 
   create() {

@@ -319,6 +319,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.scene.gameOver = true;
 
     this.scene.sound.stopAll();
+    this.scene.sound.play("hit");
 
     this.scene.time.delayedCall(3000, () => {
       this.scene.gameOverScreen.setVisible(true);
@@ -328,7 +329,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.scene.cameras.main.once("camerafadeoutcomplete", () => {
           this.scene.time.delayedCall(750, () => {
-            this.scene.scene.start("menuScene");
+            this.scene.scene.start("creditsScene");
           });
         });
       });

@@ -47,6 +47,9 @@ class Game extends Phaser.Scene {
     // this.player.setDebug(false);
     this.player.setDepth(1);
 
+    this.showingInstructions = true;
+    this.instructions = this.add.image(0, 0, "instructions").setOrigin(0).setDepth(1000).setScrollFactor(0).setVisible(false);
+
     this.gameOver = false;
     this.gameOverScreen = this.add.image(0, 0, "gameOver").setOrigin(0).setDepth(1000).setScrollFactor(0).setVisible(false);
 
@@ -114,12 +117,23 @@ class Game extends Phaser.Scene {
     this.cameras.main.fadeIn(500, 0, 0, 0);
     this.cameras.main.once("camerafadeincomplete", () => {
       this.starting = false;
-      this.player.body.allowGravity = true;
+      this.instructions.setVisible(true);
     });
+
+    this.enterKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
   }
 
   update(time, delta) {
     if (this.starting) return;
+
+    if (this.showingInstructions) {
+      if (Phaser.Input.Keyboard.JustDown(this.enterKey)) {
+        this.showingInstructions = false;
+        this.instructions.setVisible(false);
+        this.player.body.allowGravity = true;
+      }
+      return;
+    }
     
     this.graphics.clear();
     
