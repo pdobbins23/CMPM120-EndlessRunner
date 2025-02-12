@@ -120,6 +120,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       }
 
       this.setVelocity(this.groundSpeed * Math.cos(this.groundAngle) - jumpVelocity.x, this.groundSpeed * -Math.sin(this.groundAngle) - jumpVelocity.y);
+    } else {
+      if (this.body.velocity.y > 0) {
+        this.groundAngle = 0;
+        this.setRotation(0);
+      }
     }
 
     // let pushSensorLres = this.pushSensorL.process(this.x, this.y, this.scene.chunks[chunkX].map, layer, layerName, this.groundAngle, 0, true);
