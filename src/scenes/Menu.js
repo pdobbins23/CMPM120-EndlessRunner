@@ -119,7 +119,7 @@ class Menu extends Phaser.Scene {
       this.water3.tilePositionX += (15 * delta) / 1000;
       this.hills.tilePositionX += (10 * delta) / 1000;
       this.mountains.tilePositionX += (5 * delta) / 1000;
-      this.sky.tilePositionX += (2.5 * delta) / 1000;
+      this.sky.tilePositionX += (3 * delta) / 1000;
 
       this.hills.setFrame(this.hillsAnimator.anims.currentFrame.textureFrame);
 

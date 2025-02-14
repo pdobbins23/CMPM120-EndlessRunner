@@ -45,6 +45,8 @@ class Load extends Phaser.Scene {
     this.load.tilemapTiledJSON("flat", "assets/chunks/Flat.json");
     this.load.tilemapTiledJSON("smallHill", "assets/chunks/SmallHill.json");
     this.load.tilemapTiledJSON("smallRamp", "assets/chunks/SmallRamp.json");
+    this.load.tilemapTiledJSON("doubleLoop", "assets/chunks/DoubleLoop.json");
+    this.load.tilemapTiledJSON("hills", "assets/chunks/Hills.json");
 
     this.add.sprite("invis", 1, 1);
 

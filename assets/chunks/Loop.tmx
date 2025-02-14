@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.1" orientation="orthogonal" renderorder="right-down" width="40" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="3">
+<map version="1.10" tiledversion="1.11.1" orientation="orthogonal" renderorder="right-down" width="40" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="12">
  <editorsettings>
   <export target="Loop.json" format="json"/>
  </editorsettings>
@@ -317,6 +317,60 @@
     <property name="layer" type="int" value="0"/>
     <property name="radius" type="float" value="140"/>
     <property name="switch" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="3" x="650" y="651.316">
+   <properties>
+    <property name="ring" type="bool" value="true"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="4" x="703.947" y="625">
+   <properties>
+    <property name="ring" type="bool" value="true"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="5" x="732.895" y="578.947">
+   <properties>
+    <property name="ring" type="bool" value="true"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="6" x="726.316" y="515.789">
+   <properties>
+    <property name="ring" type="bool" value="true"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="7" x="681.579" y="467.105">
+   <properties>
+    <property name="ring" type="bool" value="true"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="8" x="631.579" y="451.316">
+   <properties>
+    <property name="ring" type="bool" value="true"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9" x="581.579" y="467.105">
+   <properties>
+    <property name="ring" type="bool" value="true"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="10" x="542.105" y="514.474">
+   <properties>
+    <property name="ring" type="bool" value="true"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="11" x="828.947" y="648.684">
+   <properties>
+    <property name="ring" type="bool" value="true"/>
    </properties>
    <point/>
   </object>
